@@ -1,0 +1,66 @@
+Feature Requirements
+HTR Chart Processing Application
+--------------------------------
+
+1. Import HTR Chart Files
+   - Accept .TXT files exported from HTR (CSV format with 244 fields, no headers).
+   - Preserve all blank fields exactly as provided.
+   - Validate that each row contains exactly 244 fields.
+
+2. Load Schema Files
+   - fields.json: field names, types, and metadata.
+   - lookup.json: lookup tables for fields with Options = "Y".
+   - points_of_call.csv: distance → call1–call5.
+   - race_fractional_times.csv: distance → f1–f5.
+
+3. Build New Data Table
+   - Add column headers using fields.json.
+   - Maintain original field order.
+   - Preserve all raw values before transformation.
+
+4. Apply Lookup Translations
+   - For every field where Options = "Y":
+       Replace raw codes with human‑readable values from lookup.json.
+   - Fail loudly if a lookup value is missing.
+
+5. Export Processed CSV
+   - Output a clean CSV with:
+       • Headers
+       • Translated lookup values
+       • All original numeric/text fields preserved
+
+6. Build Excel Workbook
+   - Sheet 1: Processed race data (with headers and lookup translations)
+   - Sheet 2: Points of Call by Distance
+   - Sheet 3: Race Fractional Times by Distance
+
+7. GUI Requirements
+   - Allow user to select one or more HTR files.
+   - Support drag‑and‑drop of files or folders.
+   - User must press "Start" to begin processing.
+   - Validate file types before processing.
+   - Display progress and error messages.
+   - Allow user to choose output location.
+
+8. Multi‑File Merge Option
+   - If enabled, combine multiple HTR files into one unified table.
+   - Ensure schema consistency across all merged files.
+   - Apply lookup translations after merging.
+
+Optional Features
+-----------------
+1. Track Code Cross‑Reference
+   - Load additional JSON mapping HTR track codes → Equibase track codes.
+   - Replace track codes in processed output.
+
+2. Race Condition Code Cross‑Reference
+   - Load additional JSON mapping HTR race condition codes → Equibase codes.
+   - Replace condition codes in processed output.
+
+Deterministic Rules
+-------------------
+- No invented fields or inferred logic.
+- No guessing; all transformations must come from schema files.
+- All blank fields must be preserved.
+- All rows must contain exactly 244 fields.
+- Fail loudly on schema mismatch or missing lookup values.
