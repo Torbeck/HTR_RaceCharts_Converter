@@ -1,0 +1,384 @@
+{
+    "4": [
+        {
+            "code": "TB",
+            "value": "Thoroughbred"
+        },
+        {
+            "code": "QH",
+            "value": "Quarter Horse"
+        },
+        {
+            "code": "AR",
+            "value": "Arabian"
+        },
+        {
+            "code": "MX",
+            "value": "Mixed"
+        }
+    ],
+    "7": [
+        {
+            "code": "D",
+            "value": "Dirt"
+        },
+        {
+            "code": "T",
+            "value": "Turf"
+        },
+        {
+            "code": "P",
+            "value": "Synthetic"
+        }
+    ],
+    "9": [
+        {
+            "code": "M",
+            "value": "Main Track"
+        },
+        {
+            "code": "I",
+            "value": "Inner Turf"
+        },
+        {
+            "code": "O",
+            "value": "Outer Turf"
+        },
+        {
+            "code": "H",
+            "value": "Hillside"
+        },
+        {
+            "code": "S",
+            "value": "Straight"
+        }
+    ],
+    "10": [
+        {
+            "code": "ALW",
+            "value": "Allowance"
+        },
+        {
+            "code": "AOC",
+            "value": "Allowance Optional Claiming"
+        },
+        {
+            "code": "CLM",
+            "value": "Claiming"
+        },
+        {
+            "code": "MSW",
+            "value": "Maiden Special Weight"
+        },
+        {
+            "code": "MCL",
+            "value": "Maiden Claiming"
+        },
+        {
+            "code": "STK",
+            "value": "Stakes"
+        },
+        {
+            "code": "HCP",
+            "value": "Handicap"
+        },
+        {
+            "code": "MOC",
+            "value": "Maiden Optional Claiming"
+        },
+        {
+            "code": "STR",
+            "value": "Starter Allowance"
+        },
+        {
+            "code": "SOC",
+            "value": "Starter Optional Claiming"
+        }
+    ],
+    "13": [
+        {
+            "code": "A",
+            "value": "All"
+        },
+        {
+            "code": "B",
+            "value": "Bred"
+        },
+        {
+            "code": "C",
+            "value": "Colts"
+        },
+        {
+            "code": "D",
+            "value": "Fillies"
+        },
+        {
+            "code": "E",
+            "value": "Either"
+        },
+        {
+            "code": "F",
+            "value": "Fillies & Mares"
+        },
+        {
+            "code": "G",
+            "value": "Geldings"
+        },
+        {
+            "code": "H",
+            "value": "Horses"
+        },
+        {
+            "code": "I",
+            "value": "Imported"
+        },
+        {
+            "code": "J",
+            "value": "Juvenile"
+        },
+        {
+            "code": "M",
+            "value": "Mares"
+        },
+        {
+            "code": "R",
+            "value": "Restricted"
+        }
+    ],
+    "14": [
+        {
+            "code": "02",
+            "value": "Two-year-olds"
+        },
+        {
+            "code": "03",
+            "value": "Three-year-olds"
+        },
+        {
+            "code": "04",
+            "value": "Four-year-olds"
+        },
+        {
+            "code": "2U",
+            "value": "Two and up"
+        },
+        {
+            "code": "3U",
+            "value": "Three and up"
+        },
+        {
+            "code": "4U",
+            "value": "Four and up"
+        },
+        {
+            "code": "35",
+            "value": "Three to five year olds"
+        }
+    ],
+    "19": [
+        {
+            "code": "1",
+            "value": "Grade 1"
+        },
+        {
+            "code": "2",
+            "value": "Grade 2"
+        },
+        {
+            "code": "3",
+            "value": "Grade 3"
+        }
+    ],
+    "22": [
+        {
+            "code": "FST",
+            "value": "Fast"
+        },
+        {
+            "code": "GD",
+            "value": "Good"
+        },
+        {
+            "code": "SLY",
+            "value": "Sloppy"
+        },
+        {
+            "code": "MY",
+            "value": "Muddy"
+        },
+        {
+            "code": "FM",
+            "value": "Firm"
+        },
+        {
+            "code": "YL",
+            "value": "Yielding"
+        }
+    ],
+    "23": [
+        {
+            "code": "A",
+            "value": "Clear"
+        },
+        {
+            "code": "B",
+            "value": "Cloudy"
+        },
+        {
+            "code": "C",
+            "value": "Cold"
+        },
+        {
+            "code": "E",
+            "value": "Extreme"
+        },
+        {
+            "code": "F",
+            "value": "Fog"
+        },
+        {
+            "code": "H",
+            "value": "Hot"
+        },
+        {
+            "code": "L",
+            "value": "Lightning"
+        },
+        {
+            "code": "O",
+            "value": "Overcast"
+        },
+        {
+            "code": "R",
+            "value": "Rain"
+        },
+        {
+            "code": "S",
+            "value": "Snow"
+        },
+        {
+            "code": "T",
+            "value": "Thunderstorms"
+        },
+        {
+            "code": "W",
+            "value": "Windy"
+        }
+    ],
+    "53": [
+        {
+            "code": "F",
+            "value": "Filly"
+        },
+        {
+            "code": "M",
+            "value": "Mare"
+        },
+        {
+            "code": "C",
+            "value": "Colt"
+        },
+        {
+            "code": "H",
+            "value": "Horse"
+        },
+        {
+            "code": "G",
+            "value": "Gelding"
+        },
+        {
+            "code": "R",
+            "value": "Ridgling"
+        }
+    ],
+    "54": [
+        {
+            "code": "L",
+            "value": "Lasix"
+        },
+        {
+            "code": "B",
+            "value": "Bute"
+        },
+        {
+            "code": "A",
+            "value": "Adjunct Medication"
+        }
+    ],
+    "98": [
+        {
+            "code": "Y",
+            "value": "Wagering Favorite"
+        }
+    ],
+    "101": [
+        {
+            "code": "A",
+            "value": "Entry A"
+        },
+        {
+            "code": "B",
+            "value": "Entry B"
+        },
+        {
+            "code": "C",
+            "value": "Entry C"
+        }
+    ],
+    "102": [
+        {
+            "code": "Y",
+            "value": "Coupled Entry"
+        }
+    ],
+    "221": [
+        {
+            "code": "E",
+            "value": "Easy"
+        },
+        {
+            "code": "M",
+            "value": "Moderate"
+        },
+        {
+            "code": "H",
+            "value": "Hard"
+        }
+    ],
+    "223": [
+        {
+            "code": "EP",
+            "value": "Early Presser"
+        },
+        {
+            "code": "E",
+            "value": "Early"
+        },
+        {
+            "code": "P",
+            "value": "Presser"
+        },
+        {
+            "code": "S",
+            "value": "Sustained"
+        }
+    ],
+    "233": [
+        {
+            "code": "G1",
+            "value": "Grade 1"
+        },
+        {
+            "code": "G2",
+            "value": "Grade 2"
+        },
+        {
+            "code": "G3",
+            "value": "Grade 3"
+        },
+        {
+            "code": "L",
+            "value": "Listed"
+        }
+    ]
+}
