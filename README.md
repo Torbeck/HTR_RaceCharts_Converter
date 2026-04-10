@@ -113,6 +113,8 @@ When processing completes, you will find your output files (`.csv` and `.xlsx`) 
 
 The `config.ini` file controls Excel formatting for each of the three workbook sheets. It is located in the project root folder.
 
+> **Note:** `config.ini` is not included in the repository (it is listed in `.gitignore`). A template file named `config.example.ini` is provided in the project root. To customize settings, copy or rename `config.example.ini` to `config.ini`. If `config.ini` does not exist when the program starts, it will be created automatically with default values.
+
 ### Sections
 
 The file contains one section for each Excel sheet, plus a paths section:
