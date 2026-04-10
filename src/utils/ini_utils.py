@@ -202,32 +202,33 @@ def read_excel_settings(config_path: str) -> dict:
     return result
 
 
-def read_last_output(config_path: str, default_output_dir: str) -> str:
+def read_last_output(config_path: str) -> Optional[str]:
     """Read [paths].last_output from config.ini.
 
     Fallback logic:
-    - If the key is missing, return default_output_dir.
-    - If the value is the literal string 'default', return default_output_dir.
-    - If the stored path does not exist on disk, return default_output_dir.
+    - If the key is missing or the value is the literal string
+      'default' (case-insensitive), return ``None`` so the caller
+      can fall back to the input file's directory.
+    - If the stored path does not exist on disk, return ``None``.
     - Otherwise return the stored path.
 
     Args:
         config_path: Absolute path to config.ini.
-        default_output_dir: The program's default output folder.
 
     Returns:
-        Resolved output directory path.
+        The stored output directory path, or ``None`` when the
+        default (input-file directory) behaviour should be used.
     """
     parser = load_config(config_path)
     raw = parser.get("paths", "last_output", fallback="").strip()
 
-    if not raw or raw == "default":
-        return default_output_dir
+    if not raw or raw.lower() == "default":
+        return None
 
     if os.path.isdir(raw):
         return raw
 
-    return default_output_dir
+    return None
 
 
 def write_last_output(config_path: str, output_dir: str) -> None:
