@@ -1,0 +1,1954 @@
+[
+  {
+    "field": 1,
+    "name": "Track",
+    "type": "Text",
+    "maxLength": 3,
+    "comments": "2 or 3 character Equibase Track Code",
+    "hasOptions": ""
+  },
+  {
+    "field": 2,
+    "name": "Date",
+    "type": "Text",
+    "maxLength": 10,
+    "comments": "Format: mm/dd/yyyy; Example: 04/02/2005 = April 2, 2005",
+    "hasOptions": ""
+  },
+  {
+    "field": 3,
+    "name": "Race Number",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 4,
+    "name": "Breed of Race",
+    "type": "Text",
+    "maxLength": 2,
+    "comments": "TB = Thoroughbred; QH = Quarter Horse; AR = Arabian; MX = Mixed Breed",
+    "hasOptions": "Y"
+  },
+  {
+    "field": 5,
+    "name": "Distance",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "Distance in Furlongs; Format: #.##; Example: 6.50 = 6 1/2 furlongs; 1 mile 40 yards = 8.18; 2 miles 40 yards = 16.18; 1 mile 70 yards = 8.32; 2 miles 70 yards = 16.32",
+    "hasOptions": ""
+  },
+  {
+    "field": 6,
+    "name": "About Distance Indicator",
+    "type": "Text",
+    "maxLength": 1,
+    "comments": "Y = About Distance; Otherwise Blank",
+    "hasOptions": ""
+  },
+  {
+    "field": 7,
+    "name": "Surface",
+    "type": "Text",
+    "maxLength": 1,
+    "comments": "D = Dirt; T = Turf; P = PolyTrack",
+    "hasOptions": ""
+  },
+  {
+    "field": 8,
+    "name": "Off Turf Indicator",
+    "type": "Text",
+    "maxLength": 1,
+    "comments": "Y = Race was moved off the turf; Otherwise Blank",
+    "hasOptions": ""
+  },
+  {
+    "field": 9,
+    "name": "Course Type",
+    "type": "Text",
+    "maxLength": 1,
+    "comments": "M = Main Course; I = Inner Course; O = Outer Course; H = Hurdles Course; S = Steeplechase Course; Tracks with Inner Courses include Aqu, Bel, Sar, Wo and Cnl; Tracks with Outer Courses include Cnl; Except for Cnl, the Outer Courses for all other tracks are listed as 'M' for Main",
+    "hasOptions": ""
+  },
+  {
+    "field": 10,
+    "name": "Race Type",
+    "type": "Text",
+    "maxLength": 5,
+    "comments": "ALW = Allowance; AOC = Allowance Optional Claiming; CLH = Claiming Handicap; CLM = Claiming; CST = Claiming Stake; HCP = Handicap; MAT = Match; MCL = Maiden Claiming; MOC = Maiden Optional Claiming; MST = Maiden Stakes; MSW = Maiden Special Weight; OCH = Optional Claiming Handicap; OCL = Optional Claiming; OCS = Optional Claiming Stakes; SHP = Starter Handicap; SST = Starter Stakes; STK = Stakes; STR = Starter Allowance; TRL = Trial",
+    "hasOptions": ""
+  },
+  {
+    "field": 11,
+    "name": "Abbreviated Race Conditions",
+    "type": "Text",
+    "maxLength": 20,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 12,
+    "name": "Race Name",
+    "type": "Text",
+    "maxLength": 120,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 13,
+    "name": "Sex Restriction",
+    "type": "Text",
+    "maxLength": 1,
+    "comments": "A = Colts & Geldings; B = Fillies & Mares; C = Colts; D = Colts & Fillies; E = Fillies & Geldings; F = Fillies; G = Geldings; H = Horses; I = Colts, Geldings & Horses; J = Geldings & Horses; M = Mares; R = Ridglings; Blank = No Sex Restrictions",
+    "hasOptions": ""
+  },
+  {
+    "field": 14,
+    "name": "Age Restriction",
+    "type": "Text",
+    "maxLength": 2,
+    "comments": "02 = 2 year olds; 03 = 3 year olds; 04 = 4 year olds; 05 = 5 year olds; 06 = 6 year olds; 07 = 7 year olds; 08 = 8 year olds; 09 = 9 year olds; 23 = 2 & 3 year olds; 24 = 2, 3 & 4 year olds; 2U = 2 year olds & up; 34 = 3 & 4 year olds; 35 = 3, 4 & 5 year olds; 36 = 3, 4, 5 & 6 year olds; 3U = 3 year olds & up; 45 = 4 & 5 year olds; 46 = 4, 5 & 6 year olds; 47 = 4, 5, 6 & 7 year olds; 4U = 4 year olds & up; 56 = 5 & 6 year olds; 57 = 5, 6 & 7 year olds; 58 = 5, 6, 7 & 8 year olds; 59 = 5, 6, 7, 8 & 9 year olds; 5U = 5 year olds & up; 67 = 6 & 7 year olds; 68 = 6, 7 & 8 year olds; 69 = 6, 7, 8 & 9 year olds; 6U = 6 year olds & up; 78 = 7 & 8 year olds; 79 = 7, 8 & 9 year olds; 7U = 7 year olds & up; 8U = 8 year olds & up; 9U = 9 year olds & up; Blank = No Age Restriction",
+    "hasOptions": ""
+  },
+  {
+    "field": 15,
+    "name": "Statebred Restriction",
+    "type": "Text",
+    "maxLength": 1,
+    "comments": "Y = Restricted to Statebred horses; Otherwise Blank",
+    "hasOptions": ""
+  },
+  {
+    "field": 16,
+    "name": "Purse",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "In US Dollars",
+    "hasOptions": ""
+  },
+  {
+    "field": 17,
+    "name": "Maximum Claiming Price",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "In US Dollars - Maximum Claiming Price a horse can be entered for; In Starter Races, the claiming price eligibility requirement",
+    "hasOptions": ""
+  },
+  {
+    "field": 18,
+    "name": "Minimum Claiming Price",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "In US Dollars - Minimum Claiming Price a horse can be entered for",
+    "hasOptions": ""
+  },
+  {
+    "field": 19,
+    "name": "Grade",
+    "type": "Text",
+    "maxLength": 1,
+    "comments": "1 = Grade 1; 2 = Grade 2; 3 = Grade 3; Otherwise Blank",
+    "hasOptions": ""
+  },
+  {
+    "field": 20,
+    "name": "Division",
+    "type": "Text",
+    "maxLength": 1,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 21,
+    "name": "Number of Starters",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "Number of horses that started the race",
+    "hasOptions": ""
+  },
+  {
+    "field": 22,
+    "name": "Track Condition",
+    "type": "Text",
+    "maxLength": 3,
+    "comments": "FST = Fast; WF = Wet-Fast; GD = Good; SLY = Sloppy; MY = Muddy; SL = Slow; HY = Heavy; FR = Frozen; HD = Hard; FM = Firm; YL = Yielding; SF = Soft",
+    "hasOptions": ""
+  },
+  {
+    "field": 23,
+    "name": "Weather",
+    "type": "Text",
+    "maxLength": 1,
+    "comments": "A = Hot; B = Fine; C = Clear; E = Overcast; F = Foggy; H = Hazy; L = Cloudy; O = Showery; R = Rainy; S = Snowing; T = Stormy; W = Windy",
+    "hasOptions": ""
+  },
+  {
+    "field": 24,
+    "name": "Post Time",
+    "type": "Text",
+    "maxLength": 5,
+    "comments": "Actual time the race went off; Format: h:mm; Example: 2:23; 12:20",
+    "hasOptions": ""
+  },
+  {
+    "field": 25,
+    "name": "Temp Rail Distance",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "Distance out of Temporary Rail from Inside Rail; Otherwise Blank",
+    "hasOptions": ""
+  },
+  {
+    "field": 26,
+    "name": "Chute Start Indicator",
+    "type": "Text",
+    "maxLength": 1,
+    "comments": "Y = Race was started from a chute; Otherwise Blank",
+    "hasOptions": ""
+  },
+  {
+    "field": 27,
+    "name": "Track Sealed Indicator",
+    "type": "Text",
+    "maxLength": 1,
+    "comments": "Y = Track was Sealed; Otherwise Blank",
+    "hasOptions": ""
+  },
+  {
+    "field": 28,
+    "name": "Race F1 Time",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "In Seconds; Format: sss.ttt; Example: 23.430; See Note 1 for F1 Distances",
+    "hasOptions": ""
+  },
+  {
+    "field": 29,
+    "name": "Race F2 Time",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "In Seconds; Format: sss.ttt; Example: 46.430; See Note 1 for F2 Distances",
+    "hasOptions": ""
+  },
+  {
+    "field": 30,
+    "name": "Race F3 Time",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "In Seconds; Format: sss.ttt; Example: 70.430; See Note 1 for F3 Distances",
+    "hasOptions": ""
+  },
+  {
+    "field": 31,
+    "name": "Race F4 Time",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "In Seconds; Format: sss.ttt; Example: 95.430; See Note 1 for F4 Distances",
+    "hasOptions": ""
+  },
+  {
+    "field": 32,
+    "name": "Race F5 Time",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "In Seconds; Format: sss.ttt; Example: 115.430; See Note 1 for F5 Distances",
+    "hasOptions": ""
+  },
+  {
+    "field": 33,
+    "name": "Race Winning Time",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "In Seconds; Format: sss.ttt; Example: 72.430",
+    "hasOptions": ""
+  },
+  {
+    "field": 34,
+    "name": "WPS Combined Pool",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "Combined Win, Place and Show Pool",
+    "hasOptions": ""
+  },
+  {
+    "field": 35,
+    "name": "Run Up Distance",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "In Feet; Distance from Starting Gate to Starting Timer; Blank = Unknown or Unavailable",
+    "hasOptions": ""
+  },
+  {
+    "field": 36,
+    "name": "Downhill Turf Indicator",
+    "type": "Text",
+    "maxLength": 1,
+    "comments": "Y = Race was run on Santa Anita Downhill Turf Course; Otherwise Blank",
+    "hasOptions": ""
+  },
+  {
+    "field": 37,
+    "name": "Number of turns in race",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "Rounded to nearest integer; 0 is valid; Blank = unavailable; 1 turn = approx 180 degrees; 1/2 turn = approx 90 degrees; 1.5 rounded to 2; 1.25 rounded to 1",
+    "hasOptions": ""
+  },
+  {
+    "field": 38,
+    "name": "Number of turns in race (decimal)",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "Decimal version; 0 is valid; Blank = unavailable; Fractions from chute starts; Work in progress field",
+    "hasOptions": ""
+  },
+  {
+    "field": 39,
+    "name": "Field 39",
+    "type": "",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 40,
+    "name": "Field 40",
+    "type": "",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 41,
+    "name": "Field 41",
+    "type": "",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 42,
+    "name": "Field 42",
+    "type": "",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 43,
+    "name": "Field 43",
+    "type": "",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 44,
+    "name": "Field 44",
+    "type": "",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 45,
+    "name": "Field 45",
+    "type": "",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 46,
+    "name": "Field 46",
+    "type": "",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 47,
+    "name": "Field 47",
+    "type": "",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 48,
+    "name": "Field 48",
+    "type": "",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 49,
+    "name": "Field 49",
+    "type": "",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 50,
+    "name": "Field 50",
+    "type": "",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 51,
+    "name": "Horse Name",
+    "type": "Text",
+    "maxLength": 30,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 52,
+    "name": "Horse Age",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 53,
+    "name": "Horse Sex",
+    "type": "Text",
+    "maxLength": 1,
+    "comments": "F = Filly; M = Mare; C = Colt; H = Horse; G = Gelding; R = Ridgling",
+    "hasOptions": ""
+  },
+  {
+    "field": 54,
+    "name": "Medication",
+    "type": "Text",
+    "maxLength": 3,
+    "comments": "L = Lasix; B = Bute; A = Adjunct Bleeder Medication",
+    "hasOptions": ""
+  },
+  {
+    "field": 55,
+    "name": "Equipment",
+    "type": "Text",
+    "maxLength": 5,
+    "comments": "Blank = No equipment; 2 = Screens; 3 = Shields; A = Aluminum Pads; B = Blinkers; C = Mud Calks; F = Front Wraps; G = Goggles; H = Hood; I = Cornell Collar; J = Cornell Collar Off; K = Flipping halter; L = Bar Shoes; N = No whip; O = Blinkers off; P = Aluminum Pad; Q = Nasal Strip off; R = Bar Shoe; S = Nasal Strip; V = Cheek Piece; W = No Hind Shoes; X = Cheek Piece Off; Y = No shoes; Z = Tongue Tie",
+    "hasOptions": ""
+  },
+  {
+    "field": 56,
+    "name": "Weight Carried",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 57,
+    "name": "Claiming Price",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "Claiming Price horse was entered for",
+    "hasOptions": ""
+  },
+  {
+    "field": 58,
+    "name": "Earnings",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "Money earned by horse in this race",
+    "hasOptions": ""
+  },
+  {
+    "field": 59,
+    "name": "Program Number",
+    "type": "Text",
+    "maxLength": 3,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 60,
+    "name": "Coupled Type",
+    "type": "Text",
+    "maxLength": 1,
+    "comments": "Horses marked 'a' are coupled; 'b' are coupled; Blank if uncoupled",
+    "hasOptions": ""
+  },
+  {
+    "field": 61,
+    "name": "Morning Line Odds",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 62,
+    "name": "Final Tote Odds",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 63,
+    "name": "Favorite Indicator",
+    "type": "Text",
+    "maxLength": 1,
+    "comments": "Y = Final Tote Favorite; Otherwise Blank",
+    "hasOptions": ""
+  },
+  {
+    "field": 64,
+    "name": "Non-Betting Indicator",
+    "type": "Text",
+    "maxLength": 1,
+    "comments": "Y = No Betting on this horse; Otherwise Blank",
+    "hasOptions": ""
+  },
+  {
+    "field": 65,
+    "name": "Win Mutuel Paid",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "In US Dollars; Coupled horses share mutuel",
+    "hasOptions": ""
+  },
+  {
+    "field": 66,
+    "name": "Place Mutuel Paid",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "In US Dollars; Coupled horses share mutuel",
+    "hasOptions": ""
+  },
+  {
+    "field": 67,
+    "name": "Show Mutuel Paid",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "In US Dollars; Coupled horses share mutuel",
+    "hasOptions": ""
+  },
+  {
+    "field": 68,
+    "name": "Post Position",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 69,
+    "name": "Position at Start Call",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "See Note 2",
+    "hasOptions": ""
+  },
+  {
+    "field": 70,
+    "name": "Position at Call 1",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "See Note 2; Horses who did not finish are placed last",
+    "hasOptions": ""
+  },
+  {
+    "field": 71,
+    "name": "Position at Call 2",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "See Note 2; Horses who did not finish are placed last",
+    "hasOptions": ""
+  },
+  {
+    "field": 72,
+    "name": "Position at Call 3",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "See Note 2; Horses who did not finish are placed last",
+    "hasOptions": ""
+  },
+  {
+    "field": 73,
+    "name": "Position at Call 4",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "See Note 2; Horses who did not finish are placed last",
+    "hasOptions": ""
+  },
+  {
+    "field": 74,
+    "name": "Position at Call 5",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "See Note 2; Horses who did not finish are placed last",
+    "hasOptions": ""
+  },
+  {
+    "field": 75,
+    "name": "Position at Finish",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "See Note 2; Horses who did not finish are placed last",
+    "hasOptions": ""
+  },
+  {
+    "field": 76,
+    "name": "Official Finish Position",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "See Note 2; Horses who did not finish are placed last",
+    "hasOptions": ""
+  },
+  {
+    "field": 77,
+    "name": "Call 1 Lengths Behind",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "See Note 2; 99.99 = Did Not Finish",
+    "hasOptions": ""
+  },
+  {
+    "field": 78,
+    "name": "Call 2 Lengths Behind",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "See Note 2; 99.99 = Did Not Finish",
+    "hasOptions": ""
+  },
+  {
+    "field": 79,
+    "name": "Call 3 Lengths Behind",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "See Note 2; 99.99 = Did Not Finish",
+    "hasOptions": ""
+  },
+  {
+    "field": 80,
+    "name": "Call 4 Lengths Behind",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "See Note 2; 99.99 = Did Not Finish",
+    "hasOptions": ""
+  },
+  {
+    "field": 81,
+    "name": "Stretch Call Lengths Behind",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "See Note 2; 99.99 = Did Not Finish",
+    "hasOptions": ""
+  },
+  {
+    "field": 82,
+    "name": "Finish Lengths Behind",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "See Note 2; 99.99 = Did Not Finish",
+    "hasOptions": ""
+  },
+  {
+    "field": 83,
+    "name": "Comment Line",
+    "type": "Text",
+    "maxLength": 22,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 84,
+    "name": "Trainer First Name",
+    "type": "Text",
+    "maxLength": 15,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 85,
+    "name": "Trainer Middle Name",
+    "type": "Text",
+    "maxLength": 15,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 86,
+    "name": "Trainer Last Name",
+    "type": "Text",
+    "maxLength": 80,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 87,
+    "name": "Jockey First Name",
+    "type": "Text",
+    "maxLength": 15,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 88,
+    "name": "Jockey Middle Name",
+    "type": "Text",
+    "maxLength": 15,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 89,
+    "name": "Jockey Last Name",
+    "type": "Text",
+    "maxLength": 80,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 90,
+    "name": "Apprentice Wgt Allowance",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "5 lbs = Apprentice Type 1; 7 lbs = Apprentice Type 2; 10 lbs = Apprentice Type 3; Otherwise Blank",
+    "hasOptions": ""
+  },
+  {
+    "field": 91,
+    "name": "Owner Full Name",
+    "type": "Text",
+    "maxLength": 120,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 92,
+    "name": "Claimed Indicator",
+    "type": "Text",
+    "maxLength": 1,
+    "comments": "Y = Horse was claimed; Otherwise Blank",
+    "hasOptions": ""
+  },
+  {
+    "field": 93,
+    "name": "Claiming Trainer First Name",
+    "type": "Text",
+    "maxLength": 15,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 94,
+    "name": "Claiming Trainer Middle Name",
+    "type": "Text",
+    "maxLength": 15,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 95,
+    "name": "Claiming Trainer Last Name",
+    "type": "Text",
+    "maxLength": 80,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 96,
+    "name": "Claiming Owner Full Name",
+    "type": "Text",
+    "maxLength": 120,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 97,
+    "name": "Scratch Indicator",
+    "type": "Text",
+    "maxLength": 1,
+    "comments": "Y = Scratched; Otherwise Blank",
+    "hasOptions": ""
+  },
+  {
+    "field": 98,
+    "name": "Reason for Scratch",
+    "type": "Text",
+    "maxLength": 1,
+    "comments": "A = Also Eligible; E = Early; G = Gate; I = RegVet - Injured; J = PrivVet - Injured; K = Stakes Scratch; L = RegVet - Illness; M = Main Track Only; N = PrivVet - Unsound; O = Off Turf; P = Reason Unavailable; R = Re-entered; S = Stewards; T = Trainer; U = RegVet - Unsound; V = Veterinarian; Y = Part of Entry; Z = PrivVet - Illness; Blank = Unknown",
+    "hasOptions": ""
+  },
+  {
+    "field": 99,
+    "name": "Last Race Track",
+    "type": "Text",
+    "maxLength": 3,
+    "comments": "2 or 3 character Equibase Track Code",
+    "hasOptions": ""
+  },
+  {
+    "field": 100,
+    "name": "Last Race Date",
+    "type": "Text",
+    "maxLength": 10,
+    "comments": "Format: mm/dd/yyyy; Example: 04/17/2005",
+    "hasOptions": ""
+  },
+  {
+    "field": 101,
+    "name": "Last Race Race Number",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 102,
+    "name": "Last Race Finish Position",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "Original Finish Position",
+    "hasOptions": ""
+  },
+  {
+    "field": 103,
+    "name": "Long Comment Line",
+    "type": "Text",
+    "maxLength": 65,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 104,
+    "name": "Sire",
+    "type": "Text",
+    "maxLength": 30,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 105,
+    "name": "Dam",
+    "type": "Text",
+    "maxLength": 30,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 106,
+    "name": "DamSire",
+    "type": "Text",
+    "maxLength": 30,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 107,
+    "name": "Foaling Date",
+    "type": "Text",
+    "maxLength": 10,
+    "comments": "Format: mm/dd/yyyy; Example: 04/17/2005",
+    "hasOptions": ""
+  },
+  {
+    "field": 108,
+    "name": "Foaling Area",
+    "type": "Text",
+    "maxLength": 3,
+    "comments": "State/province for USA/Canada; Country otherwise",
+    "hasOptions": ""
+  },
+  {
+    "field": 109,
+    "name": "Horse Weight",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "Weight of horse; 1 = difficulties weighing",
+    "hasOptions": ""
+  },
+  {
+    "field": 110,
+    "name": "Number of Claims Submitted",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "Number of claims submitted",
+    "hasOptions": ""
+  },
+  {
+    "field": 111,
+    "name": "Void Indicator",
+    "type": "Text",
+    "maxLength": 1,
+    "comments": "Y = Claim was voided; Otherwise Blank",
+    "hasOptions": ""
+  },
+  {
+    "field": 112,
+    "name": "Void Reason",
+    "type": "Text",
+    "maxLength": 1,
+    "comments": "A = Administrative; D = Deceased; O = Other; P = Positive Test; V = Vet; Otherwise Blank",
+    "hasOptions": ""
+  },
+  {
+    "field": 113,
+    "name": "Breeder",
+    "type": "Text",
+    "maxLength": 120,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 114,
+    "name": "Color",
+    "type": "Text",
+    "maxLength": 5,
+    "comments": "Color of Horse",
+    "hasOptions": ""
+  },
+  {
+    "field": 115,
+    "name": "Jockey ID",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "Equibase assigned Jockey ID",
+    "hasOptions": ""
+  },
+  {
+    "field": 116,
+    "name": "Trainer ID",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "Equibase assigned Trainer ID",
+    "hasOptions": ""
+  },
+  {
+    "field": 117,
+    "name": "Field 117",
+    "type": "",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 118,
+    "name": "Field 118",
+    "type": "",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 119,
+    "name": "Field 119",
+    "type": "",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 120,
+    "name": "Field 120",
+    "type": "",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 121,
+    "name": "Field 121",
+    "type": "",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 122,
+    "name": "Field 122",
+    "type": "",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 123,
+    "name": "Field 123",
+    "type": "",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 124,
+    "name": "Field 124",
+    "type": "",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 125,
+    "name": "Field 125",
+    "type": "",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 126,
+    "name": "Field 126",
+    "type": "",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 127,
+    "name": "Field 127",
+    "type": "",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 128,
+    "name": "Field 128",
+    "type": "",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 129,
+    "name": "Field 129",
+    "type": "",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 130,
+    "name": "Field 130",
+    "type": "",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 131,
+    "name": "#1 Wager Type",
+    "type": "Text",
+    "maxLength": 2,
+    "comments": "$ = Super Bet; 0 = Choose 6; 1 = Roulette; 13 = 123racing; 18 = Pick 18; 2 = Two in the Money; 3 = Pick 3; 4 = Pick 4; 4J = Pick 4 Jackpot; 5 = Pick 5; 5J = Pick 5 Jackpot; 6 = Pick 6; 6J = Pick 6 Jackpot; 7 = Pick 7; 7J = Pick 7 Jackpot; 8 = Countdown; 9 = Pick 9; 9J = Pick 9 Jackpot; A = Triactor; B = Super Tri; BQ = Bracket Quinella; C = Classix; D = Daily Double; E = Exacta; F = Perfecta; G = Perfector; H = Head2Head; HE = Halfway Exacta; HW = Halfway Win; I = Pick 10; ID = Instant Daily Double; J = Exactor; K = Win 4; L = Place Pick All; L8 = Place Pick 8; M = Consolation Pick 3; N = Future Wager; O = Omni; OU = Over/Under; P = Jockey Challenge; P5 = Place Pick 5; P6 = Place Pick 6; P8 = Pick 8; P9 = Place Pick 9; Q = Quinella; R = Triple; S = Superfecta; S5 = Super High Five; SQ = Show Quinella; T = Trifecta; U = Tri Super; V = Odd or Even; W = Twin Trifecta; X = Grand Slam; X5 = X-5 Super Hi-5; Y = Straight Flush; Z = Consolation Double; Z5 = Z-5 Super Hi-5",
+    "hasOptions": ""
+  },
+  {
+    "field": 132,
+    "name": "#1 Wager Unit",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "Unit Bet for specified Payout",
+    "hasOptions": ""
+  },
+  {
+    "field": 133,
+    "name": "#1 Number Right",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "Number right in multi-part bets",
+    "hasOptions": ""
+  },
+  {
+    "field": 134,
+    "name": "#1 Wager Payout",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "Payout in US Dollars",
+    "hasOptions": ""
+  },
+  {
+    "field": 135,
+    "name": "#1 Winning Pgm Numbers",
+    "type": "Text",
+    "maxLength": 35,
+    "comments": "Winning Program Numbers",
+    "hasOptions": ""
+  },
+  {
+    "field": 136,
+    "name": "#1 Total Pool",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "Total Pool for this Wager Type",
+    "hasOptions": ""
+  },
+  {
+    "field": 137,
+    "name": "#2 Wager Type",
+    "type": "Text",
+    "maxLength": 2,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 138,
+    "name": "#2 Wager Unit",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 139,
+    "name": "#2 Number Right",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 140,
+    "name": "#2 Wager Payout",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 141,
+    "name": "#2 Winning Pgm Numbers",
+    "type": "Text",
+    "maxLength": 35,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 142,
+    "name": "#2 Total Pool",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 143,
+    "name": "#3 Wager Type",
+    "type": "Text",
+    "maxLength": 2,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 144,
+    "name": "#3 Wager Unit",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 145,
+    "name": "#3 Number Right",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 146,
+    "name": "#3 Wager Payout",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 147,
+    "name": "#3 Winning Pgm Numbers",
+    "type": "Text",
+    "maxLength": 35,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 148,
+    "name": "#3 Total Pool",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 149,
+    "name": "#4 Wager Type",
+    "type": "Text",
+    "maxLength": 2,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 150,
+    "name": "#4 Wager Unit",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 151,
+    "name": "#4 Number Right",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 152,
+    "name": "#4 Wager Payout",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 153,
+    "name": "#4 Winning Pgm Numbers",
+    "type": "Text",
+    "maxLength": 35,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 154,
+    "name": "#4 Total Pool",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 155,
+    "name": "#5 Wager Type",
+    "type": "Text",
+    "maxLength": 2,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 156,
+    "name": "#5 Wager Unit",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 157,
+    "name": "#5 Number Right",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 158,
+    "name": "#5 Wager Payout",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 159,
+    "name": "#5 Winning Pgm Numbers",
+    "type": "Text",
+    "maxLength": 35,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 160,
+    "name": "#5 Total Pool",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 161,
+    "name": "#6 Wager Type",
+    "type": "Text",
+    "maxLength": 2,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 162,
+    "name": "#6 Wager Unit",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 163,
+    "name": "#6 Number Right",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 164,
+    "name": "#6 Wager Payout",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 165,
+    "name": "#6 Winning Pgm Numbers",
+    "type": "Text",
+    "maxLength": 35,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 166,
+    "name": "#6 Total Pool",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 167,
+    "name": "#7 Wager Type",
+    "type": "Text",
+    "maxLength": 2,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 168,
+    "name": "#7 Wager Unit",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 169,
+    "name": "#7 Number Right",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 170,
+    "name": "#7 Wager Payout",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 171,
+    "name": "#7 Winning Pgm Numbers",
+    "type": "Text",
+    "maxLength": 35,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 172,
+    "name": "#7 Total Pool",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 173,
+    "name": "#8 Wager Type",
+    "type": "Text",
+    "maxLength": 2,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 174,
+    "name": "#8 Wager Unit",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 175,
+    "name": "#8 Number Right",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 176,
+    "name": "#8 Wager Payout",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 177,
+    "name": "#8 Winning Pgm Numbers",
+    "type": "Text",
+    "maxLength": 35,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 178,
+    "name": "#8 Total Pool",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 179,
+    "name": "#9 Wager Type",
+    "type": "Text",
+    "maxLength": 2,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 180,
+    "name": "#9 Wager Unit",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 181,
+    "name": "#9 Number Right",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 182,
+    "name": "#9 Wager Payout",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 183,
+    "name": "#9 Winning Pgm Numbers",
+    "type": "Text",
+    "maxLength": 35,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 184,
+    "name": "#9 Total Pool",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 185,
+    "name": "#10 Wager Type",
+    "type": "Text",
+    "maxLength": 2,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 186,
+    "name": "#10 Wager Unit",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 187,
+    "name": "#10 Number Right",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 188,
+    "name": "#10 Wager Payout",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 189,
+    "name": "#10 Winning Pgm Numbers",
+    "type": "Text",
+    "maxLength": 35,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 190,
+    "name": "#10 Total Pool",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 191,
+    "name": "#11 Wager Type",
+    "type": "Text",
+    "maxLength": 2,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 192,
+    "name": "#11 Wager Unit",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 193,
+    "name": "#11 Number Right",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 194,
+    "name": "#11 Wager Payout",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 195,
+    "name": "#11 Winning Pgm Numbers",
+    "type": "Text",
+    "maxLength": 35,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 196,
+    "name": "#11 Total Pool",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 197,
+    "name": "#12 Wager Type",
+    "type": "Text",
+    "maxLength": 2,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 198,
+    "name": "#12 Wager Unit",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 199,
+    "name": "#12 Number Right",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 200,
+    "name": "#12 Wager Payout",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 201,
+    "name": "#12 Winning Pgm Numbers",
+    "type": "Text",
+    "maxLength": 35,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 202,
+    "name": "#12 Total Pool",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 203,
+    "name": "#13 Wager Type",
+    "type": "Text",
+    "maxLength": 2,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 204,
+    "name": "#13 Wager Unit",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 205,
+    "name": "#13 Number Right",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 206,
+    "name": "#13 Wager Payout",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 207,
+    "name": "#13 Winning Pgm Numbers",
+    "type": "Text",
+    "maxLength": 35,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 208,
+    "name": "#13 Total Pool",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 209,
+    "name": "#14 Wager Type",
+    "type": "Text",
+    "maxLength": 2,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 210,
+    "name": "#14 Wager Unit",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 211,
+    "name": "#14 Number Right",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 212,
+    "name": "#14 Wager Payout",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 213,
+    "name": "#14 Winning Pgm Numbers",
+    "type": "Text",
+    "maxLength": 35,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 214,
+    "name": "#14 Total Pool",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 215,
+    "name": "#15 Wager Type",
+    "type": "Text",
+    "maxLength": 2,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 216,
+    "name": "#15 Wager Unit",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 217,
+    "name": "#15 Number Right",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 218,
+    "name": "#15 Wager Payout",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 219,
+    "name": "#15 Winning Pgm Numbers",
+    "type": "Text",
+    "maxLength": 35,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 220,
+    "name": "#15 Total Pool",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 221,
+    "name": "#16 Wager Type",
+    "type": "Text",
+    "maxLength": 2,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 222,
+    "name": "#16 Wager Unit",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 223,
+    "name": "#16 Number Right",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 224,
+    "name": "#16 Wager Payout",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 225,
+    "name": "#16 Winning Pgm Numbers",
+    "type": "Text",
+    "maxLength": 35,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 226,
+    "name": "#16 Total Pool",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 227,
+    "name": "#17 Wager Type",
+    "type": "Text",
+    "maxLength": 2,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 228,
+    "name": "#17 Wager Unit",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 229,
+    "name": "#17 Number Right",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 230,
+    "name": "#17 Wager Payout",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 231,
+    "name": "#17 Winning Pgm Numbers",
+    "type": "Text",
+    "maxLength": 35,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 232,
+    "name": "#17 Total Pool",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 233,
+    "name": "#18 Wager Type",
+    "type": "Text",
+    "maxLength": 2,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 234,
+    "name": "#18 Wager Unit",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 235,
+    "name": "#18 Number Right",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 236,
+    "name": "#18 Wager Payout",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 237,
+    "name": "#18 Winning Pgm Numbers",
+    "type": "Text",
+    "maxLength": 35,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 238,
+    "name": "#18 Total Pool",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 239,
+    "name": "#19 Wager Type",
+    "type": "Text",
+    "maxLength": 2,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 240,
+    "name": "#19 Wager Unit",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 241,
+    "name": "#19 Number Right",
+    "type": "Integer",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 242,
+    "name": "#19 Wager Payout",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 243,
+    "name": "#19 Winning Pgm Numbers",
+    "type": "Text",
+    "maxLength": 35,
+    "comments": "",
+    "hasOptions": ""
+  },
+  {
+    "field": 244,
+    "name": "#19 Total Pool",
+    "type": "Decimal",
+    "maxLength": "",
+    "comments": "",
+    "hasOptions": ""
+  }
+]
