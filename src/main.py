@@ -32,6 +32,11 @@ def main() -> None:
     if project_root not in sys.path:
         sys.path.insert(0, project_root)
 
+    # Create config.ini with defaults if it does not exist yet.
+    if not os.path.isfile(config_path):
+        from src.utils.ini_utils import rebuild_config
+        rebuild_config(config_path)
+
     from src.gui import HTRApp
 
     app = HTRApp(scheme_dir=scheme_dir, config_path=config_path)
