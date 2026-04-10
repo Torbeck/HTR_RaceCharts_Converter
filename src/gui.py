@@ -56,12 +56,11 @@ class HTRApp:
         self._setup_drag_and_drop()
 
         # ── Preselect last output directory from config.ini ───────────
-        # Fallback logic (in read_last_output):
-        #   - If last_output is "default" or missing → use default_output_dir
-        #   - If the stored path doesn't exist on disk → use default_output_dir
-        # The default output dir is the user's home directory.
-        default_output = os.path.expanduser("~")
-        last_output = read_last_output(config_path, default_output)
+        # read_last_output returns None when the value is "Default" or
+        # missing.  In that case we leave the output field empty; it
+        # will be auto-filled to the input file's directory when the
+        # user adds files (see _add_files).
+        last_output = read_last_output(config_path)
         if last_output and os.path.isdir(last_output):
             self._output_var.set(last_output)
 
@@ -363,6 +362,9 @@ class HTRApp:
     def _add_files(self, paths: List[str]) -> None:
         """Add file paths to the list, skipping duplicates.
 
+        When the output directory is empty, it is automatically set to
+        the directory of the first input file that is added.
+
         Args:
             paths: File paths to add.
         """
@@ -374,6 +376,13 @@ class HTRApp:
                 existing.add(p)
                 self._log(f"Added: {os.path.basename(p)}")
         self._update_merge_state()
+
+        # Auto-set output directory to the first input file's folder
+        # when no output directory has been chosen yet.
+        if not self._output_var.get() and self._file_paths:
+            input_dir = os.path.dirname(self._file_paths[0])
+            if input_dir and os.path.isdir(input_dir):
+                self._output_var.set(input_dir)
 
     def _update_merge_state(self) -> None:
         """Enable the merge checkbox only when multiple files are loaded."""
