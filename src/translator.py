@@ -1,0 +1,91 @@
+"""Translator module for HTR chart processing.
+
+Applies lookup translations to fields where hasOptions is true,
+replacing raw codes with human-readable values from lookup.json.
+Blank fields are preserved as-is.
+"""
+
+from typing import Dict, List, Set
+
+from src.schema_loader import FieldsSchema, LookupTable
+
+
+def apply_lookup_translations(
+    rows: List[List[str]],
+    fields_schema: FieldsSchema,
+    lookup_table: LookupTable,
+) -> List[List[str]]:
+    """Apply lookup translations to all rows.
+
+    For every field where hasOptions is true, replace the raw code with the
+    human-readable value from lookup.json. Blank values are preserved.
+
+    Args:
+        rows: Parsed data rows (244 fields each). These are modified in place
+            and also returned.
+        fields_schema: Loaded fields.json schema.
+        lookup_table: Loaded lookup.json.
+
+    Returns:
+        The same rows list with translated values.
+
+    Raises:
+        ValueError: If a non-blank value has no matching code in lookup.json.
+    """
+    # Build translation dicts: field_index (0-based) → {code: value}
+    translation_maps: Dict[int, Dict[str, str]] = {}
+    for field_def in fields_schema:
+        if field_def.get("hasOptions"):
+            field_num = field_def["field"]
+            field_idx = field_num - 1  # 0-based
+            field_num_str = str(field_num)
+
+            if field_num_str not in lookup_table:
+                raise ValueError(
+                    f"Field {field_num} ({field_def.get('name', 'unknown')}) "
+                    f"has hasOptions=true but no entry in lookup.json."
+                )
+
+            code_map: Dict[str, str] = {}
+            for entry in lookup_table[field_num_str]:
+                code_map[entry["code"]] = entry["value"]
+            translation_maps[field_idx] = code_map
+
+    # Apply translations
+    for row_num, row in enumerate(rows, start=1):
+        for field_idx, code_map in translation_maps.items():
+            raw_value = row[field_idx]
+            if raw_value == "":
+                continue  # Preserve blanks
+            if raw_value not in code_map:
+                field_num = field_idx + 1
+                field_name = fields_schema[field_idx].get("name", "unknown")
+                raise ValueError(
+                    f"Row {row_num}: field {field_num} ({field_name}) "
+                    f"has value '{raw_value}' with no matching lookup code."
+                )
+            row[field_idx] = code_map[raw_value]
+
+    return rows
+
+
+def get_headers(fields_schema: FieldsSchema) -> List[str]:
+    """Extract column headers from the fields schema.
+
+    For fields with a null name (unused fields), the header is
+    'Field_<number>' to maintain the exact 244-column structure.
+
+    Args:
+        fields_schema: Loaded fields.json schema.
+
+    Returns:
+        List of 244 header strings.
+    """
+    headers: List[str] = []
+    for field_def in fields_schema:
+        name = field_def.get("name")
+        if name is None:
+            headers.append(f"Field_{field_def['field']}")
+        else:
+            headers.append(name)
+    return headers
