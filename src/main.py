@@ -2,8 +2,10 @@
 # HTR Race Charts Converter
 # Version: 1.0.0
 # Development Team:  Ken Torbeck (ktorbeck@gmail.com) & Dr. Russ Winterbotham
+# Not affiliated with HTR or its developers. This is an independent project
 # GPL-3.0 license
 # ──────────────────────────────────────────────────────────────────────
+
 
 """Entry point for the HTR Chart Processing Application.
 

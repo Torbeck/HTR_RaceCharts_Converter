@@ -10,6 +10,10 @@ Version: 1.0.0
 
 ---
 
+**Disclaimer:** This project is not affiliated with HTR (Handicapping Technology & Research) or its developers. It is an independent, community-developed tool for processing HTR race chart exports.
+
+---
+
 ## Overview
 
 HTR Race Charts Converter is a desktop application that transforms raw horse racing data files exported from **HTR (Handicapping Technology & Research)** into clean, formatted Excel workbooks and CSV files.
