@@ -1,8 +1,12 @@
 # HTR Race Charts Converter
 
+Version: 1.0.0
+
 **Development Team**
 - **Lead Programmer:** Ken Torbeck ([ktorbeck@gmail.com](mailto:ktorbeck@gmail.com))
-- **Dr. Russ Winterbotham from The Horse Ranker Project**
+- **Researcher:** Dr. Russ Winterbotham from The Horse Ranker Project
+
+**License:** [GPL-3.0](LICENSE)
 
 ---
 
@@ -125,6 +129,12 @@ The file contains one section for each Excel sheet, plus a paths section:
 | `auto_size_columns` | `yes` / `no` | Whether column widths are automatically adjusted to fit content. |
 | `freeze_header` | `yes` / `no` | Whether the header row stays visible when scrolling down. |
 
+### Settings (paths section)
+
+| Key | Values | Description |
+|---|---|---|
+| `last_output` | `Default` or a folder path | The output directory used for the next export. When set to `Default`, output files are saved to the same folder as the input file. After you choose a different output directory, this value is automatically updated to that path. |
+
 ### Default Configuration
 
 ```ini
@@ -145,6 +155,9 @@ table_style = TableStyleMedium12
 borders = no
 auto_size_columns = yes
 freeze_header = yes
+
+[paths]
+last_output = Default
 ```
 
 ### Invalid Style Names
@@ -220,4 +233,6 @@ Developed by Ken Torbeck and Dr. Russ Winterbotham.
 
 HTR (Handicapping Technology & Research) is a product of Ken Massa.
 
-*License: TBD*
+This project is licensed under the **GNU General Public License v3.0**. See the [LICENSE](LICENSE) file for full details.
+
+You are free to use, modify, and distribute this software under the terms of the GPL-3.0 license.
