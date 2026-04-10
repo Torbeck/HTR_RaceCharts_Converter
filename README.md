@@ -1,0 +1,223 @@
+# HTR Race Charts Converter
+
+**Development Team**
+- **Lead Programmer:** Ken Torbeck ([ktorbeck@gmail.com](mailto:ktorbeck@gmail.com))
+- **Dr. Russ Winterbotham from The Horse Ranker Project**
+
+---
+
+## Overview
+
+HTR Race Charts Converter is a desktop application that transforms raw horse racing data files exported from **HTR (Handicapping Technology & Research)** into clean, formatted Excel workbooks and CSV files.
+
+HTR exports race chart data as flat CSV text files with 244 coded fields per row and no column headers. Reading or analyzing these files directly is impractical. This program solves that problem by:
+
+- Adding meaningful column headers to every field.
+- Translating coded values (track surface, race type, age restrictions, etc.) into human-readable labels.
+- Packaging the results into a professionally formatted Excel workbook with supporting reference sheets.
+
+It is built for **handicappers, researchers, and data analysts** who work with HTR race chart exports and need structured, ready-to-use data.
+
+---
+
+## Features
+
+- **Graphical interface** — select files, configure output, and run with a few clicks.
+- **Drag-and-drop support** — drop HTR files or entire folders directly onto the window.
+- **Batch processing** — process multiple race chart files at once.
+- **Merge option** — combine multiple files into a single unified output, or export them individually.
+- **Automatic lookup translation** — coded values are replaced with descriptive labels (e.g., race type codes become "Maiden Special Weight", "Claiming", etc.).
+- **Formatted Excel output** — each workbook contains three sheets with Excel tables, auto-sized columns, and frozen headers.
+- **CSV output** — a plain CSV file is also generated alongside each Excel workbook.
+- **Reference sheets included** — Points of Call by Distance and Fractional Times by Distance are embedded in every workbook for quick lookup.
+- **Configurable formatting** — table styles, borders, column sizing, and header freeze can be customized per sheet via `config.ini`.
+- **Style validation** — invalid Excel table style names in the config are automatically detected and flagged.
+- **Config rebuild** — a built-in menu option restores `config.ini` to factory defaults if it becomes corrupted or misconfigured.
+- **Output path memory** — the program remembers your last output folder between sessions.
+
+---
+
+## Requirements
+
+| Requirement | Details |
+|---|---|
+| **Python** | 3.10 or higher |
+| **openpyxl** | Excel workbook generation |
+| **tkinterdnd2** | Drag-and-drop support (optional — the program works without it) |
+| **tkinter** | Included with standard Python installations |
+
+---
+
+## Installation
+
+1. **Install Python** (3.10+) from [python.org](https://www.python.org/downloads/) if not already installed. Make sure to check **"Add Python to PATH"** during setup.
+
+2. **Install required libraries** by opening a terminal in the project folder and running:
+
+   ```
+   pip install openpyxl
+   ```
+
+3. **Install drag-and-drop support** (optional but recommended):
+
+   ```
+   pip install tkinterdnd2
+   ```
+
+4. **Run the program:**
+
+   ```
+   python src/main.py
+   ```
+
+---
+
+## Using the Program
+
+### Step 1 — Launch
+
+Run `python src/main.py`. The HTR Chart Processor window will appear.
+
+### Step 2 — Add Input Files
+
+You have three ways to add HTR files:
+
+- **Add Files…** — Click this button to open a file picker. Select one or more `.TXT` files.
+- **Add Folder…** — Click this button to select a folder. All `.TXT` files inside it will be added automatically.
+- **Drag and Drop** — Drag files or folders directly onto the application window (requires tkinterdnd2).
+
+Added files appear in the file list. Use **Remove Selected** or **Clear All** to manage the list.
+
+### Step 3 — Choose Output Options
+
+- **Merge all files into one output** — Check this box to combine all loaded files into a single merged output. Leave it unchecked to produce separate output files for each input file.
+- **Output Directory** — Click **Browse…** to choose where the output files will be saved. The program remembers your last selection.
+
+### Step 4 — Process
+
+Click **Start Processing**. Progress messages and any errors appear in the Log panel at the bottom of the window.
+
+When processing completes, you will find your output files (`.csv` and `.xlsx`) in the chosen output directory.
+
+---
+
+## Configuration (config.ini)
+
+The `config.ini` file controls Excel formatting for each of the three workbook sheets. It is located in the project root folder.
+
+### Sections
+
+The file contains one section for each Excel sheet, plus a paths section:
+
+| Section | Controls formatting for |
+|---|---|
+| `[race_data]` | Sheet 1 — Processed Race Data |
+| `[points_call]` | Sheet 2 — Points of Call by Distance |
+| `[fractional_times]` | Sheet 3 — Fractional Times by Distance |
+| `[paths]` | Remembered output directory (managed automatically) |
+
+### Settings (per sheet section)
+
+| Key | Values | Description |
+|---|---|---|
+| `table_style` | Any valid Excel table style name | The visual style applied to the data table. Examples: `TableStyleLight1` through `TableStyleLight21`, `TableStyleMedium1` through `TableStyleMedium28`, `TableStyleDark1` through `TableStyleDark11`. |
+| `borders` | `yes` / `no` | Whether thin borders are drawn around every cell. |
+| `auto_size_columns` | `yes` / `no` | Whether column widths are automatically adjusted to fit content. |
+| `freeze_header` | `yes` / `no` | Whether the header row stays visible when scrolling down. |
+
+### Default Configuration
+
+```ini
+[race_data]
+table_style = TableStyleMedium9
+borders = yes
+auto_size_columns = yes
+freeze_header = yes
+
+[points_call]
+table_style = TableStyleMedium11
+borders = no
+auto_size_columns = yes
+freeze_header = yes
+
+[fractional_times]
+table_style = TableStyleMedium12
+borders = no
+auto_size_columns = yes
+freeze_header = yes
+```
+
+### Invalid Style Names
+
+If you enter a table style name that Excel does not recognize, the program will:
+
+1. Mark the value in the INI as `INVALID - <your value>` so you can see what went wrong.
+2. Use the default style for that sheet instead.
+
+### Rebuilding the Config
+
+If `config.ini` becomes corrupted or you want to start fresh, go to **Tools → Rebuild config.ini** in the menu bar. This resets all formatting settings to their defaults while preserving your last output directory.
+
+---
+
+## Input Files
+
+The program accepts `.TXT` files exported from HTR's Race Chart data product.
+
+- Each file is a CSV (comma-separated) text file.
+- Each row represents one race starter and contains exactly **244 fields**.
+- Files contain **no headers** — the program adds them automatically from its built-in schema.
+- File names typically follow HTR's naming convention (e.g., `SA0322F.TXT`, `TP0312F.TXT`), but any `.TXT` file in the correct format will work.
+
+---
+
+## Output Files
+
+For each input file (or merged group), the program produces two output files:
+
+### CSV File (`.csv`)
+
+A plain comma-separated file with a header row and all lookup codes translated to readable labels. This file can be opened in any spreadsheet application or imported into databases and analysis tools.
+
+### Excel Workbook (`.xlsx`)
+
+A formatted workbook containing three sheets:
+
+| Sheet | Contents |
+|---|---|
+| **Processed Race Data** | The main output — all 244 fields with headers and translated lookup values. Each row is one race starter. |
+| **Points of Call by Distance** | A reference table showing the names of the five points of call (e.g., "Start", "1/4 mile", "Stretch", "Finish") for each race distance. Use this to interpret the points-of-call fields in the race data. |
+| **Fractional Times by Distance** | A reference table showing the names of the five fractional time splits (e.g., "2 furlongs", "4 furlongs", "6 furlongs", "Final") for each race distance. Use this to interpret the fractional time fields in the race data. |
+
+Each sheet is formatted as an Excel Table with configurable styles, optional borders, auto-sized columns, and a frozen header row.
+
+---
+
+## Troubleshooting
+
+| Problem | Solution |
+|---|---|
+| **"Drag-and-drop unavailable"** in the log | Install the `tkinterdnd2` library: `pip install tkinterdnd2`. The program still works without it — use the Add Files or Add Folder buttons instead. |
+| **Permission denied** error when saving output | The output file may be open in another program (e.g., Excel). Close the file and try again. |
+| **"No .TXT files found"** after adding a folder | Make sure the folder contains `.TXT` files directly (not nested in subfolders). |
+| **Validation error about field count** | The input file may not be a valid HTR race chart export. Each row must contain exactly 244 fields. |
+| **Lookup code error** | The input file contains a coded value that is not in the program's lookup tables. This may indicate a newer HTR data format. Contact the development team. |
+| **config.ini issues** | Use **Tools → Rebuild config.ini** to restore default settings. |
+| **"INVALID - …" appears in config.ini** | You entered a table style name that Excel does not recognize. Check the spelling and use a valid style such as `TableStyleMedium9`. Rebuild the config to reset all styles. |
+
+---
+
+## Versioning / Updates
+
+This program is under active development. Features, configuration options, and supported data formats may change over time. Please check this README for updated instructions after receiving a new version.
+
+---
+
+## Credits / License
+
+**HTR Race Charts Converter**
+Developed by Ken Torbeck and Dr. Russ Winterbotham.
+
+HTR (Handicapping Technology & Research) is a product of Ken Massa.
+
+*License: TBD*
