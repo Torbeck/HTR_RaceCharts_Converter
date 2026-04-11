@@ -239,6 +239,22 @@ class TestApplyLookupTranslations(unittest.TestCase):
             any("XX" in msg and "field 4" in msg for msg in cm.output)
         )
 
+    def test_unknown_code_calls_progress_callback(self):
+        """An unrecognized code should send the 'not found' message via progress."""
+        lookup = [
+            {"field": 4, "id": "TB", "value": "Thoroughbred"},
+        ]
+        fields = self._make_fields_schema({4})
+        row = [""] * 244
+        row[3] = "BF"
+        messages = []
+        with self.assertLogs("src.translator", level="WARNING"):
+            apply_lookup_translations([row], fields, lookup,
+                                      progress=messages.append)
+        self.assertEqual(row[3], "BF")
+        self.assertEqual(len(messages), 1)
+        self.assertIn("BF for field 4 (Field4) was not found.", messages[0])
+
     def test_missing_field_in_lookup_logs_warning(self):
         """A field with hasOptions=true but no entries should log warning."""
         lookup = []

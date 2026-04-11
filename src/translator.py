@@ -6,7 +6,7 @@ Blank fields are preserved as-is.
 """
 
 import logging
-from typing import Dict, List, Set
+from typing import Callable, Dict, List, Optional, Set
 
 from src.schema_loader import FieldsSchema, LookupTable
 
@@ -17,6 +17,7 @@ def apply_lookup_translations(
     rows: List[List[str]],
     fields_schema: FieldsSchema,
     lookup_table: LookupTable,
+    progress: Optional[Callable[[str], None]] = None,
 ) -> List[List[str]]:
     """Apply lookup translations to all rows.
 
@@ -29,6 +30,8 @@ def apply_lookup_translations(
             and also returned.
         fields_schema: Loaded fields.json schema.
         lookup_table: Loaded lookup.json.
+        progress: Optional callback for progress/warning messages
+            (e.g. GUI log display).
 
     Returns:
         The same rows list with translated values.
@@ -63,12 +66,13 @@ def apply_lookup_translations(
             if raw_value not in code_map:
                 field_num = field_idx + 1
                 field_name = fields_schema[field_idx].get("name", "unknown")
-                logger.warning(
-                    "%s for field %d (%s) was not found.",
-                    raw_value,
-                    field_num,
-                    field_name,
+                msg = (
+                    f"{raw_value} for field {field_num} ({field_name})"
+                    " was not found."
                 )
+                logger.warning("%s", msg)
+                if progress is not None:
+                    progress(msg)
                 continue
             row[field_idx] = code_map[raw_value]
 
