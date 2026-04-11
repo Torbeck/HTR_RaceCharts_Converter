@@ -64,7 +64,8 @@ def validate_lookup_codes(
     code_sets: Dict[int, Set[str]] = {}
     for idx in lookup_field_indices:
         field_num = idx + 1  # 1-based
-        entries = [e for e in lookup_table if e["field"] == field_num]
+        lookup_field_num = fields_schema[idx].get("lookupRef", field_num)
+        entries = [e for e in lookup_table if e["field"] == lookup_field_num]
         if not entries:
             logger.warning(
                 "No lookup entries found for field %d (%s).",
