@@ -1,6 +1,6 @@
 # HTR Race Charts Converter
 
-Version: 1.2.0
+Version: 1.2.5
 
 **Development Team**
 - **Lead Programmer:** Ken Torbeck ([ktorbeck@gmail.com](mailto:ktorbeck@gmail.com))
