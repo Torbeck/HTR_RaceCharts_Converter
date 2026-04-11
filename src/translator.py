@@ -32,23 +32,23 @@ def apply_lookup_translations(
     Raises:
         ValueError: If a non-blank value has no matching code in lookup.json.
     """
-    # Build translation dicts: field_index (0-based) → {code: value}
+    # Build translation dicts: field_index (0-based) → {id: value}
     translation_maps: Dict[int, Dict[str, str]] = {}
     for field_def in fields_schema:
         if field_def.get("hasOptions"):
             field_num = field_def["field"]
             field_idx = field_num - 1  # 0-based
-            field_num_str = str(field_num)
 
-            if field_num_str not in lookup_table:
+            entries = [e for e in lookup_table if e["field"] == field_num]
+            if not entries:
                 raise ValueError(
                     f"Field {field_num} ({field_def.get('name', 'unknown')}) "
                     f"has hasOptions=true but no entry in lookup.json."
                 )
 
             code_map: Dict[str, str] = {}
-            for entry in lookup_table[field_num_str]:
-                code_map[entry["code"]] = entry["value"]
+            for entry in entries:
+                code_map[entry["id"]] = entry["value"]
             translation_maps[field_idx] = code_map
 
     # Apply translations

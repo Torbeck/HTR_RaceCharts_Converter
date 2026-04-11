@@ -17,7 +17,8 @@ from src.utils.file_utils import resolve_scheme_path
 # ── Type aliases ──────────────────────────────────────────────────────
 FieldDefinition = Dict[str, Any]
 FieldsSchema = List[FieldDefinition]
-LookupTable = Dict[str, List[Dict[str, str]]]
+LookupEntry = Dict[str, Any]
+LookupTable = List[LookupEntry]
 DistanceTable = Dict[str, List[str]]
 
 
@@ -77,7 +78,7 @@ def load_lookup_schema(scheme_dir: str) -> LookupTable:
         scheme_dir: Directory containing scheme files.
 
     Returns:
-        Dict mapping field number (string) to list of {code, value} dicts.
+        List of lookup entry dicts, each with 'field' (int), 'id', and 'value'.
 
     Raises:
         FileNotFoundError: If lookup.json does not exist.
@@ -87,24 +88,16 @@ def load_lookup_schema(scheme_dir: str) -> LookupTable:
     with open(path, mode="r", encoding="utf-8") as f:
         data = json.load(f)
 
-    if not isinstance(data, dict):
-        raise ValueError(f"lookup.json must be a JSON object, got {type(data).__name__}")
+    if not isinstance(data, list):
+        raise ValueError(f"lookup.json must be a JSON array, got {type(data).__name__}")
 
-    for field_num, entries in data.items():
-        if not isinstance(entries, list):
+    for i, entry in enumerate(data):
+        if not isinstance(entry, dict):
+            raise ValueError(f"lookup.json entry {i} is not an object")
+        if "field" not in entry or "id" not in entry or "value" not in entry:
             raise ValueError(
-                f"lookup.json field {field_num} must map to an array, "
-                f"got {type(entries).__name__}"
+                f"lookup.json entry {i} missing 'field', 'id', or 'value'"
             )
-        for j, entry in enumerate(entries):
-            if not isinstance(entry, dict):
-                raise ValueError(
-                    f"lookup.json field {field_num}[{j}] is not an object"
-                )
-            if "code" not in entry or "value" not in entry:
-                raise ValueError(
-                    f"lookup.json field {field_num}[{j}] missing 'code' or 'value'"
-                )
 
     return data
 
