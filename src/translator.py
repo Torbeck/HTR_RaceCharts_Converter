@@ -5,9 +5,12 @@ replacing raw codes with human-readable values from lookup.json.
 Blank fields are preserved as-is.
 """
 
+import logging
 from typing import Dict, List, Set
 
 from src.schema_loader import FieldsSchema, LookupTable
+
+logger = logging.getLogger(__name__)
 
 
 def apply_lookup_translations(
@@ -19,6 +22,7 @@ def apply_lookup_translations(
 
     For every field where hasOptions is true, replace the raw code with the
     human-readable value from lookup.json. Blank values are preserved.
+    Values not found in the lookup are preserved and a warning is logged.
 
     Args:
         rows: Parsed data rows (244 fields each). These are modified in place
@@ -28,9 +32,6 @@ def apply_lookup_translations(
 
     Returns:
         The same rows list with translated values.
-
-    Raises:
-        ValueError: If a non-blank value has no matching code in lookup.json.
     """
     # Build translation dicts: field_index (0-based) → {id: value}
     translation_maps: Dict[int, Dict[str, str]] = {}
@@ -41,10 +42,13 @@ def apply_lookup_translations(
 
             entries = [e for e in lookup_table if e["field"] == field_num]
             if not entries:
-                raise ValueError(
-                    f"Field {field_num} ({field_def.get('name', 'unknown')}) "
-                    f"has hasOptions=true but no entry in lookup.json."
+                logger.warning(
+                    "%s for field %d (%s) was not found.",
+                    "No entries",
+                    field_num,
+                    field_def.get("name", "unknown"),
                 )
+                continue
 
             code_map: Dict[str, str] = {}
             for entry in entries:
@@ -60,10 +64,13 @@ def apply_lookup_translations(
             if raw_value not in code_map:
                 field_num = field_idx + 1
                 field_name = fields_schema[field_idx].get("name", "unknown")
-                raise ValueError(
-                    f"Row {row_num}: field {field_num} ({field_name}) "
-                    f"has value '{raw_value}' with no matching lookup code."
+                logger.warning(
+                    "%s for field %d (%s) was not found.",
+                    raw_value,
+                    field_num,
+                    field_name,
                 )
+                continue
             row[field_idx] = code_map[raw_value]
 
     return rows

@@ -6,6 +6,7 @@ Validates:
 - Distances exist in points_of_call and fractional_times tables
 """
 
+import logging
 from typing import Dict, List, Set, Tuple
 
 from src.schema_loader import (
@@ -13,6 +14,8 @@ from src.schema_loader import (
     LookupTable,
 )
 from src.utils.csv_utils import EXPECTED_FIELD_COUNT
+
+logger = logging.getLogger(__name__)
 
 
 def validate_rows(rows: List[List[str]], file_path: str) -> None:
@@ -41,18 +44,15 @@ def validate_lookup_codes(
 ) -> None:
     """Validate that all non-blank lookup field values exist in lookup.json.
 
-    For every field where hasOptions is true, each non-blank raw value must
-    have a matching code in lookup.json.
+    For every field where hasOptions is true, each non-blank raw value is
+    checked against lookup.json. Values not found are preserved and a
+    warning is logged.
 
     Args:
         rows: Parsed data rows (244 fields each).
         fields_schema: Loaded fields.json schema.
         lookup_table: Loaded lookup.json.
         file_path: File path for error reporting.
-
-    Raises:
-        ValueError: If a required lookup code is missing or if a field
-            marked hasOptions=true has no entry in lookup.json.
     """
     # Build set of field indices (0-based) that require lookup
     lookup_field_indices: List[int] = []
@@ -66,25 +66,32 @@ def validate_lookup_codes(
         field_num = idx + 1  # 1-based
         entries = [e for e in lookup_table if e["field"] == field_num]
         if not entries:
-            raise ValueError(
-                f"Field {field_num} ({fields_schema[idx].get('name', 'unknown')}) "
-                f"has hasOptions=true but no entry in lookup.json."
+            logger.warning(
+                "%s for field %d (%s) was not found.",
+                "No entries",
+                field_num,
+                fields_schema[idx].get("name", "unknown"),
             )
+            continue
         code_sets[idx] = {entry["id"] for entry in entries}
 
     # Validate each row
     for row_num, row in enumerate(rows, start=1):
         for idx in lookup_field_indices:
+            if idx not in code_sets:
+                continue
             raw_value = row[idx]
             # Blank fields are preserved as-is; no lookup required
             if raw_value == "":
                 continue
             if raw_value not in code_sets[idx]:
+                field_num = idx + 1
                 field_name = fields_schema[idx].get("name", "unknown")
-                raise ValueError(
-                    f"Row {row_num} in {file_path}: field {idx + 1} "
-                    f"({field_name}) has value '{raw_value}' which is not "
-                    f"in lookup.json."
+                logger.warning(
+                    "%s for field %d (%s) was not found.",
+                    raw_value,
+                    field_num,
+                    field_name,
                 )
 
 

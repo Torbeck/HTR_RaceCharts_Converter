@@ -1,6 +1,7 @@
 """Tests for lookup.json loading, validation, and translation."""
 
 import json
+import logging
 import os
 import tempfile
 import unittest
@@ -131,17 +132,19 @@ class TestValidateLookupCodes(unittest.TestCase):
         row[3] = "TB"
         validate_lookup_codes([row], fields, lookup, "test.txt")
 
-    def test_invalid_code_raises(self):
-        """A row with an unknown lookup code should raise ValueError."""
+    def test_invalid_code_logs_warning(self):
+        """A row with an unknown lookup code should log a warning."""
         lookup = [
             {"field": 4, "id": "TB", "value": "Thoroughbred"},
         ]
         fields = self._make_fields_schema({4})
         row = [""] * 244
         row[3] = "INVALID"
-        with self.assertRaises(ValueError) as ctx:
+        with self.assertLogs("src.validator", level="WARNING") as cm:
             validate_lookup_codes([row], fields, lookup, "test.txt")
-        self.assertIn("INVALID", str(ctx.exception))
+        self.assertTrue(
+            any("INVALID" in msg and "field 4" in msg for msg in cm.output)
+        )
 
     def test_blank_values_skip_validation(self):
         """Blank values in lookup fields should be accepted."""
@@ -153,15 +156,29 @@ class TestValidateLookupCodes(unittest.TestCase):
         # Field 4 is blank — should pass
         validate_lookup_codes([row], fields, lookup, "test.txt")
 
-    def test_missing_field_in_lookup_raises(self):
-        """A field with hasOptions=true but no lookup entries should raise."""
+    def test_missing_field_in_lookup_logs_warning(self):
+        """A field with hasOptions=true but no lookup entries should log warning."""
         lookup = []  # Empty lookup
         fields = self._make_fields_schema({4})
         row = [""] * 244
         row[3] = "TB"
-        with self.assertRaises(ValueError) as ctx:
+        with self.assertLogs("src.validator", level="WARNING") as cm:
             validate_lookup_codes([row], fields, lookup, "test.txt")
-        self.assertIn("has hasOptions=true but no entry", str(ctx.exception))
+        self.assertTrue(
+            any("field 4" in msg for msg in cm.output)
+        )
+
+    def test_invalid_code_preserves_value(self):
+        """A row with an unknown lookup code should keep its original value."""
+        lookup = [
+            {"field": 4, "id": "TB", "value": "Thoroughbred"},
+        ]
+        fields = self._make_fields_schema({4})
+        row = [""] * 244
+        row[3] = "BF"
+        with self.assertLogs("src.validator", level="WARNING"):
+            validate_lookup_codes([row], fields, lookup, "test.txt")
+        self.assertEqual(row[3], "BF")
 
 
 class TestApplyLookupTranslations(unittest.TestCase):
@@ -207,27 +224,33 @@ class TestApplyLookupTranslations(unittest.TestCase):
         result = apply_lookup_translations([row], fields, lookup)
         self.assertEqual(result[0][3], "")
 
-    def test_unknown_code_raises(self):
-        """An unrecognized code in a lookup field should raise ValueError."""
+    def test_unknown_code_logs_warning_and_preserves_value(self):
+        """An unrecognized code in a lookup field should log warning and keep value."""
         lookup = [
             {"field": 4, "id": "TB", "value": "Thoroughbred"},
         ]
         fields = self._make_fields_schema({4})
         row = [""] * 244
         row[3] = "XX"
-        with self.assertRaises(ValueError) as ctx:
-            apply_lookup_translations([row], fields, lookup)
-        self.assertIn("XX", str(ctx.exception))
+        with self.assertLogs("src.translator", level="WARNING") as cm:
+            result = apply_lookup_translations([row], fields, lookup)
+        self.assertEqual(result[0][3], "XX")
+        self.assertTrue(
+            any("XX" in msg and "field 4" in msg for msg in cm.output)
+        )
 
-    def test_missing_field_in_lookup_raises(self):
-        """A field with hasOptions=true but no entries should raise."""
+    def test_missing_field_in_lookup_logs_warning(self):
+        """A field with hasOptions=true but no entries should log warning."""
         lookup = []
         fields = self._make_fields_schema({4})
         row = [""] * 244
         row[3] = "TB"
-        with self.assertRaises(ValueError) as ctx:
-            apply_lookup_translations([row], fields, lookup)
-        self.assertIn("has hasOptions=true but no entry", str(ctx.exception))
+        with self.assertLogs("src.translator", level="WARNING") as cm:
+            result = apply_lookup_translations([row], fields, lookup)
+        self.assertEqual(result[0][3], "TB")
+        self.assertTrue(
+            any("field 4" in msg for msg in cm.output)
+        )
 
 
 if __name__ == "__main__":
