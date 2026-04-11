@@ -5,23 +5,23 @@ field,name,type,maxLength,comments,hasOptions
 4,Breed of Race,Text,2,TB = Thoroughbred; QH = Quarter Horse; AR = Arabian; MX = Mixed Breed,Y
 5,Distance,Decimal,,Distance in Furlongs; Format: #.##; Example: 6.50 = 6 1/2 furlongs; 1 mile 40 yards = 8.18; 2 miles 40 yards = 16.18; 1 mile 70 yards = 8.32; 2 miles 70 yards = 16.32,
 6,About Distance Indicator,Text,1,Y = About Distance; Otherwise Blank,
-7,Surface,Text,1,D = Dirt; T = Turf; P = PolyTrack,
+7,Surface,Text,1,D = Dirt; T = Turf; P = PolyTrack,Y
 8,Off Turf Indicator,Text,1,Y = Race was moved off the turf; Otherwise Blank,
-9,Course Type,Text,1,"M = Main Course; I = Inner Course; O = Outer Course; H = Hurdles Course; S = Steeplechase Course; Tracks with Inner Courses include Aqu, Bel, Sar, Wo and Cnl; Tracks with Outer Courses include Cnl; Except for Cnl, the Outer Courses for all other tracks are listed as 'M' for Main",
-10,Race Type,Text,5,ALW = Allowance; AOC = Allowance Optional Claiming; CLH = Claiming Handicap; CLM = Claiming; CST = Claiming Stake; HCP = Handicap; MAT = Match; MCL = Maiden Claiming; MOC = Maiden Optional Claiming; MST = Maiden Stakes; MSW = Maiden Special Weight; OCH = Optional Claiming Handicap; OCL = Optional Claiming; OCS = Optional Claiming Stakes; SHP = Starter Handicap; SST = Starter Stakes; STK = Stakes; STR = Starter Allowance; TRL = Trial,
+9,Course Type,Text,1,"M = Main Course; I = Inner Course; O = Outer Course; H = Hurdles Course; S = Steeplechase Course; Tracks with Inner Courses include Aqu, Bel, Sar, Wo and Cnl; Tracks with Outer Courses include Cnl; Except for Cnl, the Outer Courses for all other tracks are listed as 'M' for Main",Y
+10,Race Type,Text,5,ALW = Allowance; AOC = Allowance Optional Claiming; CLH = Claiming Handicap; CLM = Claiming; CST = Claiming Stake; HCP = Handicap; MAT = Match; MCL = Maiden Claiming; MOC = Maiden Optional Claiming; MST = Maiden Stakes; MSW = Maiden Special Weight; OCH = Optional Claiming Handicap; OCL = Optional Claiming; OCS = Optional Claiming Stakes; SHP = Starter Handicap; SST = Starter Stakes; STK = Stakes; STR = Starter Allowance; TRL = Trial,Y
 11,Abbreviated Race Conditions,Text,20,,
 12,Race Name,Text,120,,
-13,Sex Restriction,Text,1,"A = Colts & Geldings; B = Fillies & Mares; C = Colts; D = Colts & Fillies; E = Fillies & Geldings; F = Fillies; G = Geldings; H = Horses; I = Colts, Geldings & Horses; J = Geldings & Horses; M = Mares; R = Ridglings; Blank = No Sex Restrictions",
-14,Age Restriction,Text,2,"02 = 2 year olds; 03 = 3 year olds; 04 = 4 year olds; 05 = 5 year olds; 06 = 6 year olds; 07 = 7 year olds; 08 = 8 year olds; 09 = 9 year olds; 23 = 2 & 3 year olds; 24 = 2, 3 & 4 year olds; 2U = 2 year olds & up; 34 = 3 & 4 year olds; 35 = 3, 4 & 5 year olds; 36 = 3, 4, 5 & 6 year olds; 3U = 3 year olds & up; 45 = 4 & 5 year olds; 46 = 4, 5 & 6 year olds; 47 = 4, 5, 6 & 7 year olds; 4U = 4 year olds & up; 56 = 5 & 6 year olds; 57 = 5, 6 & 7 year olds; 58 = 5, 6, 7 & 8 year olds; 59 = 5, 6, 7, 8 & 9 year olds; 5U = 5 year olds & up; 67 = 6 & 7 year olds; 68 = 6, 7 & 8 year olds; 69 = 6, 7, 8 & 9 year olds; 6U = 6 year olds & up; 78 = 7 & 8 year olds; 79 = 7, 8 & 9 year olds; 7U = 7 year olds & up; 8U = 8 year olds & up; 9U = 9 year olds & up; Blank = No Age Restriction",
+13,Sex Restriction,Text,1,"A = Colts & Geldings; B = Fillies & Mares; C = Colts; D = Colts & Fillies; E = Fillies & Geldings; F = Fillies; G = Geldings; H = Horses; I = Colts, Geldings & Horses; J = Geldings & Horses; M = Mares; R = Ridglings; Blank = No Sex Restrictions",Y
+14,Age Restriction,Text,2,"02 = 2 year olds; 03 = 3 year olds; 04 = 4 year olds; 05 = 5 year olds; 06 = 6 year olds; 07 = 7 year olds; 08 = 8 year olds; 09 = 9 year olds; 23 = 2 & 3 year olds; 24 = 2, 3 & 4 year olds; 2U = 2 year olds & up; 34 = 3 & 4 year olds; 35 = 3, 4 & 5 year olds; 36 = 3, 4, 5 & 6 year olds; 3U = 3 year olds & up; 45 = 4 & 5 year olds; 46 = 4, 5 & 6 year olds; 47 = 4, 5, 6 & 7 year olds; 4U = 4 year olds & up; 56 = 5 & 6 year olds; 57 = 5, 6 & 7 year olds; 58 = 5, 6, 7 & 8 year olds; 59 = 5, 6, 7, 8 & 9 year olds; 5U = 5 year olds & up; 67 = 6 & 7 year olds; 68 = 6, 7 & 8 year olds; 69 = 6, 7, 8 & 9 year olds; 6U = 6 year olds & up; 78 = 7 & 8 year olds; 79 = 7, 8 & 9 year olds; 7U = 7 year olds & up; 8U = 8 year olds & up; 9U = 9 year olds & up; Blank = No Age Restriction",Y
 15,Statebred Restriction,Text,1,Y = Restricted to Statebred horses; Otherwise Blank,
 16,Purse,Integer,,In US Dollars,
 17,Maximum Claiming Price,Integer,,"In US Dollars - Maximum Claiming Price a horse can be entered for; In Starter Races, the claiming price eligibility requirement",
 18,Minimum Claiming Price,Integer,,In US Dollars - Minimum Claiming Price a horse can be entered for,
-19,Grade,Text,1,1 = Grade 1; 2 = Grade 2; 3 = Grade 3; Otherwise Blank,
+19,Grade,Text,1,1 = Grade 1; 2 = Grade 2; 3 = Grade 3; Otherwise Blank,Y
 20,Division,Text,1,,
 21,Number of Starters,Integer,,Number of horses that started the race,
-22,Track Condition,Text,3,FST = Fast; WF = Wet-Fast; GD = Good; SLY = Sloppy; MY = Muddy; SL = Slow; HY = Heavy; FR = Frozen; HD = Hard; FM = Firm; YL = Yielding; SF = Soft,
-23,Weather,Text,1,A = Hot; B = Fine; C = Clear; E = Overcast; F = Foggy; H = Hazy; L = Cloudy; O = Showery; R = Rainy; S = Snowing; T = Stormy; W = Windy,
+22,Track Condition,Text,3,FST = Fast; WF = Wet-Fast; GD = Good; SLY = Sloppy; MY = Muddy; SL = Slow; HY = Heavy; FR = Frozen; HD = Hard; FM = Firm; YL = Yielding; SF = Soft,Y
+23,Weather,Text,1,A = Hot; B = Fine; C = Clear; E = Overcast; F = Foggy; H = Hazy; L = Cloudy; O = Showery; R = Rainy; S = Snowing; T = Stormy; W = Windy,Y
 24,Post Time,Text,5,Actual time the race went off; Format: h:mm; Example: 2:23; 12:20,
 25,Temp Rail Distance,Integer,,Distance out of Temporary Rail from Inside Rail; Otherwise Blank,
 26,Chute Start Indicator,Text,1,Y = Race was started from a chute; Otherwise Blank,
@@ -53,7 +53,7 @@ field,name,type,maxLength,comments,hasOptions
 52,Horse Age,Integer,,,
 53,Horse Sex,Text,1,F = Filly; M = Mare; C = Colt; H = Horse; G = Gelding; R = Ridgling,
 54,Medication,Text,3,L = Lasix; B = Bute; A = Adjunct Bleeder Medication,
-55,Equipment,Text,5,Blank = No equipment; 2 = Screens; 3 = Shields; A = Aluminum Pads; B = Blinkers; C = Mud Calks; F = Front Wraps; G = Goggles; H = Hood; I = Cornell Collar; J = Cornell Collar Off; K = Flipping halter; L = Bar Shoes; N = No whip; O = Blinkers off; P = Aluminum Pad; Q = Nasal Strip off; R = Bar Shoe; S = Nasal Strip; V = Cheek Piece; W = No Hind Shoes; X = Cheek Piece Off; Y = No shoes; Z = Tongue Tie,
+55,Equipment,Text,5,Blank = No equipment; 2 = Screens; 3 = Shields; A = Aluminum Pads; B = Blinkers; C = Mud Calks; F = Front Wraps; G = Goggles; H = Hood; I = Cornell Collar; J = Cornell Collar Off; K = Flipping halter; L = Bar Shoes; N = No whip; O = Blinkers off; P = Aluminum Pad; Q = Nasal Strip off; R = Bar Shoe; S = Nasal Strip; V = Cheek Piece; W = No Hind Shoes; X = Cheek Piece Off; Y = No shoes; Z = Tongue Tie,Y
 56,Weight Carried,Integer,,,
 57,Claiming Price,Integer,,Claiming Price horse was entered for,
 58,Earnings,Integer,,Money earned by horse in this race,
@@ -88,7 +88,7 @@ field,name,type,maxLength,comments,hasOptions
 87,Jockey First Name,Text,15,,
 88,Jockey Middle Name,Text,15,,
 89,Jockey Last Name,Text,80,,
-90,Apprentice Wgt Allowance,Integer,,5 lbs = Apprentice Type 1; 7 lbs = Apprentice Type 2; 10 lbs = Apprentice Type 3; Otherwise Blank,
+90,Apprentice Wgt Allowance,Integer,,5 lbs = Apprentice Type 1; 7 lbs = Apprentice Type 2; 10 lbs = Apprentice Type 3; Otherwise Blank,Y
 91,Owner Full Name,Text,120,,
 92,Claimed Indicator,Text,1,Y = Horse was claimed; Otherwise Blank,
 93,Claiming Trainer First Name,Text,15,,
@@ -96,7 +96,7 @@ field,name,type,maxLength,comments,hasOptions
 95,Claiming Trainer Last Name,Text,80,,
 96,Claiming Owner Full Name,Text,120,,
 97,Scratch Indicator,Text,1,Y = Scratched; Otherwise Blank,
-98,Reason for Scratch,Text,1,A = Also Eligible; E = Early; G = Gate; I = RegVet - Injured; J = PrivVet - Injured; K = Stakes Scratch; L = RegVet - Illness; M = Main Track Only; N = PrivVet - Unsound; O = Off Turf; P = Reason Unavailable; R = Re-entered; S = Stewards; T = Trainer; U = RegVet - Unsound; V = Veterinarian; Y = Part of Entry; Z = PrivVet - Illness; Blank = Unknown,
+98,Reason for Scratch,Text,1,A = Also Eligible; E = Early; G = Gate; I = RegVet - Injured; J = PrivVet - Injured; K = Stakes Scratch; L = RegVet - Illness; M = Main Track Only; N = PrivVet - Unsound; O = Off Turf; P = Reason Unavailable; R = Re-entered; S = Stewards; T = Trainer; U = RegVet - Unsound; V = Veterinarian; Y = Part of Entry; Z = PrivVet - Illness; Blank = Unknown,Y
 99,Last Race Track,Text,3,2 or 3 character Equibase Track Code,
 100,Last Race Date,Text,10,Format: mm/dd/yyyy; Example: 04/17/2005,
 101,Last Race Race Number,Integer,,,
@@ -110,7 +110,7 @@ field,name,type,maxLength,comments,hasOptions
 109,Horse Weight,Integer,,Weight of horse; 1 = difficulties weighing,
 110,Number of Claims Submitted,Integer,,Number of claims submitted,
 111,Void Indicator,Text,1,Y = Claim was voided; Otherwise Blank,
-112,Void Reason,Text,1,A = Administrative; D = Deceased; O = Other; P = Positive Test; V = Vet; Otherwise Blank,
+112,Void Reason,Text,1,A = Administrative; D = Deceased; O = Other; P = Positive Test; V = Vet; Otherwise Blank,Y
 113,Breeder,Text,120,,
 114,Color,Text,5,Color of Horse,
 115,Jockey ID,Integer,,Equibase assigned Jockey ID,
@@ -129,7 +129,7 @@ field,name,type,maxLength,comments,hasOptions
 128,Field 128,,,,
 129,Field 129,,,,
 130,Field 130,,,,
-131,#1 Wager Type,Text,2,$ = Super Bet; 0 = Choose 6; 1 = Roulette; 13 = 123racing; 18 = Pick 18; 2 = Two in the Money; 3 = Pick 3; 4 = Pick 4; 4J = Pick 4 Jackpot; 5 = Pick 5; 5J = Pick 5 Jackpot; 6 = Pick 6; 6J = Pick 6 Jackpot; 7 = Pick 7; 7J = Pick 7 Jackpot; 8 = Countdown; 9 = Pick 9; 9J = Pick 9 Jackpot; A = Triactor; B = Super Tri; BQ = Bracket Quinella; C = Classix; D = Daily Double; E = Exacta; F = Perfecta; G = Perfector; H = Head2Head; HE = Halfway Exacta; HW = Halfway Win; I = Pick 10; ID = Instant Daily Double; J = Exactor; K = Win 4; L = Place Pick All; L8 = Place Pick 8; M = Consolation Pick 3; N = Future Wager; O = Omni; OU = Over/Under; P = Jockey Challenge; P5 = Place Pick 5; P6 = Place Pick 6; P8 = Pick 8; P9 = Place Pick 9; Q = Quinella; R = Triple; S = Superfecta; S5 = Super High Five; SQ = Show Quinella; T = Trifecta; U = Tri Super; V = Odd or Even; W = Twin Trifecta; X = Grand Slam; X5 = X-5 Super Hi-5; Y = Straight Flush; Z = Consolation Double; Z5 = Z-5 Super Hi-5,
+131,#1 Wager Type,Text,2,$ = Super Bet; 0 = Choose 6; 1 = Roulette; 13 = 123racing; 18 = Pick 18; 2 = Two in the Money; 3 = Pick 3; 4 = Pick 4; 4J = Pick 4 Jackpot; 5 = Pick 5; 5J = Pick 5 Jackpot; 6 = Pick 6; 6J = Pick 6 Jackpot; 7 = Pick 7; 7J = Pick 7 Jackpot; 8 = Countdown; 9 = Pick 9; 9J = Pick 9 Jackpot; A = Triactor; B = Super Tri; BQ = Bracket Quinella; C = Classix; D = Daily Double; E = Exacta; F = Perfecta; G = Perfector; H = Head2Head; HE = Halfway Exacta; HW = Halfway Win; I = Pick 10; ID = Instant Daily Double; J = Exactor; K = Win 4; L = Place Pick All; L8 = Place Pick 8; M = Consolation Pick 3; N = Future Wager; O = Omni; OU = Over/Under; P = Jockey Challenge; P5 = Place Pick 5; P6 = Place Pick 6; P8 = Pick 8; P9 = Place Pick 9; Q = Quinella; R = Triple; S = Superfecta; S5 = Super High Five; SQ = Show Quinella; T = Trifecta; U = Tri Super; V = Odd or Even; W = Twin Trifecta; X = Grand Slam; X5 = X-5 Super Hi-5; Y = Straight Flush; Z = Consolation Double; Z5 = Z-5 Super Hi-5,Y
 132,#1 Wager Unit,Decimal,,Unit Bet for specified Payout,
 133,#1 Number Right,Integer,,Number right in multi-part bets,
 134,#1 Wager Payout,Decimal,,Payout in US Dollars,
