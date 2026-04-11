@@ -43,7 +43,8 @@ def apply_lookup_translations(
             field_num = field_def["field"]
             field_idx = field_num - 1  # 0-based
 
-            entries = [e for e in lookup_table if e["field"] == field_num]
+            lookup_field_num = field_def.get("lookupRef", field_num)
+            entries = [e for e in lookup_table if e["field"] == lookup_field_num]
             if not entries:
                 logger.warning(
                     "No lookup entries found for field %d (%s).",
