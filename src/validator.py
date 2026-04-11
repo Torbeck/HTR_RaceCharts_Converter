@@ -67,8 +67,7 @@ def validate_lookup_codes(
         entries = [e for e in lookup_table if e["field"] == field_num]
         if not entries:
             logger.warning(
-                "%s for field %d (%s) was not found.",
-                "No entries",
+                "No lookup entries found for field %d (%s).",
                 field_num,
                 fields_schema[idx].get("name", "unknown"),
             )
