@@ -10,7 +10,7 @@
     {
         "field": 2,
         "name": "Date",
-        "type": "Text",
+        "type": "Date",
         "maxLength": 10,
         "comments": "Format: mm/dd/yyyy; Example: 04/02/2005 = April 2, 2005",
         "hasOptions": ""
@@ -306,7 +306,7 @@
     {
         "field": 39,
         "name": "Field 39",
-        "type": "",
+        "type": "Text",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -314,7 +314,7 @@
     {
         "field": 40,
         "name": "Field 40",
-        "type": "",
+        "type": "Text",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -322,7 +322,7 @@
     {
         "field": 41,
         "name": "Field 41",
-        "type": "",
+        "type": "Text",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -330,7 +330,7 @@
     {
         "field": 42,
         "name": "Field 42",
-        "type": "",
+        "type": "Text",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -338,7 +338,7 @@
     {
         "field": 43,
         "name": "Field 43",
-        "type": "",
+        "type": "Text",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -346,7 +346,7 @@
     {
         "field": 44,
         "name": "Field 44",
-        "type": "",
+        "type": "Text",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -354,7 +354,7 @@
     {
         "field": 45,
         "name": "Field 45",
-        "type": "",
+        "type": "Text",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -362,7 +362,7 @@
     {
         "field": 46,
         "name": "Field 46",
-        "type": "",
+        "type": "Text",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -370,7 +370,7 @@
     {
         "field": 47,
         "name": "Field 47",
-        "type": "",
+        "type": "Text",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -378,7 +378,7 @@
     {
         "field": 48,
         "name": "Field 48",
-        "type": "",
+        "type": "Text",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -386,7 +386,7 @@
     {
         "field": 49,
         "name": "Field 49",
-        "type": "",
+        "type": "Text",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -394,7 +394,7 @@
     {
         "field": 50,
         "name": "Field 50",
-        "type": "",
+        "type": "Text",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -930,7 +930,7 @@
     {
         "field": 117,
         "name": "Field 117",
-        "type": "",
+        "type": "Text",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -938,7 +938,7 @@
     {
         "field": 118,
         "name": "Field 118",
-        "type": "",
+        "type": "Text",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -946,7 +946,7 @@
     {
         "field": 119,
         "name": "Field 119",
-        "type": "",
+        "type": "Text",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -954,7 +954,7 @@
     {
         "field": 120,
         "name": "Field 120",
-        "type": "",
+        "type": "Text",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -962,7 +962,7 @@
     {
         "field": 121,
         "name": "Field 121",
-        "type": "",
+        "type": "Text",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -970,7 +970,7 @@
     {
         "field": 122,
         "name": "Field 122",
-        "type": "",
+        "type": "Text",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -978,7 +978,7 @@
     {
         "field": 123,
         "name": "Field 123",
-        "type": "",
+        "type": "Text",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -986,7 +986,7 @@
     {
         "field": 124,
         "name": "Field 124",
-        "type": "",
+        "type": "Text",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -994,7 +994,7 @@
     {
         "field": 125,
         "name": "Field 125",
-        "type": "",
+        "type": "Text",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1002,7 +1002,7 @@
     {
         "field": 126,
         "name": "Field 126",
-        "type": "",
+        "type": "Text",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1010,7 +1010,7 @@
     {
         "field": 127,
         "name": "Field 127",
-        "type": "",
+        "type": "Text",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1018,7 +1018,7 @@
     {
         "field": 128,
         "name": "Field 128",
-        "type": "",
+        "type": "Text",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1026,7 +1026,7 @@
     {
         "field": 129,
         "name": "Field 129",
-        "type": "",
+        "type": "Text",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1034,7 +1034,7 @@
     {
         "field": 130,
         "name": "Field 130",
-        "type": "",
+        "type": "Text",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
