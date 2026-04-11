@@ -191,7 +191,8 @@ def _translate_and_export(
     translated_rows = copy.deepcopy(rows)
 
     progress(f"Applying lookup translations for {output_name}...")
-    apply_lookup_translations(translated_rows, fields_schema, lookup_table)
+    apply_lookup_translations(translated_rows, fields_schema, lookup_table,
+                              progress=progress)
 
     # Export CSV
     csv_path = os.path.join(output_dir, f"{output_name}.csv")
