@@ -11,12 +11,14 @@ Provides a tkinter-based GUI with:
 import os
 import threading
 import tkinter as tk
+import webbrowser
 from tkinter import filedialog, messagebox, ttk
 from typing import List, Optional
 
 from src.processor import process_files
 from src.utils.file_utils import collect_txt_files, validate_file_extension
 from src.utils.ini_utils import read_last_output, rebuild_config
+from src.version import __version__
 
 
 class HTRApp:
@@ -79,6 +81,11 @@ class HTRApp:
             label="Rebuild config.ini", command=self._on_rebuild_config
         )
         menu_bar.add_cascade(label="Tools", menu=tools_menu)
+
+        help_menu = tk.Menu(menu_bar, tearoff=0)
+        help_menu.add_command(label="About", command=self._on_about)
+        menu_bar.add_cascade(label="Help", menu=help_menu)
+
         self._root.config(menu=menu_bar)
 
         main_frame = ttk.Frame(self._root, padding=10)
@@ -196,6 +203,65 @@ class HTRApp:
             self._log("config.ini rebuilt with default settings.")
         except Exception as e:
             self._log(f"ERROR rebuilding config.ini: {e}")
+
+    def _on_about(self) -> None:
+        """Show the About dialog."""
+        about_win = tk.Toplevel(self._root)
+        about_win.title("About HTR Race Charts Converter")
+        about_win.resizable(False, False)
+        about_win.transient(self._root)
+        about_win.grab_set()
+
+        frame = ttk.Frame(about_win, padding=20)
+        frame.pack(fill=tk.BOTH, expand=True)
+
+        ttk.Label(
+            frame,
+            text="HTR Race Charts Converter",
+            font=("TkDefaultFont", 14, "bold"),
+        ).pack(pady=(0, 5))
+
+        ttk.Label(frame, text=f"Version: {__version__}").pack()
+
+        ttk.Label(
+            frame,
+            text=(
+                "Development Team:\n"
+                "Ken Torbeck & Dr. Russ Winterbotham"
+            ),
+            justify=tk.CENTER,
+        ).pack(pady=(10, 0))
+
+        ttk.Label(frame, text="License: GPL-3.0").pack(pady=(10, 0))
+
+        ttk.Label(
+            frame,
+            text=(
+                "Disclaimer: This project is not affiliated with\n"
+                "HTR (Handicapping Technology & Research) or its\n"
+                "developers. It is an independent, community-\n"
+                "developed tool for processing HTR race chart exports."
+            ),
+            justify=tk.CENTER,
+        ).pack(pady=(10, 0))
+
+        ttk.Label(
+            frame,
+            text="\u00a9 2026 Ken Torbeck and Dr. Russ Winterbotham",
+        ).pack(pady=(10, 0))
+
+        github_url = "https://github.com/ktorbeck/htr-race-charts-converter"
+        link = ttk.Label(
+            frame, text=github_url, foreground="blue", cursor="hand2"
+        )
+        link.pack(pady=(5, 10))
+        link.bind(
+            "<Button-1>", lambda e: webbrowser.open_new_tab(github_url)
+        )
+
+        ttk.Button(about_win, text="OK", command=about_win.destroy).pack(
+            pady=(0, 10)
+        )
 
     def _on_add_files(self) -> None:
         """Open a file dialog to select .TXT files."""
