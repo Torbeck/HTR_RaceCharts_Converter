@@ -1,384 +1,1067 @@
-{
-    "4": [
-        {
-            "code": "TB",
-            "value": "Thoroughbred"
-        },
-        {
-            "code": "QH",
-            "value": "Quarter Horse"
-        },
-        {
-            "code": "AR",
-            "value": "Arabian"
-        },
-        {
-            "code": "MX",
-            "value": "Mixed"
-        }
-    ],
-    "7": [
-        {
-            "code": "D",
-            "value": "Dirt"
-        },
-        {
-            "code": "T",
-            "value": "Turf"
-        },
-        {
-            "code": "P",
-            "value": "Synthetic"
-        }
-    ],
-    "9": [
-        {
-            "code": "M",
-            "value": "Main Track"
-        },
-        {
-            "code": "I",
-            "value": "Inner Turf"
-        },
-        {
-            "code": "O",
-            "value": "Outer Turf"
-        },
-        {
-            "code": "H",
-            "value": "Hillside"
-        },
-        {
-            "code": "S",
-            "value": "Straight"
-        }
-    ],
-    "10": [
-        {
-            "code": "ALW",
-            "value": "Allowance"
-        },
-        {
-            "code": "AOC",
-            "value": "Allowance Optional Claiming"
-        },
-        {
-            "code": "CLM",
-            "value": "Claiming"
-        },
-        {
-            "code": "MSW",
-            "value": "Maiden Special Weight"
-        },
-        {
-            "code": "MCL",
-            "value": "Maiden Claiming"
-        },
-        {
-            "code": "STK",
-            "value": "Stakes"
-        },
-        {
-            "code": "HCP",
-            "value": "Handicap"
-        },
-        {
-            "code": "MOC",
-            "value": "Maiden Optional Claiming"
-        },
-        {
-            "code": "STR",
-            "value": "Starter Allowance"
-        },
-        {
-            "code": "SOC",
-            "value": "Starter Optional Claiming"
-        }
-    ],
-    "13": [
-        {
-            "code": "A",
-            "value": "All"
-        },
-        {
-            "code": "B",
-            "value": "Bred"
-        },
-        {
-            "code": "C",
-            "value": "Colts"
-        },
-        {
-            "code": "D",
-            "value": "Fillies"
-        },
-        {
-            "code": "E",
-            "value": "Either"
-        },
-        {
-            "code": "F",
-            "value": "Fillies & Mares"
-        },
-        {
-            "code": "G",
-            "value": "Geldings"
-        },
-        {
-            "code": "H",
-            "value": "Horses"
-        },
-        {
-            "code": "I",
-            "value": "Imported"
-        },
-        {
-            "code": "J",
-            "value": "Juvenile"
-        },
-        {
-            "code": "M",
-            "value": "Mares"
-        },
-        {
-            "code": "R",
-            "value": "Restricted"
-        }
-    ],
-    "14": [
-        {
-            "code": "02",
-            "value": "Two-year-olds"
-        },
-        {
-            "code": "03",
-            "value": "Three-year-olds"
-        },
-        {
-            "code": "04",
-            "value": "Four-year-olds"
-        },
-        {
-            "code": "2U",
-            "value": "Two and up"
-        },
-        {
-            "code": "3U",
-            "value": "Three and up"
-        },
-        {
-            "code": "4U",
-            "value": "Four and up"
-        },
-        {
-            "code": "35",
-            "value": "Three to five year olds"
-        }
-    ],
-    "19": [
-        {
-            "code": "1",
-            "value": "Grade 1"
-        },
-        {
-            "code": "2",
-            "value": "Grade 2"
-        },
-        {
-            "code": "3",
-            "value": "Grade 3"
-        }
-    ],
-    "22": [
-        {
-            "code": "FST",
-            "value": "Fast"
-        },
-        {
-            "code": "GD",
-            "value": "Good"
-        },
-        {
-            "code": "SLY",
-            "value": "Sloppy"
-        },
-        {
-            "code": "MY",
-            "value": "Muddy"
-        },
-        {
-            "code": "FM",
-            "value": "Firm"
-        },
-        {
-            "code": "YL",
-            "value": "Yielding"
-        }
-    ],
-    "23": [
-        {
-            "code": "A",
-            "value": "Clear"
-        },
-        {
-            "code": "B",
-            "value": "Cloudy"
-        },
-        {
-            "code": "C",
-            "value": "Cold"
-        },
-        {
-            "code": "E",
-            "value": "Extreme"
-        },
-        {
-            "code": "F",
-            "value": "Fog"
-        },
-        {
-            "code": "H",
-            "value": "Hot"
-        },
-        {
-            "code": "L",
-            "value": "Lightning"
-        },
-        {
-            "code": "O",
-            "value": "Overcast"
-        },
-        {
-            "code": "R",
-            "value": "Rain"
-        },
-        {
-            "code": "S",
-            "value": "Snow"
-        },
-        {
-            "code": "T",
-            "value": "Thunderstorms"
-        },
-        {
-            "code": "W",
-            "value": "Windy"
-        }
-    ],
-    "53": [
-        {
-            "code": "F",
-            "value": "Filly"
-        },
-        {
-            "code": "M",
-            "value": "Mare"
-        },
-        {
-            "code": "C",
-            "value": "Colt"
-        },
-        {
-            "code": "H",
-            "value": "Horse"
-        },
-        {
-            "code": "G",
-            "value": "Gelding"
-        },
-        {
-            "code": "R",
-            "value": "Ridgling"
-        }
-    ],
-    "54": [
-        {
-            "code": "L",
-            "value": "Lasix"
-        },
-        {
-            "code": "B",
-            "value": "Bute"
-        },
-        {
-            "code": "A",
-            "value": "Adjunct Medication"
-        }
-    ],
-    "98": [
-        {
-            "code": "Y",
-            "value": "Wagering Favorite"
-        }
-    ],
-    "101": [
-        {
-            "code": "A",
-            "value": "Entry A"
-        },
-        {
-            "code": "B",
-            "value": "Entry B"
-        },
-        {
-            "code": "C",
-            "value": "Entry C"
-        }
-    ],
-    "102": [
-        {
-            "code": "Y",
-            "value": "Coupled Entry"
-        }
-    ],
-    "221": [
-        {
-            "code": "E",
-            "value": "Easy"
-        },
-        {
-            "code": "M",
-            "value": "Moderate"
-        },
-        {
-            "code": "H",
-            "value": "Hard"
-        }
-    ],
-    "223": [
-        {
-            "code": "EP",
-            "value": "Early Presser"
-        },
-        {
-            "code": "E",
-            "value": "Early"
-        },
-        {
-            "code": "P",
-            "value": "Presser"
-        },
-        {
-            "code": "S",
-            "value": "Sustained"
-        }
-    ],
-    "233": [
-        {
-            "code": "G1",
-            "value": "Grade 1"
-        },
-        {
-            "code": "G2",
-            "value": "Grade 2"
-        },
-        {
-            "code": "G3",
-            "value": "Grade 3"
-        },
-        {
-            "code": "L",
-            "value": "Listed"
-        }
-    ]
-}
+[
+    {
+        "field": 4,
+        "id": "TB",
+        "value": "Thoroughbred"
+    },
+    {
+        "field": 4,
+        "id": "QH",
+        "value": "Quarter Horse"
+    },
+    {
+        "field": 4,
+        "id": "AR",
+        "value": "Arabian"
+    },
+    {
+        "field": 4,
+        "id": "MX",
+        "value": "Mix Breed"
+    },
+    {
+        "field": 7,
+        "id": "D",
+        "value": "Dirt"
+    },
+    {
+        "field": 7,
+        "id": "T",
+        "value": "Turf"
+    },
+    {
+        "field": 7,
+        "id": "P",
+        "value": "PolyTrack"
+    },
+    {
+        "field": 9,
+        "id": "M",
+        "value": "Main Course"
+    },
+    {
+        "field": 9,
+        "id": "I",
+        "value": "Inner Course (Aqu, Bel, Sar, Wo and Cnl)"
+    },
+    {
+        "field": 9,
+        "id": "O",
+        "value": "Outer Course (Cnl)"
+    },
+    {
+        "field": 9,
+        "id": "H",
+        "value": "Hurdles Course"
+    },
+    {
+        "field": 9,
+        "id": "S",
+        "value": "Steeplechase Course"
+    },
+    {
+        "field": 10,
+        "id": "ALW ",
+        "value": "Allowance"
+    },
+    {
+        "field": 10,
+        "id": "AOC ",
+        "value": "Allowance Optional Claiming"
+    },
+    {
+        "field": 10,
+        "id": "CLH ",
+        "value": "Claiming Handicap"
+    },
+    {
+        "field": 10,
+        "id": "CLM ",
+        "value": "Claiming"
+    },
+    {
+        "field": 10,
+        "id": "CST ",
+        "value": "Claiming Stake"
+    },
+    {
+        "field": 10,
+        "id": "HCP ",
+        "value": "Handicap"
+    },
+    {
+        "field": 10,
+        "id": "MAT ",
+        "value": "Match"
+    },
+    {
+        "field": 10,
+        "id": "MCL ",
+        "value": "Maiden Claiming"
+    },
+    {
+        "field": 10,
+        "id": "MOC ",
+        "value": "Maiden Optional Claiming"
+    },
+    {
+        "field": 10,
+        "id": "MST ",
+        "value": "Maiden Stakes"
+    },
+    {
+        "field": 10,
+        "id": "MSW ",
+        "value": "Maiden Special Weight"
+    },
+    {
+        "field": 10,
+        "id": "OCH ",
+        "value": "Optional Claiming Handicap"
+    },
+    {
+        "field": 10,
+        "id": "OCL ",
+        "value": "Optional Claiming"
+    },
+    {
+        "field": 10,
+        "id": "OCS ",
+        "value": "Optional Claiming Stakes"
+    },
+    {
+        "field": 10,
+        "id": "SHP ",
+        "value": "Starter Handicap"
+    },
+    {
+        "field": 10,
+        "id": "SST ",
+        "value": "Starter Stakes"
+    },
+    {
+        "field": 10,
+        "id": "STK ",
+        "value": "Stakes"
+    },
+    {
+        "field": 10,
+        "id": "STR ",
+        "value": "Starter Allowance"
+    },
+    {
+        "field": 10,
+        "id": "TRL ",
+        "value": "Trial"
+    },
+    {
+        "field": 13,
+        "id": "A ",
+        "value": "Colts & Geldings"
+    },
+    {
+        "field": 13,
+        "id": "B ",
+        "value": "Fillies & mares"
+    },
+    {
+        "field": 13,
+        "id": "C ",
+        "value": "Colts"
+    },
+    {
+        "field": 13,
+        "id": "D ",
+        "value": "Colts & Fillies"
+    },
+    {
+        "field": 13,
+        "id": "E ",
+        "value": "Fillies & Geldings"
+    },
+    {
+        "field": 13,
+        "id": "F ",
+        "value": "Fillies"
+    },
+    {
+        "field": 13,
+        "id": "G ",
+        "value": "Geldings"
+    },
+    {
+        "field": 13,
+        "id": "H ",
+        "value": "Horses"
+    },
+    {
+        "field": 13,
+        "id": "I ",
+        "value": "Colts, Geldings & Horses"
+    },
+    {
+        "field": 13,
+        "id": "J ",
+        "value": "Geldings & Horses"
+    },
+    {
+        "field": 13,
+        "id": "M ",
+        "value": "Mares"
+    },
+    {
+        "field": 13,
+        "id": "R ",
+        "value": "Ridglings"
+    },
+    {
+        "field": 13,
+        "id": "Blank ",
+        "value": "No Sex Restrictions"
+    },
+    {
+        "field": 14,
+        "id": "2",
+        "value": "2 year olds"
+    },
+    {
+        "field": 14,
+        "id": "3",
+        "value": "3 year olds"
+    },
+    {
+        "field": 14,
+        "id": "4",
+        "value": "4 year olds"
+    },
+    {
+        "field": 14,
+        "id": "5",
+        "value": "5 year olds"
+    },
+    {
+        "field": 14,
+        "id": "6",
+        "value": "6 year olds"
+    },
+    {
+        "field": 14,
+        "id": "7",
+        "value": "7 year olds"
+    },
+    {
+        "field": 14,
+        "id": "8",
+        "value": "8 year olds"
+    },
+    {
+        "field": 14,
+        "id": "9",
+        "value": "9 year olds"
+    },
+    {
+        "field": 14,
+        "id": "23",
+        "value": "2 & 3 year olds"
+    },
+    {
+        "field": 14,
+        "id": "24",
+        "value": "2, 3 & 4 year olds"
+    },
+    {
+        "field": 14,
+        "id": "2U ",
+        "value": "2 year olds & up"
+    },
+    {
+        "field": 14,
+        "id": "34",
+        "value": "3 & 4 year olds"
+    },
+    {
+        "field": 14,
+        "id": "35",
+        "value": "3, 4 & 5 year olds"
+    },
+    {
+        "field": 14,
+        "id": "36",
+        "value": "3, 4, 5 & 6 year olds"
+    },
+    {
+        "field": 14,
+        "id": "3U ",
+        "value": "3 year olds & up"
+    },
+    {
+        "field": 14,
+        "id": "45",
+        "value": "4 & 5 year olds"
+    },
+    {
+        "field": 14,
+        "id": "46",
+        "value": "4, 5 & 6 year olds"
+    },
+    {
+        "field": 14,
+        "id": "47",
+        "value": "4, 5, 6 & 7 year olds"
+    },
+    {
+        "field": 14,
+        "id": "4U ",
+        "value": "4 year olds & up"
+    },
+    {
+        "field": 14,
+        "id": "56",
+        "value": "5 & 6 year olds"
+    },
+    {
+        "field": 14,
+        "id": "57",
+        "value": "5, 6 & 7 year olds"
+    },
+    {
+        "field": 14,
+        "id": "58",
+        "value": "5, 6, 7 & 8 year olds"
+    },
+    {
+        "field": 14,
+        "id": "59",
+        "value": "5, 6, 7, 8 & 9 year olds"
+    },
+    {
+        "field": 14,
+        "id": "5U ",
+        "value": "5 year olds & up"
+    },
+    {
+        "field": 14,
+        "id": "67",
+        "value": "6 & 7 year olds"
+    },
+    {
+        "field": 14,
+        "id": "68",
+        "value": "6, 7 & 8 year olds"
+    },
+    {
+        "field": 14,
+        "id": "69",
+        "value": "6, 7, 8 & 9 year olds"
+    },
+    {
+        "field": 14,
+        "id": "6U ",
+        "value": "6 year olds & up"
+    },
+    {
+        "field": 14,
+        "id": "78",
+        "value": "7 & 8 year olds"
+    },
+    {
+        "field": 14,
+        "id": "79",
+        "value": "7, 8 & 9 year olds"
+    },
+    {
+        "field": 14,
+        "id": "7U ",
+        "value": "7 year olds & up"
+    },
+    {
+        "field": 14,
+        "id": "8U ",
+        "value": "8 year olds & up"
+    },
+    {
+        "field": 14,
+        "id": "9U ",
+        "value": "9 year olds & up"
+    },
+    {
+        "field": 14,
+        "id": "NULL",
+        "value": "No Age Restriction"
+    },
+    {
+        "field": 19,
+        "id": "1",
+        "value": "Grade 1"
+    },
+    {
+        "field": 19,
+        "id": "2",
+        "value": "Grade 2"
+    },
+    {
+        "field": 19,
+        "id": "3",
+        "value": "Grade 3"
+    },
+    {
+        "field": 22,
+        "id": "FST ",
+        "value": "Fast"
+    },
+    {
+        "field": 22,
+        "id": "WF ",
+        "value": "Wet-Fast"
+    },
+    {
+        "field": 22,
+        "id": "GD ",
+        "value": "Good"
+    },
+    {
+        "field": 22,
+        "id": "SLY ",
+        "value": "Sloppy"
+    },
+    {
+        "field": 22,
+        "id": "MY ",
+        "value": "Muddy"
+    },
+    {
+        "field": 22,
+        "id": "SL ",
+        "value": "Slow"
+    },
+    {
+        "field": 22,
+        "id": "HY ",
+        "value": "Heavy"
+    },
+    {
+        "field": 22,
+        "id": "FR ",
+        "value": "Frozen"
+    },
+    {
+        "field": 22,
+        "id": "HD ",
+        "value": "Hard"
+    },
+    {
+        "field": 22,
+        "id": "FM ",
+        "value": "Firm"
+    },
+    {
+        "field": 22,
+        "id": "YL ",
+        "value": "Yielding"
+    },
+    {
+        "field": 22,
+        "id": "SF ",
+        "value": "Soft"
+    },
+    {
+        "field": 23,
+        "id": "A ",
+        "value": "Hot"
+    },
+    {
+        "field": 23,
+        "id": "B ",
+        "value": "Fine"
+    },
+    {
+        "field": 23,
+        "id": "C ",
+        "value": "Clear"
+    },
+    {
+        "field": 23,
+        "id": "E ",
+        "value": "Overcast"
+    },
+    {
+        "field": 23,
+        "id": "F ",
+        "value": "Foggy"
+    },
+    {
+        "field": 23,
+        "id": "H ",
+        "value": "Hazy"
+    },
+    {
+        "field": 23,
+        "id": "L ",
+        "value": "Cloudy"
+    },
+    {
+        "field": 23,
+        "id": "O ",
+        "value": "Showery"
+    },
+    {
+        "field": 23,
+        "id": "R ",
+        "value": "Rainy"
+    },
+    {
+        "field": 23,
+        "id": "S ",
+        "value": "Snowing"
+    },
+    {
+        "field": 23,
+        "id": "T ",
+        "value": "Stormy"
+    },
+    {
+        "field": 23,
+        "id": "W ",
+        "value": "Windy"
+    },
+    {
+        "field": 55,
+        "id": "NULL",
+        "value": "No equipment"
+    },
+    {
+        "field": 55,
+        "id": "2",
+        "value": "Screens"
+    },
+    {
+        "field": 55,
+        "id": "3",
+        "value": "Shields"
+    },
+    {
+        "field": 55,
+        "id": " A ",
+        "value": "Aluminum Pads"
+    },
+    {
+        "field": 55,
+        "id": " B ",
+        "value": "Blinkers"
+    },
+    {
+        "field": 55,
+        "id": " C ",
+        "value": "Mud Calks"
+    },
+    {
+        "field": 55,
+        "id": " F ",
+        "value": "Front Wraps"
+    },
+    {
+        "field": 55,
+        "id": " G ",
+        "value": "Goggles"
+    },
+    {
+        "field": 55,
+        "id": " H ",
+        "value": "Hood"
+    },
+    {
+        "field": 55,
+        "id": " I ",
+        "value": "Cornell Collar"
+    },
+    {
+        "field": 55,
+        "id": " J ",
+        "value": "Cornell Collar Off"
+    },
+    {
+        "field": 55,
+        "id": " K ",
+        "value": "Flipping halter"
+    },
+    {
+        "field": 55,
+        "id": " L ",
+        "value": "Bar Shoes"
+    },
+    {
+        "field": 55,
+        "id": " N ",
+        "value": "No whip"
+    },
+    {
+        "field": 55,
+        "id": " O ",
+        "value": "Blinkers off"
+    },
+    {
+        "field": 55,
+        "id": " P ",
+        "value": "Aluminum Pad"
+    },
+    {
+        "field": 55,
+        "id": " Q ",
+        "value": "Nasal Strip off"
+    },
+    {
+        "field": 55,
+        "id": " R ",
+        "value": "Bar Shoe"
+    },
+    {
+        "field": 55,
+        "id": " S ",
+        "value": "Nasal Strip"
+    },
+    {
+        "field": 55,
+        "id": " V ",
+        "value": "Cheek Piece"
+    },
+    {
+        "field": 55,
+        "id": " W ",
+        "value": "No Hind Shoes"
+    },
+    {
+        "field": 55,
+        "id": " X ",
+        "value": "Cheek Piece Off"
+    },
+    {
+        "field": 55,
+        "id": " Y ",
+        "value": "No shoes"
+    },
+    {
+        "field": 90,
+        "id": "5 lbs ",
+        "value": "Apprentice Type 1"
+    },
+    {
+        "field": 90,
+        "id": "7 lbs ",
+        "value": "Apprentice Type 2"
+    },
+    {
+        "field": 90,
+        "id": "10 lbs ",
+        "value": "Apprentice Type 3"
+    },
+    {
+        "field": 98,
+        "id": "A",
+        "value": "Also Eligible"
+    },
+    {
+        "field": 98,
+        "id": "E",
+        "value": "Early"
+    },
+    {
+        "field": 98,
+        "id": "G",
+        "value": "Gate"
+    },
+    {
+        "field": 98,
+        "id": "I",
+        "value": "RegVet - Injured"
+    },
+    {
+        "field": 98,
+        "id": "J",
+        "value": "PrivVet - Injured"
+    },
+    {
+        "field": 98,
+        "id": "K",
+        "value": "Stakes Scratch"
+    },
+    {
+        "field": 98,
+        "id": "L",
+        "value": "RegVet - Illness"
+    },
+    {
+        "field": 98,
+        "id": "M",
+        "value": "Main Track Only"
+    },
+    {
+        "field": 98,
+        "id": "N",
+        "value": "PrivVet - Unsound"
+    },
+    {
+        "field": 98,
+        "id": "O",
+        "value": "Off Turf"
+    },
+    {
+        "field": 98,
+        "id": "P",
+        "value": "Reason Unavailable"
+    },
+    {
+        "field": 98,
+        "id": "R",
+        "value": "Re-entered"
+    },
+    {
+        "field": 98,
+        "id": "S",
+        "value": "Stewards"
+    },
+    {
+        "field": 98,
+        "id": "T",
+        "value": "Trainer"
+    },
+    {
+        "field": 98,
+        "id": "U",
+        "value": "RegVet - Unsound"
+    },
+    {
+        "field": 98,
+        "id": "V",
+        "value": "Veterinarian"
+    },
+    {
+        "field": 98,
+        "id": "Y",
+        "value": "Part of Entry"
+    },
+    {
+        "field": 98,
+        "id": "Z",
+        "value": "PrivVet - Illness"
+    },
+    {
+        "field": 98,
+        "id": "NULL",
+        "value": "Unknown"
+    },
+    {
+        "field": 112,
+        "id": "A",
+        "value": "Administrative"
+    },
+    {
+        "field": 112,
+        "id": "D",
+        "value": "Deceased"
+    },
+    {
+        "field": 112,
+        "id": "O",
+        "value": "Other"
+    },
+    {
+        "field": 112,
+        "id": "P",
+        "value": "Positive Test"
+    },
+    {
+        "field": 112,
+        "id": "V",
+        "value": "Vet"
+    },
+    {
+        "field": 131,
+        "id": "$",
+        "value": "Super Bet"
+    },
+    {
+        "field": 131,
+        "id": "0",
+        "value": "Choose 6"
+    },
+    {
+        "field": 131,
+        "id": "1",
+        "value": "Roulette"
+    },
+    {
+        "field": 131,
+        "id": "13",
+        "value": "123racing"
+    },
+    {
+        "field": 131,
+        "id": "18",
+        "value": "Pick 18"
+    },
+    {
+        "field": 131,
+        "id": "2",
+        "value": "Two in the Money"
+    },
+    {
+        "field": 131,
+        "id": "3",
+        "value": "Pick 3"
+    },
+    {
+        "field": 131,
+        "id": "4",
+        "value": "Pick 4"
+    },
+    {
+        "field": 131,
+        "id": "4J",
+        "value": "Pick 4 Jackpot"
+    },
+    {
+        "field": 131,
+        "id": "5",
+        "value": "Pick 5"
+    },
+    {
+        "field": 131,
+        "id": "5J",
+        "value": "Pick 5 Jackpot"
+    },
+    {
+        "field": 131,
+        "id": "6",
+        "value": "Pick 6"
+    },
+    {
+        "field": 131,
+        "id": "6J",
+        "value": "Pick 6 Jackpot"
+    },
+    {
+        "field": 131,
+        "id": "7",
+        "value": "Pick 7"
+    },
+    {
+        "field": 131,
+        "id": "7J",
+        "value": "Pick 7 Jackpot"
+    },
+    {
+        "field": 131,
+        "id": "8",
+        "value": "Countdown"
+    },
+    {
+        "field": 131,
+        "id": "9",
+        "value": "Pick 9"
+    },
+    {
+        "field": 131,
+        "id": "9J",
+        "value": "Pick 9 Jackpot"
+    },
+    {
+        "field": 131,
+        "id": "A",
+        "value": "Triactor"
+    },
+    {
+        "field": 131,
+        "id": "B",
+        "value": "Super Tri"
+    },
+    {
+        "field": 131,
+        "id": "BQ",
+        "value": "Bracket Quinella"
+    },
+    {
+        "field": 131,
+        "id": "C",
+        "value": "Classix"
+    },
+    {
+        "field": 131,
+        "id": "D",
+        "value": "Daily Double"
+    },
+    {
+        "field": 131,
+        "id": "E",
+        "value": "Exacta"
+    },
+    {
+        "field": 131,
+        "id": "F",
+        "value": "Perfecta"
+    },
+    {
+        "field": 131,
+        "id": "G",
+        "value": "Perfector"
+    },
+    {
+        "field": 131,
+        "id": "H",
+        "value": "Head2Head"
+    },
+    {
+        "field": 131,
+        "id": "HE",
+        "value": "Halfway Exacta"
+    },
+    {
+        "field": 131,
+        "id": "HW",
+        "value": "Halfway Win"
+    },
+    {
+        "field": 131,
+        "id": "I",
+        "value": "Pick 10"
+    },
+    {
+        "field": 131,
+        "id": "ID",
+        "value": "Instant Daily Double"
+    },
+    {
+        "field": 131,
+        "id": "J",
+        "value": "Exactor"
+    },
+    {
+        "field": 131,
+        "id": "K",
+        "value": "Win 4"
+    },
+    {
+        "field": 131,
+        "id": "L",
+        "value": "Place Pick All"
+    },
+    {
+        "field": 131,
+        "id": "L8",
+        "value": "Place Pick 8"
+    },
+    {
+        "field": 131,
+        "id": "M",
+        "value": "Consolation Pick 3"
+    },
+    {
+        "field": 131,
+        "id": "N",
+        "value": "Future Wager"
+    },
+    {
+        "field": 131,
+        "id": "O",
+        "value": "Omni"
+    },
+    {
+        "field": 131,
+        "id": "OU",
+        "value": "Over/Under"
+    },
+    {
+        "field": 131,
+        "id": "P",
+        "value": "Jockey Challenge"
+    },
+    {
+        "field": 131,
+        "id": "P5",
+        "value": "Place Pick 5"
+    },
+    {
+        "field": 131,
+        "id": "P6",
+        "value": "Place Pick 6"
+    },
+    {
+        "field": 131,
+        "id": "P8",
+        "value": "Pick 8"
+    },
+    {
+        "field": 131,
+        "id": "P9",
+        "value": "Place Pick 9"
+    },
+    {
+        "field": 131,
+        "id": "Q",
+        "value": "Quinella"
+    },
+    {
+        "field": 131,
+        "id": "R",
+        "value": "Triple"
+    },
+    {
+        "field": 131,
+        "id": "S",
+        "value": "Superfecta"
+    },
+    {
+        "field": 131,
+        "id": "S5",
+        "value": "Super High Five"
+    },
+    {
+        "field": 131,
+        "id": "SQ",
+        "value": "Show Quinella"
+    },
+    {
+        "field": 131,
+        "id": "T",
+        "value": "Trifecta"
+    },
+    {
+        "field": 131,
+        "id": "U",
+        "value": "Tri Super"
+    },
+    {
+        "field": 131,
+        "id": "V",
+        "value": "Odd or Even"
+    },
+    {
+        "field": 131,
+        "id": "W",
+        "value": "Twin Trifecta"
+    },
+    {
+        "field": 131,
+        "id": "X",
+        "value": "Grand Slam"
+    },
+    {
+        "field": 131,
+        "id": "X5",
+        "value": "X-5 Super Hi-5"
+    },
+    {
+        "field": 131,
+        "id": "Y",
+        "value": "Straight Flush"
+    },
+    {
+        "field": 131,
+        "id": "Z",
+        "value": "Consolation Double"
+    },
+    {
+        "field": 131,
+        "id": "Z5",
+        "value": "Z-5 Super Hi-5"
+    }
+]

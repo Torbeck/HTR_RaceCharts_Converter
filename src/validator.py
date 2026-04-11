@@ -63,15 +63,14 @@ def validate_lookup_codes(
     # Build code-sets per field for fast lookup
     code_sets: Dict[int, Set[str]] = {}
     for idx in lookup_field_indices:
-        field_num_str = str(idx + 1)  # 1-based string key
-        if field_num_str not in lookup_table:
+        field_num = idx + 1  # 1-based
+        entries = [e for e in lookup_table if e["field"] == field_num]
+        if not entries:
             raise ValueError(
-                f"Field {idx + 1} ({fields_schema[idx].get('name', 'unknown')}) "
+                f"Field {field_num} ({fields_schema[idx].get('name', 'unknown')}) "
                 f"has hasOptions=true but no entry in lookup.json."
             )
-        code_sets[idx] = {
-            entry["code"] for entry in lookup_table[field_num_str]
-        }
+        code_sets[idx] = {entry["id"] for entry in entries}
 
     # Validate each row
     for row_num, row in enumerate(rows, start=1):
