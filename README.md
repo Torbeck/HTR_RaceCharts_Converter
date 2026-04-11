@@ -33,7 +33,7 @@ It is built for **handicappers, researchers, and data analysts** who work with H
 - **Graphical interface** — select files, configure output, and run with a few clicks.
 - **Drag-and-drop support** — drop HTR files or entire folders directly onto the window.
 - **Batch processing** — process multiple race chart files at once.
-- **Merge option** — combine multiple files into a single unified output, or export them individually.
+- **Merge option** — combine multiple files into a single unified output, or export them individually. The merge checkbox is enabled automatically when two or more files are loaded.
 - **Automatic lookup translation** — coded values are replaced with descriptive labels (e.g., race type codes become "Maiden Special Weight", "Claiming", etc.).
 - **Formatted Excel output** — each workbook contains three sheets with Excel tables, auto-sized columns, and frozen headers.
 - **CSV output** — a plain CSV file is also generated alongside each Excel workbook.
@@ -42,6 +42,50 @@ It is built for **handicappers, researchers, and data analysts** who work with H
 - **Style validation** — invalid Excel table style names in the config are automatically detected and flagged.
 - **Config rebuild** — a built-in menu option restores `config.ini` to factory defaults if it becomes corrupted or misconfigured.
 - **Output path memory** — the program remembers your last output folder between sessions.
+- **Auto-fill output directory** — when files are added and no output directory has been selected yet, the output directory is automatically set to the folder of the first input file.
+- **Background processing** — file processing runs in a background thread so the GUI stays responsive.
+- **About dialog** — version number, team credits, license, and project link are available under **Help → About**.
+
+---
+
+## Project Structure
+
+```text
+project_root/
+│
+├── src/
+│   ├── main.py              ← entry point; launches the GUI
+│   ├── gui.py               ← main application window and all UI logic
+│   ├── processor.py         ← orchestrates the full processing pipeline
+│   ├── schema_loader.py     ← loads scheme files (fields.json, lookup.json, CSVs)
+│   ├── translator.py        ← applies lookup translations and builds headers
+│   ├── validator.py         ← validates field counts, lookup codes, and distances
+│   ├── exporter.py          ← exports CSV and Excel workbooks
+│   ├── version.py           ← single-source version number
+│   └── utils/
+│       ├── csv_utils.py     ← HTR file parsing
+│       ├── excel_utils.py   ← Excel table and formatting helpers
+│       ├── file_utils.py    ← file collection and extension validation
+│       ├── formatting_utils.py ← column sizing and border helpers
+│       └── ini_utils.py     ← config.ini reading/writing
+│
+├── scheme/
+│   ├── fields.json          ← field names, types, and metadata (244 fields)
+│   ├── lookup.json          ← lookup translation tables
+│   ├── points_of_call.csv   ← point-of-call labels by race distance
+│   └── race_fractional_times.csv ← fractional time labels by race distance
+│
+├── tools/
+│   ├── __init__.py
+│   ├── __main__.py          ← allows `python -m tools`
+│   └── schema_editor.py     ← developer tool for editing scheme files (see below)
+│
+├── tests/                   ← unit tests (Python unittest)
+│
+├── config.example.ini       ← template for config.ini
+├── requirements.txt
+└── FeatureRequirements.txt
+```
 
 ---
 
@@ -61,6 +105,12 @@ It is built for **handicappers, researchers, and data analysts** who work with H
 1. **Install Python** (3.10+) from [python.org](https://www.python.org/downloads/) if not already installed. Make sure to check **"Add Python to PATH"** during setup.
 
 2. **Install required libraries** by opening a terminal in the project folder and running:
+
+   ```
+   pip install -r requirements.txt
+   ```
+
+   Or install packages individually:
 
    ```
    pip install openpyxl
@@ -98,14 +148,18 @@ Added files appear in the file list. Use **Remove Selected** or **Clear All** to
 
 ### Step 3 — Choose Output Options
 
-- **Merge all files into one output** — Check this box to combine all loaded files into a single merged output. Leave it unchecked to produce separate output files for each input file.
-- **Output Directory** — Click **Browse…** to choose where the output files will be saved. The program remembers your last selection.
+- **Merge all files into one output** — Check this box to combine all loaded files into a single merged output. Leave it unchecked to produce separate output files for each input file. This checkbox is only enabled when two or more files are loaded.
+- **Output Directory** — Click **Browse…** to choose where the output files will be saved. The program remembers your last selection. If no directory has been chosen yet, it is automatically set to the folder of the first input file you add.
 
 ### Step 4 — Process
 
-Click **Start Processing**. Progress messages and any errors appear in the Log panel at the bottom of the window.
+Click **Start Processing**. Processing runs in the background so the window stays responsive. Progress messages and any errors appear in the Log panel at the bottom of the window.
 
 When processing completes, you will find your output files (`.csv` and `.xlsx`) in the chosen output directory.
+
+### About
+
+Go to **Help → About** to view the version number, development team credits, license information, and a link to the project repository.
 
 ---
 
@@ -209,6 +263,40 @@ A formatted workbook containing three sheets:
 | **Fractional Times by Distance** | A reference table showing the names of the five fractional time splits (e.g., "2 furlongs", "4 furlongs", "6 furlongs", "Final") for each race distance. Use this to interpret the fractional time fields in the race data. |
 
 Each sheet is formatted as an Excel Table with configurable styles, optional borders, auto-sized columns, and a frozen header row.
+
+---
+
+## Developer Tools
+
+### Schema Editor (`tools/schema_editor.py`)
+
+> **Note:** This tool is intended for developers who need to maintain or extend the scheme files (`scheme/fields.json` and `scheme/lookup.json`). It is **not** a general-use tool and is not required to run or use the main application.
+
+The Schema Editor is a standalone Tkinter GUI that allows developers to view and edit the scheme files that drive the main application. It reuses the same loading and validation logic as the main program to ensure consistency.
+
+**Capabilities:**
+- Browse all 244 field definitions (field number, name, type, maxLength, comments, hasOptions, lookupRef)
+- Edit field properties through a form interface
+- Validate the scheme for missing keys, unknown types, and broken lookup references
+- Save changes back to `scheme/fields.json`
+
+**Limitations:**
+- Editing `scheme/lookup.json` directly is not supported in this version (it is loaded for reference/validation only).
+- Not intended for end users — incorrect changes to the scheme files will break processing.
+
+**How to run** (from the project root):
+
+```
+python -m tools
+```
+
+or
+
+```
+python tools/schema_editor.py
+```
+
+Requires `tkinter` (included with standard Python installations) and the `scheme/` directory to be present.
 
 ---
 
