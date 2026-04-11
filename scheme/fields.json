@@ -53,7 +53,7 @@
     "type": "Text",
     "maxLength": 1,
     "comments": "D = Dirt; T = Turf; P = PolyTrack",
-    "hasOptions": ""
+    "hasOptions": "Y"
   },
   {
     "field": 8,
@@ -69,7 +69,7 @@
     "type": "Text",
     "maxLength": 1,
     "comments": "M = Main Course; I = Inner Course; O = Outer Course; H = Hurdles Course; S = Steeplechase Course; Tracks with Inner Courses include Aqu, Bel, Sar, Wo and Cnl; Tracks with Outer Courses include Cnl; Except for Cnl, the Outer Courses for all other tracks are listed as 'M' for Main",
-    "hasOptions": ""
+    "hasOptions": "Y"
   },
   {
     "field": 10,
@@ -77,7 +77,7 @@
     "type": "Text",
     "maxLength": 5,
     "comments": "ALW = Allowance; AOC = Allowance Optional Claiming; CLH = Claiming Handicap; CLM = Claiming; CST = Claiming Stake; HCP = Handicap; MAT = Match; MCL = Maiden Claiming; MOC = Maiden Optional Claiming; MST = Maiden Stakes; MSW = Maiden Special Weight; OCH = Optional Claiming Handicap; OCL = Optional Claiming; OCS = Optional Claiming Stakes; SHP = Starter Handicap; SST = Starter Stakes; STK = Stakes; STR = Starter Allowance; TRL = Trial",
-    "hasOptions": ""
+    "hasOptions": "Y"
   },
   {
     "field": 11,
@@ -101,7 +101,7 @@
     "type": "Text",
     "maxLength": 1,
     "comments": "A = Colts & Geldings; B = Fillies & Mares; C = Colts; D = Colts & Fillies; E = Fillies & Geldings; F = Fillies; G = Geldings; H = Horses; I = Colts, Geldings & Horses; J = Geldings & Horses; M = Mares; R = Ridglings; Blank = No Sex Restrictions",
-    "hasOptions": ""
+    "hasOptions": "Y"
   },
   {
     "field": 14,
@@ -109,7 +109,7 @@
     "type": "Text",
     "maxLength": 2,
     "comments": "02 = 2 year olds; 03 = 3 year olds; 04 = 4 year olds; 05 = 5 year olds; 06 = 6 year olds; 07 = 7 year olds; 08 = 8 year olds; 09 = 9 year olds; 23 = 2 & 3 year olds; 24 = 2, 3 & 4 year olds; 2U = 2 year olds & up; 34 = 3 & 4 year olds; 35 = 3, 4 & 5 year olds; 36 = 3, 4, 5 & 6 year olds; 3U = 3 year olds & up; 45 = 4 & 5 year olds; 46 = 4, 5 & 6 year olds; 47 = 4, 5, 6 & 7 year olds; 4U = 4 year olds & up; 56 = 5 & 6 year olds; 57 = 5, 6 & 7 year olds; 58 = 5, 6, 7 & 8 year olds; 59 = 5, 6, 7, 8 & 9 year olds; 5U = 5 year olds & up; 67 = 6 & 7 year olds; 68 = 6, 7 & 8 year olds; 69 = 6, 7, 8 & 9 year olds; 6U = 6 year olds & up; 78 = 7 & 8 year olds; 79 = 7, 8 & 9 year olds; 7U = 7 year olds & up; 8U = 8 year olds & up; 9U = 9 year olds & up; Blank = No Age Restriction",
-    "hasOptions": ""
+    "hasOptions": "Y"
   },
   {
     "field": 15,
@@ -149,7 +149,7 @@
     "type": "Text",
     "maxLength": 1,
     "comments": "1 = Grade 1; 2 = Grade 2; 3 = Grade 3; Otherwise Blank",
-    "hasOptions": ""
+    "hasOptions": "Y"
   },
   {
     "field": 20,
@@ -173,7 +173,7 @@
     "type": "Text",
     "maxLength": 3,
     "comments": "FST = Fast; WF = Wet-Fast; GD = Good; SLY = Sloppy; MY = Muddy; SL = Slow; HY = Heavy; FR = Frozen; HD = Hard; FM = Firm; YL = Yielding; SF = Soft",
-    "hasOptions": ""
+    "hasOptions": "Y"
   },
   {
     "field": 23,
@@ -181,7 +181,7 @@
     "type": "Text",
     "maxLength": 1,
     "comments": "A = Hot; B = Fine; C = Clear; E = Overcast; F = Foggy; H = Hazy; L = Cloudy; O = Showery; R = Rainy; S = Snowing; T = Stormy; W = Windy",
-    "hasOptions": ""
+    "hasOptions": "Y"
   },
   {
     "field": 24,
@@ -437,7 +437,7 @@
     "type": "Text",
     "maxLength": 5,
     "comments": "Blank = No equipment; 2 = Screens; 3 = Shields; A = Aluminum Pads; B = Blinkers; C = Mud Calks; F = Front Wraps; G = Goggles; H = Hood; I = Cornell Collar; J = Cornell Collar Off; K = Flipping halter; L = Bar Shoes; N = No whip; O = Blinkers off; P = Aluminum Pad; Q = Nasal Strip off; R = Bar Shoe; S = Nasal Strip; V = Cheek Piece; W = No Hind Shoes; X = Cheek Piece Off; Y = No shoes; Z = Tongue Tie",
-    "hasOptions": ""
+    "hasOptions": "Y"
   },
   {
     "field": 56,
@@ -717,7 +717,7 @@
     "type": "Integer",
     "maxLength": "",
     "comments": "5 lbs = Apprentice Type 1; 7 lbs = Apprentice Type 2; 10 lbs = Apprentice Type 3; Otherwise Blank",
-    "hasOptions": ""
+    "hasOptions": "Y"
   },
   {
     "field": 91,
@@ -781,7 +781,7 @@
     "type": "Text",
     "maxLength": 1,
     "comments": "A = Also Eligible; E = Early; G = Gate; I = RegVet - Injured; J = PrivVet - Injured; K = Stakes Scratch; L = RegVet - Illness; M = Main Track Only; N = PrivVet - Unsound; O = Off Turf; P = Reason Unavailable; R = Re-entered; S = Stewards; T = Trainer; U = RegVet - Unsound; V = Veterinarian; Y = Part of Entry; Z = PrivVet - Illness; Blank = Unknown",
-    "hasOptions": ""
+    "hasOptions": "Y"
   },
   {
     "field": 99,
@@ -893,7 +893,7 @@
     "type": "Text",
     "maxLength": 1,
     "comments": "A = Administrative; D = Deceased; O = Other; P = Positive Test; V = Vet; Otherwise Blank",
-    "hasOptions": ""
+    "hasOptions": "Y"
   },
   {
     "field": 113,
@@ -1045,7 +1045,7 @@
     "type": "Text",
     "maxLength": 2,
     "comments": "$ = Super Bet; 0 = Choose 6; 1 = Roulette; 13 = 123racing; 18 = Pick 18; 2 = Two in the Money; 3 = Pick 3; 4 = Pick 4; 4J = Pick 4 Jackpot; 5 = Pick 5; 5J = Pick 5 Jackpot; 6 = Pick 6; 6J = Pick 6 Jackpot; 7 = Pick 7; 7J = Pick 7 Jackpot; 8 = Countdown; 9 = Pick 9; 9J = Pick 9 Jackpot; A = Triactor; B = Super Tri; BQ = Bracket Quinella; C = Classix; D = Daily Double; E = Exacta; F = Perfecta; G = Perfector; H = Head2Head; HE = Halfway Exacta; HW = Halfway Win; I = Pick 10; ID = Instant Daily Double; J = Exactor; K = Win 4; L = Place Pick All; L8 = Place Pick 8; M = Consolation Pick 3; N = Future Wager; O = Omni; OU = Over/Under; P = Jockey Challenge; P5 = Place Pick 5; P6 = Place Pick 6; P8 = Pick 8; P9 = Place Pick 9; Q = Quinella; R = Triple; S = Superfecta; S5 = Super High Five; SQ = Show Quinella; T = Trifecta; U = Tri Super; V = Odd or Even; W = Twin Trifecta; X = Grand Slam; X5 = X-5 Super Hi-5; Y = Straight Flush; Z = Consolation Double; Z5 = Z-5 Super Hi-5",
-    "hasOptions": ""
+    "hasOptions": "Y"
   },
   {
     "field": 132,
