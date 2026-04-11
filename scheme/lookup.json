@@ -61,162 +61,162 @@
     },
     {
         "field": 10,
-        "id": "ALW ",
+        "id": "ALW",
         "value": "Allowance"
     },
     {
         "field": 10,
-        "id": "AOC ",
+        "id": "AOC",
         "value": "Allowance Optional Claiming"
     },
     {
         "field": 10,
-        "id": "CLH ",
+        "id": "CLH",
         "value": "Claiming Handicap"
     },
     {
         "field": 10,
-        "id": "CLM ",
+        "id": "CLM",
         "value": "Claiming"
     },
     {
         "field": 10,
-        "id": "CST ",
+        "id": "CST",
         "value": "Claiming Stake"
     },
     {
         "field": 10,
-        "id": "HCP ",
+        "id": "HCP",
         "value": "Handicap"
     },
     {
         "field": 10,
-        "id": "MAT ",
+        "id": "MAT",
         "value": "Match"
     },
     {
         "field": 10,
-        "id": "MCL ",
+        "id": "MCL",
         "value": "Maiden Claiming"
     },
     {
         "field": 10,
-        "id": "MOC ",
+        "id": "MOC",
         "value": "Maiden Optional Claiming"
     },
     {
         "field": 10,
-        "id": "MST ",
+        "id": "MST",
         "value": "Maiden Stakes"
     },
     {
         "field": 10,
-        "id": "MSW ",
+        "id": "MSW",
         "value": "Maiden Special Weight"
     },
     {
         "field": 10,
-        "id": "OCH ",
+        "id": "OCH",
         "value": "Optional Claiming Handicap"
     },
     {
         "field": 10,
-        "id": "OCL ",
+        "id": "OCL",
         "value": "Optional Claiming"
     },
     {
         "field": 10,
-        "id": "OCS ",
+        "id": "OCS",
         "value": "Optional Claiming Stakes"
     },
     {
         "field": 10,
-        "id": "SHP ",
+        "id": "SHP",
         "value": "Starter Handicap"
     },
     {
         "field": 10,
-        "id": "SST ",
+        "id": "SST",
         "value": "Starter Stakes"
     },
     {
         "field": 10,
-        "id": "STK ",
+        "id": "STK",
         "value": "Stakes"
     },
     {
         "field": 10,
-        "id": "STR ",
+        "id": "STR",
         "value": "Starter Allowance"
     },
     {
         "field": 10,
-        "id": "TRL ",
+        "id": "TRL",
         "value": "Trial"
     },
     {
         "field": 13,
-        "id": "A ",
+        "id": "A",
         "value": "Colts & Geldings"
     },
     {
         "field": 13,
-        "id": "B ",
+        "id": "B",
         "value": "Fillies & mares"
     },
     {
         "field": 13,
-        "id": "C ",
+        "id": "C",
         "value": "Colts"
     },
     {
         "field": 13,
-        "id": "D ",
+        "id": "D",
         "value": "Colts & Fillies"
     },
     {
         "field": 13,
-        "id": "E ",
+        "id": "E",
         "value": "Fillies & Geldings"
     },
     {
         "field": 13,
-        "id": "F ",
+        "id": "F",
         "value": "Fillies"
     },
     {
         "field": 13,
-        "id": "G ",
+        "id": "G",
         "value": "Geldings"
     },
     {
         "field": 13,
-        "id": "H ",
+        "id": "H",
         "value": "Horses"
     },
     {
         "field": 13,
-        "id": "I ",
+        "id": "I",
         "value": "Colts, Geldings & Horses"
     },
     {
         "field": 13,
-        "id": "J ",
+        "id": "J",
         "value": "Geldings & Horses"
     },
     {
         "field": 13,
-        "id": "M ",
+        "id": "M",
         "value": "Mares"
     },
     {
         "field": 13,
-        "id": "R ",
+        "id": "R",
         "value": "Ridglings"
     },
     {
         "field": 13,
-        "id": "Blank ",
+        "id": "Blank",
         "value": "No Sex Restrictions"
     },
     {
@@ -271,7 +271,7 @@
     },
     {
         "field": 14,
-        "id": "2U ",
+        "id": "2U",
         "value": "2 year olds & up"
     },
     {
@@ -291,7 +291,7 @@
     },
     {
         "field": 14,
-        "id": "3U ",
+        "id": "3U",
         "value": "3 year olds & up"
     },
     {
@@ -311,7 +311,7 @@
     },
     {
         "field": 14,
-        "id": "4U ",
+        "id": "4U",
         "value": "4 year olds & up"
     },
     {
@@ -336,7 +336,7 @@
     },
     {
         "field": 14,
-        "id": "5U ",
+        "id": "5U",
         "value": "5 year olds & up"
     },
     {
@@ -356,7 +356,7 @@
     },
     {
         "field": 14,
-        "id": "6U ",
+        "id": "6U",
         "value": "6 year olds & up"
     },
     {
@@ -371,17 +371,17 @@
     },
     {
         "field": 14,
-        "id": "7U ",
+        "id": "7U",
         "value": "7 year olds & up"
     },
     {
         "field": 14,
-        "id": "8U ",
+        "id": "8U",
         "value": "8 year olds & up"
     },
     {
         "field": 14,
-        "id": "9U ",
+        "id": "9U",
         "value": "9 year olds & up"
     },
     {
@@ -406,122 +406,122 @@
     },
     {
         "field": 22,
-        "id": "FST ",
+        "id": "FST",
         "value": "Fast"
     },
     {
         "field": 22,
-        "id": "WF ",
+        "id": "WF",
         "value": "Wet-Fast"
     },
     {
         "field": 22,
-        "id": "GD ",
+        "id": "GD",
         "value": "Good"
     },
     {
         "field": 22,
-        "id": "SLY ",
+        "id": "SLY",
         "value": "Sloppy"
     },
     {
         "field": 22,
-        "id": "MY ",
+        "id": "MY",
         "value": "Muddy"
     },
     {
         "field": 22,
-        "id": "SL ",
+        "id": "SL",
         "value": "Slow"
     },
     {
         "field": 22,
-        "id": "HY ",
+        "id": "HY",
         "value": "Heavy"
     },
     {
         "field": 22,
-        "id": "FR ",
+        "id": "FR",
         "value": "Frozen"
     },
     {
         "field": 22,
-        "id": "HD ",
+        "id": "HD",
         "value": "Hard"
     },
     {
         "field": 22,
-        "id": "FM ",
+        "id": "FM",
         "value": "Firm"
     },
     {
         "field": 22,
-        "id": "YL ",
+        "id": "YL",
         "value": "Yielding"
     },
     {
         "field": 22,
-        "id": "SF ",
+        "id": "SF",
         "value": "Soft"
     },
     {
         "field": 23,
-        "id": "A ",
+        "id": "A",
         "value": "Hot"
     },
     {
         "field": 23,
-        "id": "B ",
+        "id": "B",
         "value": "Fine"
     },
     {
         "field": 23,
-        "id": "C ",
+        "id": "C",
         "value": "Clear"
     },
     {
         "field": 23,
-        "id": "E ",
+        "id": "E",
         "value": "Overcast"
     },
     {
         "field": 23,
-        "id": "F ",
+        "id": "F",
         "value": "Foggy"
     },
     {
         "field": 23,
-        "id": "H ",
+        "id": "H",
         "value": "Hazy"
     },
     {
         "field": 23,
-        "id": "L ",
+        "id": "L",
         "value": "Cloudy"
     },
     {
         "field": 23,
-        "id": "O ",
+        "id": "O",
         "value": "Showery"
     },
     {
         "field": 23,
-        "id": "R ",
+        "id": "R",
         "value": "Rainy"
     },
     {
         "field": 23,
-        "id": "S ",
+        "id": "S",
         "value": "Snowing"
     },
     {
         "field": 23,
-        "id": "T ",
+        "id": "T",
         "value": "Stormy"
     },
     {
         "field": 23,
-        "id": "W ",
+        "id": "W",
         "value": "Windy"
     },
     {
@@ -541,117 +541,117 @@
     },
     {
         "field": 55,
-        "id": " A ",
+        "id": "A",
         "value": "Aluminum Pads"
     },
     {
         "field": 55,
-        "id": " B ",
+        "id": "B",
         "value": "Blinkers"
     },
     {
         "field": 55,
-        "id": " C ",
+        "id": "C",
         "value": "Mud Calks"
     },
     {
         "field": 55,
-        "id": " F ",
+        "id": "F",
         "value": "Front Wraps"
     },
     {
         "field": 55,
-        "id": " G ",
+        "id": "G",
         "value": "Goggles"
     },
     {
         "field": 55,
-        "id": " H ",
+        "id": "H",
         "value": "Hood"
     },
     {
         "field": 55,
-        "id": " I ",
+        "id": "I",
         "value": "Cornell Collar"
     },
     {
         "field": 55,
-        "id": " J ",
+        "id": "J",
         "value": "Cornell Collar Off"
     },
     {
         "field": 55,
-        "id": " K ",
+        "id": "K",
         "value": "Flipping halter"
     },
     {
         "field": 55,
-        "id": " L ",
+        "id": "L",
         "value": "Bar Shoes"
     },
     {
         "field": 55,
-        "id": " N ",
+        "id": "N",
         "value": "No whip"
     },
     {
         "field": 55,
-        "id": " O ",
+        "id": "O",
         "value": "Blinkers off"
     },
     {
         "field": 55,
-        "id": " P ",
+        "id": "P",
         "value": "Aluminum Pad"
     },
     {
         "field": 55,
-        "id": " Q ",
+        "id": "Q",
         "value": "Nasal Strip off"
     },
     {
         "field": 55,
-        "id": " R ",
+        "id": "R",
         "value": "Bar Shoe"
     },
     {
         "field": 55,
-        "id": " S ",
+        "id": "S",
         "value": "Nasal Strip"
     },
     {
         "field": 55,
-        "id": " V ",
+        "id": "V",
         "value": "Cheek Piece"
     },
     {
         "field": 55,
-        "id": " W ",
+        "id": "W",
         "value": "No Hind Shoes"
     },
     {
         "field": 55,
-        "id": " X ",
+        "id": "X",
         "value": "Cheek Piece Off"
     },
     {
         "field": 55,
-        "id": " Y ",
+        "id": "Y",
         "value": "No shoes"
     },
     {
         "field": 90,
-        "id": "5 lbs ",
+        "id": "5 lbs",
         "value": "Apprentice Type 1"
     },
     {
         "field": 90,
-        "id": "7 lbs ",
+        "id": "7 lbs",
         "value": "Apprentice Type 2"
     },
     {
         "field": 90,
-        "id": "10 lbs ",
+        "id": "10 lbs",
         "value": "Apprentice Type 3"
     },
     {
