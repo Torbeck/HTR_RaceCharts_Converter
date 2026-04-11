@@ -221,42 +221,42 @@
     },
     {
         "field": 14,
-        "id": "2",
+        "id": "02",
         "value": "2 year olds"
     },
     {
         "field": 14,
-        "id": "3",
+        "id": "03",
         "value": "3 year olds"
     },
     {
         "field": 14,
-        "id": "4",
+        "id": "04",
         "value": "4 year olds"
     },
     {
         "field": 14,
-        "id": "5",
+        "id": "05",
         "value": "5 year olds"
     },
     {
         "field": 14,
-        "id": "6",
+        "id": "06",
         "value": "6 year olds"
     },
     {
         "field": 14,
-        "id": "7",
+        "id": "07",
         "value": "7 year olds"
     },
     {
         "field": 14,
-        "id": "8",
+        "id": "08",
         "value": "8 year olds"
     },
     {
         "field": 14,
-        "id": "9",
+        "id": "09",
         "value": "9 year olds"
     },
     {
@@ -642,17 +642,32 @@
     {
         "field": 90,
         "id": "5 lbs",
-        "value": "Apprentice Type 1"
+        "value": "Apprentice Type 1 (5 lbs)"
+    },
+    {
+        "field": 90,
+        "id": "5",
+        "value": "Apprentice Type 1 (5 lbs)"
     },
     {
         "field": 90,
         "id": "7 lbs",
-        "value": "Apprentice Type 2"
+        "value": "Apprentice Type 2 (7 lbs)"
+    },
+    {
+        "field": 90,
+        "id": "7",
+        "value": "Apprentice Type 2 (7 lbs)"
     },
     {
         "field": 90,
         "id": "10 lbs",
-        "value": "Apprentice Type 3"
+        "value": "Apprentice Type 3 (10 lbs)"
+    },
+    {
+        "field": 90,
+        "id": "10",
+        "value": "Apprentice Type 3 (10 lbs)"
     },
     {
         "field": 98,
