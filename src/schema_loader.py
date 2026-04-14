@@ -9,7 +9,8 @@ Loads all authoritative data sources at runtime:
 
 import csv
 import json
-from typing import Any, Dict, List, Tuple
+import logging
+from typing import Any, Callable, Dict, List, Optional, Tuple
 
 from src.utils.file_utils import resolve_scheme_path
 
@@ -24,6 +25,62 @@ DistanceTable = Dict[str, List[str]]
 
 REQUIRED_FIELD_KEYS = {"field", "name", "type", "maxLength", "comments", "hasOptions"}
 EXPECTED_FIELD_COUNT = 244
+
+# ── Excel format mapping ──────────────────────────────────────────────
+# Maps canonical field "type" values (from fields.json) to Excel number
+# format codes.  "General" is represented as None – openpyxl skips
+# setting number_format when None is returned by get_column_formats().
+
+EXCEL_FORMATS: Dict[str, str] = {
+    "Text": "@",
+    "Integer": "0",
+    "Decimal": "0.00",
+    "Date": "mm/dd/yyyy",
+    "Currency": "$#,##0.00",
+}
+
+VALID_TYPES: List[str] = list(EXCEL_FORMATS.keys())
+
+_logger = logging.getLogger(__name__)
+
+
+def get_column_formats(
+    fields_schema: FieldsSchema,
+    progress: Optional[Callable[[str], None]] = None,
+) -> List[Optional[str]]:
+    """Return a list of Excel format strings for each column in fields_schema.
+
+    For each field, looks up the ``"type"`` value in :data:`EXCEL_FORMATS`.
+    If the type is missing or unknown, returns ``None`` (Excel General
+    format) and logs a warning via the ``progress`` callback and the
+    module-level logger.
+
+    Args:
+        fields_schema: List of field definitions loaded from fields.json.
+        progress: Optional callback ``(str) -> None`` for progress/warning
+            messages (e.g. the GUI log).  When provided, unmapped columns
+            are also reported through this callback.
+
+    Returns:
+        List of Excel format strings (one per field), or ``None`` where
+        the field type has no mapping (Excel will use General format).
+    """
+    formats: List[Optional[str]] = []
+    for field_def in fields_schema:
+        field_type = field_def.get("type", "")
+        fmt = EXCEL_FORMATS.get(field_type) if field_type else None
+        if fmt is None:
+            field_num = field_def.get("field", "?")
+            field_name = field_def.get("name", "?")
+            msg = (
+                f"Field {field_num} ({field_name!r}): type {field_type!r}"
+                f" has no Excel format mapping; using General."
+            )
+            _logger.warning(msg)
+            if progress is not None:
+                progress(f"WARNING: {msg}")
+        formats.append(fmt)
+    return formats
 
 
 def load_fields_schema(scheme_dir: str) -> FieldsSchema:

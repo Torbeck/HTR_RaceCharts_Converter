@@ -17,6 +17,7 @@ from src.schema_loader import (
     FieldsSchema,
     LookupTable,
     build_distance_lookup,
+    get_column_formats,
     load_fields_schema,
     load_fractional_times,
     load_lookup_schema,
@@ -90,6 +91,10 @@ def process_files(
 
     headers = get_headers(fields_schema)
 
+    # Build column format list from field type specs in fields.json
+    progress("Building Excel column formats from fields.json...")
+    column_formats = get_column_formats(fields_schema, progress=progress)
+
     # ── Step 2: Parse and validate all files ──────────────────────────
     all_rows: List[List[str]] = []
     for file_path in file_paths:
@@ -119,6 +124,7 @@ def process_files(
             output_name="merged",
             progress=progress,
             excel_settings=excel_settings,
+            column_formats=column_formats,
         )
     else:
         for file_path, rows in zip(file_paths, all_rows):
@@ -134,6 +140,7 @@ def process_files(
                 output_name=base_name,
                 progress=progress,
                 excel_settings=excel_settings,
+                column_formats=column_formats,
             )
 
     # ── Step 4: Persist last output path ──────────────────────────────
@@ -172,6 +179,7 @@ def _translate_and_export(
     output_name: str,
     progress: ProgressCallback,
     excel_settings: Optional[Dict[str, ExcelSettings]] = None,
+    column_formats: Optional[List[Optional[str]]] = None,
 ) -> None:
     """Apply translations and export to CSV and Excel.
 
@@ -186,6 +194,8 @@ def _translate_and_export(
         output_name: Base name for output files.
         progress: Progress callback.
         excel_settings: Optional dict of per-table ExcelSettings.
+        column_formats: Optional list of Excel number-format strings for
+            each column in sheet 1, derived from fields.json field types.
     """
     # Deep copy rows so translations don't mutate the originals
     translated_rows = copy.deepcopy(rows)
@@ -209,6 +219,7 @@ def _translate_and_export(
         ft_data=ft_data,
         output_path=xlsx_path,
         excel_settings=excel_settings,
+        column_formats=column_formats,
     )
 
     progress(f"Finished exporting {output_name}.")
