@@ -34,6 +34,7 @@ def export_excel(
     ft_data: Tuple[List[str], List[List[str]]],
     output_path: str,
     excel_settings: Optional[Dict[str, ExcelSettings]] = None,
+    column_formats: Optional[List[Optional[str]]] = None,
 ) -> None:
     """Export processed data and reference tables to an Excel workbook.
 
@@ -48,6 +49,9 @@ def export_excel(
         ft_data: Tuple of (headers, rows) for race_fractional_times.csv.
         output_path: Path to write the .xlsx file.
         excel_settings: Optional dict of per-table ExcelSettings.
+        column_formats: Optional list of Excel number-format strings for
+            each column in sheet 1, derived from fields.json field types.
+            A ``None`` entry means Excel General format for that column.
     """
     poc_headers, poc_rows = poc_data
     ft_headers, ft_rows = ft_data
@@ -61,4 +65,5 @@ def export_excel(
         fractional_times_rows=ft_rows,
         output_path=output_path,
         excel_settings=excel_settings,
+        column_formats=column_formats,
     )
