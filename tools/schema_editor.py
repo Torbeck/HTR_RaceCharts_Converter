@@ -28,24 +28,14 @@ if _PROJECT_ROOT not in sys.path:
     sys.path.insert(0, _PROJECT_ROOT)
 
 from src.schema_loader import (
+    EXCEL_FORMATS,
     REQUIRED_FIELD_KEYS,
+    VALID_TYPES,
     FieldsSchema,
     LookupTable,
     load_fields_schema,
     load_lookup_schema,
 )
-
-# ── Excel-style type mapping ─────────────────────────────────────────
-
-EXCEL_FORMATS: Dict[str, str] = {
-    "Text": "@",
-    "Integer": "0",
-    "Decimal": "0.00",
-    "Date": "mm/dd/yyyy",
-    "Currency": "$#,##0.00",
-}
-
-VALID_TYPES: List[str] = list(EXCEL_FORMATS.keys())
 
 # ── Non-GUI helpers (testable without tkinter) ───────────────────────
 

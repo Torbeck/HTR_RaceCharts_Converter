@@ -1,7 +1,8 @@
 """Excel workbook utilities for HTR chart processing.
 
 Builds the 3-sheet Excel workbook:
-- Sheet 1 (Processed Race Data): formatted per [race_data] INI settings.
+- Sheet 1 (Processed Race Data): formatted per [race_data] INI settings,
+  with per-column number formats derived from fields.json field types.
 - Sheet 2 (Points of Call by Distance): formatted per [points_call] INI settings.
 - Sheet 3 (Fractional Times by Distance): formatted per [fractional_times] INI settings.
 """
@@ -23,6 +24,7 @@ def build_workbook(
     fractional_times_rows: List[List[str]],
     output_path: str,
     excel_settings: Optional[Dict[str, ExcelSettings]] = None,
+    column_formats: Optional[List[Optional[str]]] = None,
 ) -> None:
     """Build and save an Excel workbook with three sheets.
 
@@ -44,6 +46,9 @@ def build_workbook(
         output_path: Path to write the .xlsx file.
         excel_settings: Optional dict of per-table ExcelSettings from
             config.ini.  If provided, applies formatting to all sheets.
+        column_formats: Optional list of Excel number-format strings for
+            each column in sheet 1.  Aligned to processed_headers; a
+            ``None`` entry means leave the column at Excel General format.
     """
     wb = openpyxl.Workbook()
 
@@ -51,6 +56,9 @@ def build_workbook(
     ws1 = wb.active
     ws1.title = "Processed Race Data"
     _write_sheet(ws1, processed_headers, processed_rows)
+
+    if column_formats:
+        _apply_column_formats(ws1, column_formats, row_count=1 + len(processed_rows))
 
     if excel_settings and "race_data" in excel_settings:
         apply_sheet_formatting(
@@ -108,3 +116,28 @@ def _write_sheet(
     ws.append(headers)
     for row in rows:
         ws.append(row)
+
+
+def _apply_column_formats(
+    ws: openpyxl.worksheet.worksheet.Worksheet,
+    column_formats: List[Optional[str]],
+    row_count: int,
+) -> None:
+    """Apply Excel number formats to data cells (rows 2 onward) in a worksheet.
+
+    The header row (row 1) is intentionally skipped so that column headers
+    remain as plain text regardless of the column format.
+
+    Args:
+        ws: Target worksheet.  Must already contain data written by
+            :func:`_write_sheet`.
+        column_formats: List of Excel format strings aligned to column
+            positions (1-based: index 0 → column 1).  A ``None`` entry
+            means leave the column at Excel General format (no-op).
+        row_count: Total number of rows including the header row.
+    """
+    for col_idx, fmt in enumerate(column_formats, start=1):
+        if fmt is None:
+            continue
+        for row_idx in range(2, row_count + 1):
+            ws.cell(row=row_idx, column=col_idx).number_format = fmt
