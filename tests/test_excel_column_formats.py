@@ -8,6 +8,7 @@ Covers:
 """
 
 import os
+import shutil
 import tempfile
 import unittest
 
@@ -171,6 +172,9 @@ class TestBuildWorkbookColumnFormats(unittest.TestCase):
     def setUp(self):
         self._tmpdir = tempfile.mkdtemp()
         self._output_path = os.path.join(self._tmpdir, "test_output.xlsx")
+
+    def tearDown(self):
+        shutil.rmtree(self._tmpdir, ignore_errors=True)
 
     def _build(self, headers, rows, col_fmts=None):
         build_workbook(

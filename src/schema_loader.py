@@ -73,9 +73,8 @@ def get_column_formats(
             field_num = field_def.get("field", "?")
             field_name = field_def.get("name", "?")
             msg = (
-                f"Field {field_num} ({field_name!r}): "
-                f"type {field_type!r} has no Excel format mapping; "
-                f"using General."
+                f"Field {field_num} ({field_name!r}): type {field_type!r}"
+                f" has no Excel format mapping; using General."
             )
             _logger.warning(msg)
             if progress is not None:
