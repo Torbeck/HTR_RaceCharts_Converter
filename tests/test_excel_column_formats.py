@@ -2,11 +2,15 @@
 
 Covers:
 - get_column_formats: known types, unknown types, empty types, progress logging
+- _coerce_cell_value: string → int/float/datetime/str type conversion
 - _apply_column_formats: cell number_format set correctly for data rows
-- build_workbook: column_formats applied to Sheet 1, not Sheet 2 or 3
+- build_workbook: column_formats applied to Sheet 1, not Sheet 2 or 3;
+  values stored as real numbers/dates (not strings) to prevent Excel's
+  "Number stored as text" green-triangle indicator.
 - EXCEL_FORMATS sourced from src.schema_loader (single source of truth)
 """
 
+import datetime
 import os
 import shutil
 import tempfile
@@ -15,7 +19,7 @@ import unittest
 import openpyxl
 
 from src.schema_loader import EXCEL_FORMATS, VALID_TYPES, get_column_formats
-from src.utils.excel_utils import _apply_column_formats, build_workbook
+from src.utils.excel_utils import _apply_column_formats, _coerce_cell_value, build_workbook
 
 
 class TestGetColumnFormats(unittest.TestCase):
@@ -166,6 +170,85 @@ class TestApplyColumnFormats(unittest.TestCase):
             self.fail(f"_apply_column_formats raised unexpectedly: {e}")
 
 
+class TestCellValueCoercion(unittest.TestCase):
+    """Unit tests for _coerce_cell_value type conversion."""
+
+    def test_integer_format_converts_to_int(self):
+        result = _coerce_cell_value("42", "0")
+        self.assertEqual(result, 42)
+        self.assertIsInstance(result, int)
+
+    def test_integer_format_whole_float_string(self):
+        """String "3.0" should be converted to int 3 for Integer format."""
+        result = _coerce_cell_value("3.0", "0")
+        self.assertEqual(result, 3)
+        self.assertIsInstance(result, int)
+
+    def test_decimal_format_converts_to_float(self):
+        result = _coerce_cell_value("3.14", "0.00")
+        self.assertAlmostEqual(result, 3.14)
+        self.assertIsInstance(result, float)
+
+    def test_currency_format_converts_to_float(self):
+        result = _coerce_cell_value("125000.00", "$#,##0.00")
+        self.assertAlmostEqual(result, 125000.0)
+        self.assertIsInstance(result, float)
+
+    def test_currency_format_strips_symbols(self):
+        """Values with '$' and ',' should be parsed correctly."""
+        result = _coerce_cell_value("$1,234.56", "$#,##0.00")
+        self.assertAlmostEqual(result, 1234.56)
+        self.assertIsInstance(result, float)
+
+    def test_currency_format_no_decimals(self):
+        result = _coerce_cell_value("125000", "$#,##0.00")
+        self.assertAlmostEqual(result, 125000.0)
+        self.assertIsInstance(result, float)
+
+    def test_date_format_converts_to_datetime(self):
+        result = _coerce_cell_value("04/05/2024", "mm/dd/yyyy")
+        self.assertEqual(result, datetime.datetime(2024, 4, 5))
+        self.assertIsInstance(result, datetime.datetime)
+
+    def test_text_format_keeps_string(self):
+        result = _coerce_cell_value("hello", "@")
+        self.assertEqual(result, "hello")
+        self.assertIsInstance(result, str)
+
+    def test_none_format_keeps_string(self):
+        result = _coerce_cell_value("hello", None)
+        self.assertEqual(result, "hello")
+        self.assertIsInstance(result, str)
+
+    def test_blank_always_returned_unchanged_for_all_formats(self):
+        """Blank strings must remain blank for every format to preserve empty cells."""
+        for fmt in ["0", "0.00", "$#,##0.00", "mm/dd/yyyy", "@", None]:
+            with self.subTest(fmt=fmt):
+                result = _coerce_cell_value("", fmt)
+                self.assertEqual(result, "")
+
+    def test_invalid_integer_falls_back_to_string(self):
+        result = _coerce_cell_value("not_a_number", "0")
+        self.assertEqual(result, "not_a_number")
+        self.assertIsInstance(result, str)
+
+    def test_invalid_float_falls_back_to_string(self):
+        result = _coerce_cell_value("abc", "0.00")
+        self.assertEqual(result, "abc")
+        self.assertIsInstance(result, str)
+
+    def test_invalid_date_falls_back_to_string(self):
+        result = _coerce_cell_value("not_a_date", "mm/dd/yyyy")
+        self.assertEqual(result, "not_a_date")
+        self.assertIsInstance(result, str)
+
+    def test_unknown_format_keeps_string(self):
+        """Any unrecognised format string should return the value unchanged."""
+        result = _coerce_cell_value("42", "##0.0E+0")
+        self.assertEqual(result, "42")
+        self.assertIsInstance(result, str)
+
+
 class TestBuildWorkbookColumnFormats(unittest.TestCase):
     """Verify build_workbook applies column_formats to Sheet 1 data cells."""
 
@@ -239,6 +322,107 @@ class TestBuildWorkbookColumnFormats(unittest.TestCase):
         ws = wb.active
         self.assertNotEqual(ws.cell(row=2, column=1).number_format, "0")
         self.assertEqual(ws.cell(row=2, column=2).number_format, "0")
+
+    # ── Value-type tests: ensure real numbers/dates are written (no green triangle) ──
+
+    def test_integer_column_value_is_numeric(self):
+        """Integer column must store an int value, not a string."""
+        headers = ["Race Number"]
+        rows = [["42"]]
+        col_fmts = ["0"]
+        wb = self._build(headers, rows, col_fmts)
+        ws = wb.active
+        cell_value = ws.cell(row=2, column=1).value
+        self.assertNotIsInstance(
+            cell_value, str, "Integer cell must not store a string value"
+        )
+        self.assertIsInstance(cell_value, (int, float))
+        self.assertEqual(cell_value, 42)
+
+    def test_currency_column_value_is_numeric(self):
+        """Currency column must store a float value, not a string."""
+        headers = ["Purse"]
+        rows = [["125000.00"]]
+        col_fmts = ["$#,##0.00"]
+        wb = self._build(headers, rows, col_fmts)
+        ws = wb.active
+        cell_value = ws.cell(row=2, column=1).value
+        self.assertNotIsInstance(
+            cell_value, str, "Currency cell must not store a string value"
+        )
+        self.assertIsInstance(cell_value, (int, float))
+        self.assertAlmostEqual(cell_value, 125000.0)
+
+    def test_decimal_column_value_is_numeric(self):
+        """Decimal column must store a float value, not a string."""
+        headers = ["Odds"]
+        rows = [["5.50"]]
+        col_fmts = ["0.00"]
+        wb = self._build(headers, rows, col_fmts)
+        ws = wb.active
+        cell_value = ws.cell(row=2, column=1).value
+        self.assertNotIsInstance(
+            cell_value, str, "Decimal cell must not store a string value"
+        )
+        self.assertIsInstance(cell_value, (int, float))
+        self.assertAlmostEqual(cell_value, 5.5)
+
+    def test_date_column_value_is_datetime(self):
+        """Date column must store a datetime value, not a string."""
+        headers = ["Race Date"]
+        rows = [["04/05/2024"]]
+        col_fmts = ["mm/dd/yyyy"]
+        wb = self._build(headers, rows, col_fmts)
+        ws = wb.active
+        cell_value = ws.cell(row=2, column=1).value
+        self.assertNotIsInstance(
+            cell_value, str, "Date cell must not store a string value"
+        )
+        self.assertIsInstance(cell_value, datetime.datetime)
+        self.assertEqual(cell_value, datetime.datetime(2024, 4, 5))
+
+    def test_text_column_value_stays_string(self):
+        """Text column values must remain strings."""
+        headers = ["Track"]
+        rows = [["CD"]]
+        col_fmts = ["@"]
+        wb = self._build(headers, rows, col_fmts)
+        ws = wb.active
+        cell_value = ws.cell(row=2, column=1).value
+        self.assertIsInstance(cell_value, str)
+        self.assertEqual(cell_value, "CD")
+
+    def test_blank_cell_stays_blank_for_numeric_format(self):
+        """Blank string values must remain blank (None) even for numeric columns."""
+        headers = ["Race Number"]
+        rows = [["", "42"]]
+        col_fmts = ["0"]
+        wb = self._build(headers, rows, col_fmts)
+        ws = wb.active
+        # Empty string written → cell should be None or empty string, not a number
+        blank_value = ws.cell(row=2, column=1).value
+        self.assertFalse(
+            blank_value,
+            "Blank cell in numeric column must remain blank/None, not be converted",
+        )
+
+    def test_integer_column_number_format_correct_after_coercion(self):
+        """number_format must still be '0' for Integer columns after value coercion."""
+        headers = ["Race Number"]
+        rows = [["7"]]
+        col_fmts = ["0"]
+        wb = self._build(headers, rows, col_fmts)
+        ws = wb.active
+        self.assertEqual(ws.cell(row=2, column=1).number_format, "0")
+
+    def test_currency_column_number_format_correct_after_coercion(self):
+        """number_format must still be '$#,##0.00' after value coercion."""
+        headers = ["Purse"]
+        rows = [["50000.00"]]
+        col_fmts = ["$#,##0.00"]
+        wb = self._build(headers, rows, col_fmts)
+        ws = wb.active
+        self.assertEqual(ws.cell(row=2, column=1).number_format, "$#,##0.00")
 
 
 class TestExcelFormatsSourcedFromSchemaLoader(unittest.TestCase):
