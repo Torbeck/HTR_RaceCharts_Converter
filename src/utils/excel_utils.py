@@ -7,7 +7,8 @@ Builds the 3-sheet Excel workbook:
 - Sheet 3 (Fractional Times by Distance): formatted per [fractional_times] INI settings.
 """
 
-from typing import Dict, List, Optional
+import datetime
+from typing import Any, Dict, List, Optional
 
 import openpyxl
 
@@ -55,7 +56,7 @@ def build_workbook(
     # ── Sheet 1: Processed Race Data ──────────────────────────────────
     ws1 = wb.active
     ws1.title = "Processed Race Data"
-    _write_sheet(ws1, processed_headers, processed_rows)
+    _write_sheet(ws1, processed_headers, processed_rows, column_formats=column_formats)
 
     if column_formats:
         _apply_column_formats(ws1, column_formats, row_count=1 + len(processed_rows))
@@ -105,17 +106,80 @@ def _write_sheet(
     ws: openpyxl.worksheet.worksheet.Worksheet,
     headers: List[str],
     rows: List[List[str]],
+    column_formats: Optional[List[Optional[str]]] = None,
 ) -> None:
     """Write headers and rows to a worksheet.
+
+    When ``column_formats`` is provided, each cell value is coerced to the
+    appropriate Python type (int, float, datetime) before writing so that
+    Excel stores real numbers/dates rather than strings.  This prevents the
+    "Number stored as text" green-triangle indicator in Excel.
 
     Args:
         ws: The openpyxl worksheet.
         headers: Column headers.
-        rows: Data rows.
+        rows: Data rows (typically all strings from CSV parsing).
+        column_formats: Optional list of Excel format strings aligned to
+            column positions (index 0 → column 1).  When supplied, each
+            cell value is coerced before being written to the sheet.
     """
     ws.append(headers)
     for row in rows:
-        ws.append(row)
+        if column_formats:
+            coerced = [
+                _coerce_cell_value(val, column_formats[i] if i < len(column_formats) else None)
+                for i, val in enumerate(row)
+            ]
+            ws.append(coerced)
+        else:
+            ws.append(row)
+
+
+def _coerce_cell_value(value: str, fmt: Optional[str]) -> Any:
+    """Convert a raw string cell value to the appropriate Python type.
+
+    Blank strings are always returned unchanged so that empty cells remain
+    empty in the workbook.  Conversion failures fall back silently to the
+    original string value so that no data is lost.
+
+    Args:
+        value: Raw string value from CSV parsing.
+        fmt: Excel format string (e.g. ``"0"``, ``"$#,##0.00"``,
+             ``"mm/dd/yyyy"``, ``"@"``), or ``None`` for General format.
+
+    Returns:
+        - ``int`` for Integer format (``"0"``)
+        - ``float`` for Decimal (``"0.00"``) or Currency (``"$#,##0.00"``)
+        - ``datetime.datetime`` for Date format (``"mm/dd/yyyy"``)
+        - Original ``str`` for Text (``"@"``) or unknown/None formats,
+          and as a fallback when conversion fails.
+    """
+    if not value:
+        return value  # Preserve blanks / empty cells
+
+    if fmt == "0":
+        try:
+            # Use int(float()) to handle "3" and "3.0" equally
+            return int(float(value))
+        except (ValueError, TypeError):
+            return value
+
+    if fmt in ("0.00", "$#,##0.00"):
+        try:
+            # Strip currency symbols and thousands separators before parsing
+            cleaned = value.replace("$", "").replace(",", "").strip()
+            return float(cleaned)
+        except (ValueError, TypeError):
+            return value
+
+    if fmt == "mm/dd/yyyy":
+        try:
+            return datetime.datetime.strptime(value, "%m/%d/%Y")
+        except (ValueError, TypeError):
+            return value
+
+    # Text ("@"), None (General), or any unrecognised format: keep as string
+    return value
 
 
 def _apply_column_formats(
