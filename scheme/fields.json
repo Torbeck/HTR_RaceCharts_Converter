@@ -122,7 +122,7 @@
     {
         "field": 16,
         "name": "Purse",
-        "type": "Integer",
+        "type": "Currency",
         "maxLength": "",
         "comments": "In US Dollars",
         "hasOptions": ""
@@ -130,7 +130,7 @@
     {
         "field": 17,
         "name": "Maximum Claiming Price",
-        "type": "Integer",
+        "type": "Currency",
         "maxLength": "",
         "comments": "In US Dollars - Maximum Claiming Price a horse can be entered for; In Starter Races, the claiming price eligibility requirement",
         "hasOptions": ""
@@ -138,7 +138,7 @@
     {
         "field": 18,
         "name": "Minimum Claiming Price",
-        "type": "Integer",
+        "type": "Currency",
         "maxLength": "",
         "comments": "In US Dollars - Minimum Claiming Price a horse can be entered for",
         "hasOptions": ""
@@ -514,7 +514,7 @@
     {
         "field": 65,
         "name": "Win Mutuel Paid",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "In US Dollars; Coupled horses share mutuel",
         "hasOptions": ""
@@ -522,7 +522,7 @@
     {
         "field": 66,
         "name": "Place Mutuel Paid",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "In US Dollars; Coupled horses share mutuel",
         "hasOptions": ""
@@ -530,7 +530,7 @@
     {
         "field": 67,
         "name": "Show Mutuel Paid",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "In US Dollars; Coupled horses share mutuel",
         "hasOptions": ""
@@ -1066,7 +1066,7 @@
     {
         "field": 134,
         "name": "#1 Wager Payout",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "Payout in US Dollars",
         "hasOptions": ""
@@ -1115,7 +1115,7 @@
     {
         "field": 140,
         "name": "#2 Wager Payout",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1164,7 +1164,7 @@
     {
         "field": 146,
         "name": "#3 Wager Payout",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1213,7 +1213,7 @@
     {
         "field": 152,
         "name": "#4 Wager Payout",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1262,7 +1262,7 @@
     {
         "field": 158,
         "name": "#5 Wager Payout",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1311,7 +1311,7 @@
     {
         "field": 164,
         "name": "#6 Wager Payout",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1360,7 +1360,7 @@
     {
         "field": 170,
         "name": "#7 Wager Payout",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1409,7 +1409,7 @@
     {
         "field": 176,
         "name": "#8 Wager Payout",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1458,7 +1458,7 @@
     {
         "field": 182,
         "name": "#9 Wager Payout",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1507,7 +1507,7 @@
     {
         "field": 188,
         "name": "#10 Wager Payout",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1556,7 +1556,7 @@
     {
         "field": 194,
         "name": "#11 Wager Payout",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1605,7 +1605,7 @@
     {
         "field": 200,
         "name": "#12 Wager Payout",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1654,7 +1654,7 @@
     {
         "field": 206,
         "name": "#13 Wager Payout",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1703,7 +1703,7 @@
     {
         "field": 212,
         "name": "#14 Wager Payout",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1752,7 +1752,7 @@
     {
         "field": 218,
         "name": "#15 Wager Payout",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1801,7 +1801,7 @@
     {
         "field": 224,
         "name": "#16 Wager Payout",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1850,7 +1850,7 @@
     {
         "field": 230,
         "name": "#17 Wager Payout",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1899,7 +1899,7 @@
     {
         "field": 236,
         "name": "#18 Wager Payout",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1948,7 +1948,7 @@
     {
         "field": 242,
         "name": "#19 Wager Payout",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
