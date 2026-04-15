@@ -1,5 +1,7 @@
 # HTR Race Charts Converter
 
+<img src="assets/icons/master/htr_racecharts_converter_1024.png" width="128" alt="HTR Race Charts Converter">
+
 Version: 1.5.0
 
 **Development Team**
@@ -52,6 +54,27 @@ It is built for **handicappers, researchers, and data analysts** who work with H
 
 ```text
 project_root/
+│
+├── assets/
+│   └── icons/
+│       ├── apps/                ← application icons (32–512 px, for taskbar and About dialog)
+│       │   ├── htr_racecharts_converter_32.png
+│       │   ├── htr_racecharts_converter_64.png
+│       │   ├── htr_racecharts_converter_128.png
+│       │   ├── htr_racecharts_converter_256.png
+│       │   ├── htr_racecharts_converter_512.png
+│       │   ├── schema_editor_32.png
+│       │   ├── schema_editor_64.png
+│       │   ├── schema_editor_128.png
+│       │   ├── schema_editor_256.png
+│       │   └── schema_editor_512.png
+│       └── master/              ← high-resolution masters (1024–4096 px, for README and About dialogs)
+│           ├── htr_racecharts_converter_1024.png
+│           ├── htr_racecharts_converter_2048.png
+│           ├── htr_racecharts_converter_4096.png
+│           ├── schema_editor_1024.png
+│           ├── schema_editor_2048.png
+│           └── schema_editor_4096.png
 │
 ├── src/
 │   ├── main.py              ← entry point; launches the GUI

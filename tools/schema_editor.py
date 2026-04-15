@@ -148,11 +148,30 @@ class SchemaEditorApp:
         self._root.title("Schema Editor \u2013 Developer Tool")
         self._root.geometry("960x640")
         self._root.minsize(800, 500)
+        self._app_icons: List[Any] = []
+        self._set_app_icon()
 
         self._build_ui()
         self._load_scheme(scheme_dir)
 
     # ── UI construction ──────────────────────────────────────────────
+
+    def _set_app_icon(self) -> None:
+        """Load and set the schema editor window icon from assets/icons/apps."""
+        tk = self._tk
+        icon_dir = os.path.join(_PROJECT_ROOT, "assets", "icons", "apps")
+        sizes = [512, 256, 128, 64, 32]
+        icons = []
+        for size in sizes:
+            path = os.path.join(icon_dir, f"schema_editor_{size}.png")
+            if os.path.isfile(path):
+                try:
+                    icons.append(tk.PhotoImage(file=path))
+                except Exception:
+                    pass
+        if icons:
+            self._root.iconphoto(True, *icons)
+        self._app_icons = icons  # Prevent garbage collection
 
     def _build_ui(self) -> None:
         tk = self._tk

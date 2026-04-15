@@ -20,6 +20,11 @@ from src.utils.file_utils import collect_txt_files, validate_file_extension
 from src.utils.ini_utils import read_last_output, rebuild_config
 from src.version import __version__
 
+_ICON_DIR = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+    "assets", "icons", "apps",
+)
+
 
 class HTRApp:
     """Main application window for HTR chart processing."""
@@ -53,6 +58,8 @@ class HTRApp:
         self._root.title("HTR Chart Processor")
         self._root.geometry("800x620")
         self._root.minsize(700, 550)
+        self._app_icons: List[tk.PhotoImage] = []
+        self._set_app_icon()
 
         self._build_ui()
         self._setup_drag_and_drop()
@@ -189,6 +196,23 @@ class HTRApp:
 
     # ── Event Handlers ────────────────────────────────────────────────
 
+    def _set_app_icon(self) -> None:
+        """Load and set the application window icon from assets/icons/apps."""
+        sizes = [512, 256, 128, 64, 32]
+        icons: List[tk.PhotoImage] = []
+        for size in sizes:
+            path = os.path.join(
+                _ICON_DIR, f"htr_racecharts_converter_{size}.png"
+            )
+            if os.path.isfile(path):
+                try:
+                    icons.append(tk.PhotoImage(file=path))
+                except Exception:
+                    pass
+        if icons:
+            self._root.iconphoto(True, *icons)
+        self._app_icons = icons  # Prevent garbage collection
+
     def _on_rebuild_config(self) -> None:
         """Rebuild config.ini from hardcoded defaults after confirmation."""
         if not messagebox.askyesno(
@@ -214,6 +238,16 @@ class HTRApp:
 
         frame = ttk.Frame(about_win, padding=20)
         frame.pack(fill=tk.BOTH, expand=True)
+
+        logo_path = os.path.join(_ICON_DIR, "htr_racecharts_converter_128.png")
+        if os.path.isfile(logo_path):
+            try:
+                logo_img = tk.PhotoImage(file=logo_path)
+                logo_label = ttk.Label(frame, image=logo_img)
+                logo_label.image = logo_img  # Prevent garbage collection
+                logo_label.pack(pady=(0, 5))
+            except Exception:
+                pass
 
         ttk.Label(
             frame,
