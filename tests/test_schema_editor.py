@@ -59,7 +59,7 @@ class TestTypeDisplayLabel(unittest.TestCase):
         self.assertEqual(type_display_label("Decimal"), "Decimal  (0.00)")
 
     def test_date_label(self):
-        self.assertEqual(type_display_label("Date"), "Date  (mm/dd/yyyy)")
+        self.assertEqual(type_display_label("Date"), "Date  (m/d/yyyy)")
 
     def test_currency_label(self):
         self.assertEqual(type_display_label("Currency"), "Currency  ($#,##0.00)")
@@ -235,7 +235,7 @@ class TestExcelFormatsMapping(unittest.TestCase):
         self.assertEqual(EXCEL_FORMATS["Decimal"], "0.00")
 
     def test_date_format(self):
-        self.assertEqual(EXCEL_FORMATS["Date"], "mm/dd/yyyy")
+        self.assertEqual(EXCEL_FORMATS["Date"], "m/d/yyyy")
 
     def test_currency_format(self):
         self.assertEqual(EXCEL_FORMATS["Currency"], "$#,##0.00")
