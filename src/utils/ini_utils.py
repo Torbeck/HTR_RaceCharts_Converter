@@ -5,6 +5,7 @@ Reads and writes config.ini for:
 - [points_call] section: table_style, borders, auto_size_columns, freeze_header
 - [fractional_times] section: table_style, borders, auto_size_columns, freeze_header
 - [paths] section: last_output
+- [output] section: visible_fields, custom_order
 
 Fallback logic:
 - If config.ini does not exist, return hardcoded defaults for all keys.
@@ -289,6 +290,10 @@ def rebuild_config(config_path: str) -> None:
 
     parser.add_section("paths")
     parser.set("paths", "last_output", last_output)
+
+    parser.add_section("output")
+    parser.set("output", "visible_fields", "all")
+    parser.set("output", "custom_order", "default")
 
     with open(config_path, mode="w", encoding="utf-8") as f:
         parser.write(f)
