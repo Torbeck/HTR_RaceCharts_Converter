@@ -2,7 +2,7 @@
 
 <img src="assets/icons/master/htr_racecharts_converter_1024.png" width="128" alt="HTR Race Charts Converter">
 
-Version: 1.5.0
+Version: 1.7.5
 
 **Development Team**
 - **Lead Programmer:** Ken Torbeck ([ktorbeck@gmail.com](mailto:ktorbeck@gmail.com))
