@@ -56,7 +56,7 @@ class TestGetColumnFormats(unittest.TestCase):
 
     def test_date_type(self):
         fields = [self._make_field(1, "Date")]
-        self.assertEqual(get_column_formats(fields), ["mm/dd/yyyy"])
+        self.assertEqual(get_column_formats(fields), ["m/d/yyyy"])
 
     def test_currency_type(self):
         fields = [self._make_field(1, "Currency")]
@@ -83,7 +83,7 @@ class TestGetColumnFormats(unittest.TestCase):
             self._make_field(4, "Integer"),
         ]
         result = get_column_formats(fields)
-        self.assertEqual(result, ["@", "mm/dd/yyyy", None, "0"])
+        self.assertEqual(result, ["@", "m/d/yyyy", None, "0"])
 
     def test_length_matches_schema_length(self):
         """Return list length must match number of fields."""

@@ -35,7 +35,7 @@ EXCEL_FORMATS: Dict[str, str] = {
     "Text": "@",
     "Integer": "0",
     "Decimal": "0.00",
-    "Date": "mm/dd/yyyy",
+    "Date": "m/d/yyyy",
     "Currency": "$#,##0.00",
 }
 
