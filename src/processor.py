@@ -23,6 +23,11 @@ from src.schema_loader import (
     load_lookup_schema,
     load_points_of_call,
 )
+from src.output_settings import (
+    apply_field_filter,
+    read_output_settings,
+    resolve_field_indices,
+)
 from src.translator import apply_lookup_translations, get_headers
 from src.validator import validate_distances, validate_lookup_codes, validate_rows
 from src.exporter import export_csv, export_excel
@@ -74,9 +79,14 @@ def process_files(
     # If config_path is provided, read per-table settings from the
     # [race_data], [points_call], and [fractional_times] sections.
     excel_settings: Optional[Dict[str, ExcelSettings]] = None
+    field_indices: Optional[List[int]] = None
     if config_path is not None:
         progress("Loading Excel settings from config.ini...")
         excel_settings = read_excel_settings(config_path)
+
+        # Load output field visibility / ordering settings
+        progress("Loading output field settings from config.ini...")
+        visible_raw, order_raw = read_output_settings(config_path)
 
     # ── Step 1: Load scheme files ─────────────────────────────────────
     progress("Loading scheme files...")
@@ -94,6 +104,17 @@ def process_files(
     # Build column format list from field type specs in fields.json
     progress("Building Excel column formats from fields.json...")
     column_formats = get_column_formats(fields_schema, progress=progress)
+
+    # Resolve output field visibility / ordering
+    if config_path is not None:
+        field_indices = resolve_field_indices(
+            fields_schema, visible_raw, order_raw,
+        )
+        if field_indices is not None:
+            progress(
+                f"Output field filter active: "
+                f"{len(field_indices)} of {len(fields_schema)} fields selected."
+            )
 
     # ── Step 2: Parse and validate all files ──────────────────────────
     all_rows: List[List[str]] = []
@@ -125,6 +146,7 @@ def process_files(
             progress=progress,
             excel_settings=excel_settings,
             column_formats=column_formats,
+            field_indices=field_indices,
         )
     else:
         for file_path, rows in zip(file_paths, all_rows):
@@ -141,6 +163,7 @@ def process_files(
                 progress=progress,
                 excel_settings=excel_settings,
                 column_formats=column_formats,
+                field_indices=field_indices,
             )
 
     # ── Step 4: Persist last output path ──────────────────────────────
@@ -180,6 +203,7 @@ def _translate_and_export(
     progress: ProgressCallback,
     excel_settings: Optional[Dict[str, ExcelSettings]] = None,
     column_formats: Optional[List[Optional[str]]] = None,
+    field_indices: Optional[List[int]] = None,
 ) -> None:
     """Apply translations and export to CSV and Excel.
 
@@ -196,6 +220,9 @@ def _translate_and_export(
         excel_settings: Optional dict of per-table ExcelSettings.
         column_formats: Optional list of Excel number-format strings for
             each column in sheet 1, derived from fields.json field types.
+        field_indices: Optional list of 0-based column indices that
+            defines the visible fields and their order for Excel export.
+            ``None`` means use all fields in canonical order.
     """
     # Deep copy rows so translations don't mutate the originals
     translated_rows = copy.deepcopy(rows)
@@ -204,22 +231,32 @@ def _translate_and_export(
     apply_lookup_translations(translated_rows, fields_schema, lookup_table,
                               progress=progress)
 
-    # Export CSV
+    # Export CSV (always uses the full canonical 244-column layout)
     csv_path = os.path.join(output_dir, f"{output_name}.csv")
     progress(f"Exporting CSV: {csv_path}")
     export_csv(translated_rows, headers, csv_path)
+
+    # Apply field visibility / ordering for Excel export
+    excel_headers = headers
+    excel_rows = translated_rows
+    excel_formats = column_formats
+    if field_indices is not None:
+        progress(f"Applying output field filter for {output_name}...")
+        excel_headers, excel_rows, excel_formats = apply_field_filter(
+            headers, translated_rows, column_formats, field_indices,
+        )
 
     # Export Excel
     xlsx_path = os.path.join(output_dir, f"{output_name}.xlsx")
     progress(f"Exporting Excel: {xlsx_path}")
     export_excel(
-        processed_headers=headers,
-        processed_rows=translated_rows,
+        processed_headers=excel_headers,
+        processed_rows=excel_rows,
         poc_data=poc_data,
         ft_data=ft_data,
         output_path=xlsx_path,
         excel_settings=excel_settings,
-        column_formats=column_formats,
+        column_formats=excel_formats,
     )
 
     progress(f"Finished exporting {output_name}.")

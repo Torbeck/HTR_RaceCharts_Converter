@@ -13,11 +13,15 @@ import threading
 import tkinter as tk
 import webbrowser
 from tkinter import filedialog, messagebox, ttk
-from typing import List, Optional
+from typing import Callable, List, Optional
 
 from src.processor import process_files
 from src.utils.file_utils import collect_txt_files, validate_file_extension
 from src.utils.ini_utils import read_last_output, rebuild_config
+from src.output_settings import (
+    read_output_settings,
+    write_output_settings,
+)
 from src.version import __version__
 
 _ICON_DIR = os.path.join(
@@ -88,6 +92,15 @@ class HTRApp:
             label="Rebuild config.ini", command=self._on_rebuild_config
         )
         menu_bar.add_cascade(label="Tools", menu=tools_menu)
+
+        output_menu = tk.Menu(menu_bar, tearoff=0)
+        output_menu.add_command(
+            label="Field Visibility...", command=self._on_field_visibility
+        )
+        output_menu.add_command(
+            label="Field Ordering...", command=self._on_field_ordering
+        )
+        menu_bar.add_cascade(label="Output", menu=output_menu)
 
         help_menu = tk.Menu(menu_bar, tearoff=0)
         help_menu.add_command(label="About", command=self._on_about)
@@ -227,6 +240,36 @@ class HTRApp:
             self._log("config.ini rebuilt with default settings.")
         except Exception as e:
             self._log(f"ERROR rebuilding config.ini: {e}")
+
+    def _on_field_visibility(self) -> None:
+        """Open the Field Visibility dialog."""
+        try:
+            from src.schema_loader import load_fields_schema
+            fields_schema = load_fields_schema(self._scheme_dir)
+        except Exception as e:
+            messagebox.showerror("Load Error", f"Cannot load fields.json: {e}")
+            return
+
+        visible_raw, _ = read_output_settings(self._config_path)
+        _FieldVisibilityDialog(
+            self._root, fields_schema, self._config_path, visible_raw,
+            log_callback=self._log,
+        )
+
+    def _on_field_ordering(self) -> None:
+        """Open the Field Ordering dialog."""
+        try:
+            from src.schema_loader import load_fields_schema
+            fields_schema = load_fields_schema(self._scheme_dir)
+        except Exception as e:
+            messagebox.showerror("Load Error", f"Cannot load fields.json: {e}")
+            return
+
+        _, order_raw = read_output_settings(self._config_path)
+        _FieldOrderingDialog(
+            self._root, fields_schema, self._config_path, order_raw,
+            log_callback=self._log,
+        )
 
     def _on_about(self) -> None:
         """Show the About dialog."""
@@ -548,3 +591,283 @@ class HTRApp:
                 paths.append(raw[i:end])
                 i = end
         return paths
+
+
+# ── Field Visibility Dialog ───────────────────────────────────────────
+
+
+class _FieldVisibilityDialog:
+    """Checkbox dialog for selecting which fields are visible in Excel output.
+
+    Saves the selection to ``[output] visible_fields`` in config.ini.
+    """
+
+    def __init__(
+        self,
+        parent: tk.Tk,
+        fields_schema: List,
+        config_path: str,
+        visible_fields_raw: str,
+        log_callback: Optional[Callable] = None,
+    ) -> None:
+        self._config_path = config_path
+        self._fields_schema = fields_schema
+        self._log_callback = log_callback
+
+        self._win = tk.Toplevel(parent)
+        self._win.title("Field Visibility")
+        self._win.geometry("500x600")
+        self._win.transient(parent)
+        self._win.grab_set()
+
+        # Parse current visible fields setting
+        if visible_fields_raw.lower() == "all":
+            self._visible_set: Optional[set] = None  # all visible
+        else:
+            from src.output_settings import _parse_int_list
+            self._visible_set = set(_parse_int_list(visible_fields_raw))
+
+        self._build_ui()
+
+    def _build_ui(self) -> None:
+        top_frame = ttk.Frame(self._win, padding=5)
+        top_frame.pack(fill=tk.X)
+
+        ttk.Label(
+            top_frame,
+            text="Select fields to include in the Excel export:",
+        ).pack(side=tk.LEFT)
+
+        btn_frame = ttk.Frame(top_frame)
+        btn_frame.pack(side=tk.RIGHT)
+        ttk.Button(btn_frame, text="All", command=self._select_all).pack(
+            side=tk.LEFT, padx=2
+        )
+        ttk.Button(btn_frame, text="None", command=self._select_none).pack(
+            side=tk.LEFT, padx=2
+        )
+
+        # Scrollable checkbox list
+        list_frame = ttk.Frame(self._win)
+        list_frame.pack(fill=tk.BOTH, expand=True, padx=5)
+
+        canvas = tk.Canvas(list_frame)
+        scrollbar = ttk.Scrollbar(list_frame, orient=tk.VERTICAL, command=canvas.yview)
+        self._inner_frame = ttk.Frame(canvas)
+
+        self._inner_frame.bind(
+            "<Configure>",
+            lambda e: canvas.configure(scrollregion=canvas.bbox("all")),
+        )
+        canvas.create_window((0, 0), window=self._inner_frame, anchor="nw")
+        canvas.configure(yscrollcommand=scrollbar.set)
+
+        canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+        self._vars: List[tk.BooleanVar] = []
+        for field_def in self._fields_schema:
+            field_num = field_def["field"]
+            field_name = field_def.get("name") or f"Field_{field_num}"
+            var = tk.BooleanVar(
+                value=(self._visible_set is None or field_num in self._visible_set)
+            )
+            self._vars.append(var)
+            ttk.Checkbutton(
+                self._inner_frame,
+                text=f"{field_num}. {field_name}",
+                variable=var,
+            ).pack(anchor=tk.W)
+
+        # Save / Cancel buttons
+        bottom_frame = ttk.Frame(self._win, padding=5)
+        bottom_frame.pack(fill=tk.X)
+        ttk.Button(bottom_frame, text="Save", command=self._on_save).pack(
+            side=tk.RIGHT, padx=5
+        )
+        ttk.Button(bottom_frame, text="Cancel", command=self._win.destroy).pack(
+            side=tk.RIGHT
+        )
+
+    def _select_all(self) -> None:
+        for var in self._vars:
+            var.set(True)
+
+    def _select_none(self) -> None:
+        for var in self._vars:
+            var.set(False)
+
+    def _on_save(self) -> None:
+        selected = []
+        all_selected = True
+        for i, var in enumerate(self._vars):
+            if var.get():
+                selected.append(str(self._fields_schema[i]["field"]))
+            else:
+                all_selected = False
+
+        if all_selected:
+            visible_value = "all"
+        else:
+            visible_value = ",".join(selected)
+
+        _, current_order = read_output_settings(self._config_path)
+        write_output_settings(self._config_path, visible_value, current_order)
+
+        if self._log_callback:
+            if all_selected:
+                self._log_callback("Field visibility: all fields visible.")
+            else:
+                self._log_callback(
+                    f"Field visibility: {len(selected)} of "
+                    f"{len(self._fields_schema)} fields selected."
+                )
+        self._win.destroy()
+
+
+# ── Field Ordering Dialog ─────────────────────────────────────────────
+
+
+class _FieldOrderingDialog:
+    """Drag-and-drop style dialog for reordering fields in the Excel output.
+
+    Uses Up/Down buttons to move fields.  Saves the order to
+    ``[output] custom_order`` in config.ini.
+    """
+
+    def __init__(
+        self,
+        parent: tk.Tk,
+        fields_schema: List,
+        config_path: str,
+        custom_order_raw: str,
+        log_callback: Optional[Callable] = None,
+    ) -> None:
+        self._config_path = config_path
+        self._fields_schema = fields_schema
+        self._log_callback = log_callback
+
+        self._win = tk.Toplevel(parent)
+        self._win.title("Field Ordering")
+        self._win.geometry("500x600")
+        self._win.transient(parent)
+        self._win.grab_set()
+
+        # Build initial order
+        all_field_nums = [f["field"] for f in fields_schema]
+        if custom_order_raw.lower() != "default":
+            from src.output_settings import _parse_int_list
+            parsed = _parse_int_list(custom_order_raw)
+            valid = set(all_field_nums)
+            order = [f for f in parsed if f in valid]
+            listed = set(order)
+            for f in all_field_nums:
+                if f not in listed:
+                    order.append(f)
+            self._order = order
+        else:
+            self._order = list(all_field_nums)
+
+        # Map field number → name for display
+        self._name_map = {}
+        for f in fields_schema:
+            name = f.get("name") or f"Field_{f['field']}"
+            self._name_map[f["field"]] = name
+
+        self._build_ui()
+
+    def _build_ui(self) -> None:
+        top_frame = ttk.Frame(self._win, padding=5)
+        top_frame.pack(fill=tk.X)
+        ttk.Label(
+            top_frame,
+            text="Reorder fields using the buttons. Top = first column.",
+        ).pack(side=tk.LEFT)
+
+        # Listbox with scrollbar
+        list_frame = ttk.Frame(self._win)
+        list_frame.pack(fill=tk.BOTH, expand=True, padx=5)
+
+        self._listbox = tk.Listbox(list_frame, selectmode=tk.SINGLE)
+        scrollbar = ttk.Scrollbar(
+            list_frame, orient=tk.VERTICAL, command=self._listbox.yview
+        )
+        self._listbox.configure(yscrollcommand=scrollbar.set)
+        self._listbox.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+        self._refresh_listbox()
+
+        # Move buttons
+        btn_frame = ttk.Frame(self._win, padding=5)
+        btn_frame.pack(fill=tk.X)
+        ttk.Button(btn_frame, text="▲ Move Up", command=self._move_up).pack(
+            side=tk.LEFT, padx=5
+        )
+        ttk.Button(btn_frame, text="▼ Move Down", command=self._move_down).pack(
+            side=tk.LEFT, padx=5
+        )
+        ttk.Button(btn_frame, text="Reset", command=self._reset_order).pack(
+            side=tk.LEFT, padx=5
+        )
+
+        # Save / Cancel
+        bottom_frame = ttk.Frame(self._win, padding=5)
+        bottom_frame.pack(fill=tk.X)
+        ttk.Button(bottom_frame, text="Save", command=self._on_save).pack(
+            side=tk.RIGHT, padx=5
+        )
+        ttk.Button(bottom_frame, text="Cancel", command=self._win.destroy).pack(
+            side=tk.RIGHT
+        )
+
+    def _refresh_listbox(self) -> None:
+        self._listbox.delete(0, tk.END)
+        for field_num in self._order:
+            name = self._name_map.get(field_num, f"Field_{field_num}")
+            self._listbox.insert(tk.END, f"{field_num}. {name}")
+
+    def _move_up(self) -> None:
+        sel = self._listbox.curselection()
+        if not sel or sel[0] == 0:
+            return
+        idx = sel[0]
+        self._order[idx - 1], self._order[idx] = (
+            self._order[idx], self._order[idx - 1]
+        )
+        self._refresh_listbox()
+        self._listbox.selection_set(idx - 1)
+        self._listbox.see(idx - 1)
+
+    def _move_down(self) -> None:
+        sel = self._listbox.curselection()
+        if not sel or sel[0] >= len(self._order) - 1:
+            return
+        idx = sel[0]
+        self._order[idx + 1], self._order[idx] = (
+            self._order[idx], self._order[idx + 1]
+        )
+        self._refresh_listbox()
+        self._listbox.selection_set(idx + 1)
+        self._listbox.see(idx + 1)
+
+    def _reset_order(self) -> None:
+        self._order = [f["field"] for f in self._fields_schema]
+        self._refresh_listbox()
+
+    def _on_save(self) -> None:
+        default_order = [f["field"] for f in self._fields_schema]
+        if self._order == default_order:
+            order_value = "default"
+        else:
+            order_value = ",".join(str(f) for f in self._order)
+
+        current_visible, _ = read_output_settings(self._config_path)
+        write_output_settings(self._config_path, current_visible, order_value)
+
+        if self._log_callback:
+            if order_value == "default":
+                self._log_callback("Field ordering: using default order.")
+            else:
+                self._log_callback("Field ordering: custom order saved.")
+        self._win.destroy()
