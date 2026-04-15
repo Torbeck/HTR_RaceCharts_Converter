@@ -13,7 +13,7 @@ import threading
 import tkinter as tk
 import webbrowser
 from tkinter import filedialog, messagebox, ttk
-from typing import List, Optional
+from typing import Callable, List, Optional
 
 from src.processor import process_files
 from src.utils.file_utils import collect_txt_files, validate_file_extension
@@ -608,7 +608,7 @@ class _FieldVisibilityDialog:
         fields_schema: List,
         config_path: str,
         visible_fields_raw: str,
-        log_callback: Optional[callable] = None,
+        log_callback: Optional[Callable] = None,
     ) -> None:
         self._config_path = config_path
         self._fields_schema = fields_schema
@@ -741,7 +741,7 @@ class _FieldOrderingDialog:
         fields_schema: List,
         config_path: str,
         custom_order_raw: str,
-        log_callback: Optional[callable] = None,
+        log_callback: Optional[Callable] = None,
     ) -> None:
         self._config_path = config_path
         self._fields_schema = fields_schema
