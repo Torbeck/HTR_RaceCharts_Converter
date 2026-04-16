@@ -207,19 +207,10 @@ The indicator in the Options area shows current status:
 
 ### 7) Screenshots (placeholders)
 
-Add screenshots at these paths:
+![Screenshot 1](url_to_screenshot_1)
+![Screenshot 2](url_to_screenshot_2)
+![Screenshot 3](url_to_screenshot_3)
 
-- `assets/screenshots/main-window.png` — main HTR Chart Processor window (file list, options, output directory, log panel)
-- `assets/screenshots/field-visibility.png` — **Field Visibility** dialog with field checkbox list
-- `assets/screenshots/field-ordering.png` — **Field Ordering** dialog showing reorder controls
-
-Suggested README embeds:
-
-```markdown
-![Main Window](assets/screenshots/main-window.png)
-![Field Visibility Dialog](assets/screenshots/field-visibility.png)
-![Field Ordering Dialog](assets/screenshots/field-ordering.png)
-```
 
 ### About
 
