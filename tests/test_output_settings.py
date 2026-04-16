@@ -11,7 +11,9 @@ from src.output_settings import (
     _parse_int_list,
     apply_field_filter,
     is_customized,
+    output_is_customized,
     read_output_settings,
+    reset_output_settings,
     resolve_field_indices,
     write_field_list,
     write_output_settings,
@@ -208,6 +210,93 @@ class TestIsCustomized(unittest.TestCase):
 
     def test_non_empty_list_means_customized(self):
         self.assertTrue(is_customized([0, 2, 4]))
+
+
+class TestOutputIsCustomized(unittest.TestCase):
+    """Verify output_is_customized reads config and detects non-defaults."""
+
+    def test_defaults_not_customized(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            config_path = os.path.join(tmpdir, "config.ini")
+            write_output_settings(config_path, "all", "default")
+            self.assertFalse(output_is_customized(config_path))
+
+    def test_custom_visibility_detected(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            config_path = os.path.join(tmpdir, "config.ini")
+            write_output_settings(config_path, "1,2,3", "default")
+            self.assertTrue(output_is_customized(config_path))
+
+    def test_custom_order_detected(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            config_path = os.path.join(tmpdir, "config.ini")
+            write_output_settings(config_path, "all", "3,2,1")
+            self.assertTrue(output_is_customized(config_path))
+
+    def test_both_custom_detected(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            config_path = os.path.join(tmpdir, "config.ini")
+            write_output_settings(config_path, "1,3", "3,1")
+            self.assertTrue(output_is_customized(config_path))
+
+    def test_missing_file_not_customized(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            config_path = os.path.join(tmpdir, "nonexistent.ini")
+            self.assertFalse(output_is_customized(config_path))
+
+
+class TestResetOutputSettings(unittest.TestCase):
+    """Verify reset_output_settings restores defaults."""
+
+    def test_reset_from_custom(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            config_path = os.path.join(tmpdir, "config.ini")
+            write_output_settings(config_path, "1,2,3", "3,2,1")
+            self.assertTrue(output_is_customized(config_path))
+
+            reset_output_settings(config_path)
+
+            visible, order = read_output_settings(config_path)
+            self.assertEqual(visible, DEFAULT_VISIBLE_FIELDS)
+            self.assertEqual(order, DEFAULT_CUSTOM_ORDER)
+            self.assertFalse(output_is_customized(config_path))
+
+    def test_reset_preserves_other_sections(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            config_path = os.path.join(tmpdir, "config.ini")
+            parser = configparser.ConfigParser()
+            parser.add_section("paths")
+            parser.set("paths", "last_output", "/my/path")
+            parser.add_section("output")
+            parser.set("output", "visible_fields", "1,2")
+            parser.set("output", "custom_order", "2,1")
+            with open(config_path, "w", encoding="utf-8") as f:
+                parser.write(f)
+
+            reset_output_settings(config_path)
+
+            parser2 = configparser.ConfigParser()
+            parser2.read(config_path, encoding="utf-8")
+            self.assertEqual(parser2.get("paths", "last_output"), "/my/path")
+            self.assertEqual(
+                parser2.get("output", "visible_fields"),
+                DEFAULT_VISIBLE_FIELDS,
+            )
+            self.assertEqual(
+                parser2.get("output", "custom_order"),
+                DEFAULT_CUSTOM_ORDER,
+            )
+
+    def test_reset_when_already_default(self):
+        """Resetting defaults should be a no-op."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            config_path = os.path.join(tmpdir, "config.ini")
+            write_output_settings(config_path, "all", "default")
+            reset_output_settings(config_path)
+
+            visible, order = read_output_settings(config_path)
+            self.assertEqual(visible, DEFAULT_VISIBLE_FIELDS)
+            self.assertEqual(order, DEFAULT_CUSTOM_ORDER)
 
 
 class TestWriteFieldList(unittest.TestCase):
