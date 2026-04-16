@@ -276,6 +276,7 @@ Customized output settings are stored in `config.ini` under `[output]`:
 | `custom_order` | `default` | Column order |
 
 - Custom values for both keys are comma-separated field numbers using 1-based indexing, for example: `1,2,3,10`.
+- Field numbers map to the canonical schema order in `scheme/fields.json` (also shown in the Field Visibility/Field Ordering dialogs).
 - High-level algorithm:
   1. Build the order from `custom_order` (or canonical default order when `default`).
   2. Build the visible set from `visible_fields` (or all fields when `all`).
@@ -296,7 +297,7 @@ Customized output settings are stored in `config.ini` under `[output]`:
 
 - Customized visibility/order is applied to **Excel output**.
 - **CSV output remains the full canonical 244-column layout**, even when customization is enabled.
-- When customization is enabled, CSV filename still uses the `_customized` suffix for consistency with the paired Excel file.
+- When customization is enabled, CSV filename still uses the `_customized` suffix so all outputs from the same run share a consistent base name.
 
 ### Default Configuration
 
