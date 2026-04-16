@@ -207,9 +207,9 @@ The indicator in the Options area shows current status:
 
 ### 7) Screenshots (placeholders)
 
-![Screenshot 1](url_to_screenshot_1)
-![Screenshot 2](url_to_screenshot_2)
-![Screenshot 3](url_to_screenshot_3)
+![Main Window](assets/screenshots/main-window.png)
+![Field Visibility Dialog](assets/screenshots/field-visibility.png)
+![Field Ordering Dialog](assets/screenshots/field-ordering.png)
 
 
 ### About
