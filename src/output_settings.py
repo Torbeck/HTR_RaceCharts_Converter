@@ -14,6 +14,7 @@ This module never modifies fields.json.  All user preferences are stored
 exclusively in config.ini.
 """
 
+import os
 import re
 from typing import List, Optional, Tuple
 
@@ -184,3 +185,49 @@ def apply_field_filter(
     if column_formats is not None:
         filtered_formats = [column_formats[i] for i in indices]
     return filtered_headers, filtered_rows, filtered_formats
+
+
+# ── Customized-output helpers ─────────────────────────────────────────
+
+def is_customized(field_indices: Optional[List[int]]) -> bool:
+    """Return ``True`` when the output is customized.
+
+    A non-``None`` *field_indices* value means the user has changed field
+    visibility, ordering, or both.
+    """
+    return field_indices is not None
+
+
+def write_field_list(
+    output_dir: str,
+    output_name: str,
+    headers: List[str],
+    field_indices: List[int],
+) -> str:
+    """Write a companion ``.txt`` file listing the customized fields.
+
+    Each line shows the position, original field number, and field name
+    so users can quickly verify the structure of their customized output.
+
+    Args:
+        output_dir: Directory for the output file.
+        output_name: Base filename (should already include
+            ``_customized`` suffix).
+        headers: Full list of column headers (canonical order).
+        field_indices: 0-based column indices in the desired order.
+
+    Returns:
+        The absolute path to the written ``.txt`` file.
+    """
+    txt_path = os.path.join(output_dir, f"{output_name}.txt")
+    lines: List[str] = ["Customized Output Fields", "=" * 24, ""]
+    for position, idx in enumerate(field_indices, start=1):
+        field_num = idx + 1  # convert back to 1-based
+        name = headers[idx]
+        lines.append(f"{position}. {name} (Field #{field_num})")
+    lines.append("")  # trailing newline
+
+    with open(txt_path, mode="w", encoding="utf-8") as f:
+        f.write("\n".join(lines))
+
+    return txt_path
