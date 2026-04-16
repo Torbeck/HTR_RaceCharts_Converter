@@ -2,8 +2,6 @@
 
 <img src="assets/icons/master/htr_racecharts_converter_1024.png" width="128" alt="HTR Race Charts Converter">
 
-Version is shown in **Help → About** and sourced from `src/version.py` (`__version__`).
-
 **Development Team**
 - **Lead Programmer:** Ken Torbeck ([ktorbeck@gmail.com](mailto:ktorbeck@gmail.com))
 - **Researcher:** Dr. Russ Winterbotham from The Horse Ranker Project
