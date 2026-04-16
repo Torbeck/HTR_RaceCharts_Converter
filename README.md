@@ -209,9 +209,9 @@ The indicator in the Options area shows current status:
 
 Add screenshots at these paths:
 
-- `assets/screenshots/main-window.png`
-- `assets/screenshots/field-visibility.png`
-- `assets/screenshots/field-ordering.png`
+- `assets/screenshots/main-window.png` — main HTR Chart Processor window (file list, options, output directory, log panel)
+- `assets/screenshots/field-visibility.png` — **Field Visibility** dialog with field checkbox list
+- `assets/screenshots/field-ordering.png` — **Field Ordering** dialog showing reorder controls
 
 Suggested README embeds:
 
