@@ -25,8 +25,10 @@ from src.schema_loader import (
 )
 from src.output_settings import (
     apply_field_filter,
+    is_customized,
     read_output_settings,
     resolve_field_indices,
+    write_field_list,
 )
 from src.translator import apply_lookup_translations, get_headers
 from src.validator import validate_distances, validate_lookup_codes, validate_rows
@@ -231,6 +233,11 @@ def _translate_and_export(
     apply_lookup_translations(translated_rows, fields_schema, lookup_table,
                               progress=progress)
 
+    # Determine if this is a customized export and adjust the output name
+    customized = is_customized(field_indices)
+    if customized:
+        output_name = f"{output_name}_customized"
+
     # Export CSV (always uses the full canonical 244-column layout)
     csv_path = os.path.join(output_dir, f"{output_name}.csv")
     progress(f"Exporting CSV: {csv_path}")
@@ -240,11 +247,17 @@ def _translate_and_export(
     excel_headers = headers
     excel_rows = translated_rows
     excel_formats = column_formats
-    if field_indices is not None:
+    if customized:
         progress(f"Applying output field filter for {output_name}...")
         excel_headers, excel_rows, excel_formats = apply_field_filter(
             headers, translated_rows, column_formats, field_indices,
         )
+
+        # Generate companion field list file
+        txt_path = write_field_list(
+            output_dir, output_name, headers, field_indices,
+        )
+        progress(f"Field list written: {txt_path}")
 
     # Export Excel
     xlsx_path = os.path.join(output_dir, f"{output_name}.xlsx")

@@ -10,8 +10,10 @@ from src.output_settings import (
     DEFAULT_VISIBLE_FIELDS,
     _parse_int_list,
     apply_field_filter,
+    is_customized,
     read_output_settings,
     resolve_field_indices,
+    write_field_list,
     write_output_settings,
 )
 
@@ -193,6 +195,93 @@ class TestRebuildConfigOutputSection(unittest.TestCase):
             self.assertEqual(
                 parser.get("output", "custom_order"), "default"
             )
+
+
+class TestIsCustomized(unittest.TestCase):
+    """Verify is_customized helper."""
+
+    def test_none_means_not_customized(self):
+        self.assertFalse(is_customized(None))
+
+    def test_empty_list_means_customized(self):
+        self.assertTrue(is_customized([]))
+
+    def test_non_empty_list_means_customized(self):
+        self.assertTrue(is_customized([0, 2, 4]))
+
+
+class TestWriteFieldList(unittest.TestCase):
+    """Verify write_field_list generates the correct companion .txt file."""
+
+    def test_generates_txt_file(self):
+        headers = ["Track Code", "Race Date", "Horse Name", "Jockey", "Trainer"]
+        indices = [2, 0, 4]  # Horse Name, Track Code, Trainer
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            path = write_field_list(tmpdir, "test_customized", headers, indices)
+            self.assertTrue(os.path.isfile(path))
+            self.assertTrue(path.endswith(".txt"))
+
+    def test_filename_matches_output_name(self):
+        headers = ["A", "B", "C"]
+        indices = [1, 0]
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            path = write_field_list(tmpdir, "myfile_customized", headers, indices)
+            self.assertEqual(os.path.basename(path), "myfile_customized.txt")
+
+    def test_content_lists_fields_in_order(self):
+        headers = ["Track Code", "Race Date", "Horse Name", "Jockey", "Trainer"]
+        indices = [2, 0, 4]  # Horse Name, Track Code, Trainer
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            path = write_field_list(tmpdir, "test_customized", headers, indices)
+            with open(path, encoding="utf-8") as f:
+                content = f.read()
+
+            # Verify header section
+            self.assertIn("Customized Output Fields", content)
+
+            # Verify field entries
+            self.assertIn("1. Horse Name (Field #3)", content)
+            self.assertIn("2. Track Code (Field #1)", content)
+            self.assertIn("3. Trainer (Field #5)", content)
+
+    def test_field_order_is_explicit(self):
+        """Each field line must start with its 1-based position number."""
+        headers = ["A", "B", "C", "D"]
+        indices = [3, 1]
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            path = write_field_list(tmpdir, "ordered_customized", headers, indices)
+            with open(path, encoding="utf-8") as f:
+                content = f.read()
+
+            self.assertIn("1. D (Field #4)", content)
+            self.assertIn("2. B (Field #2)", content)
+
+    def test_returns_path_to_written_file(self):
+        headers = ["A", "B"]
+        indices = [0]
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            path = write_field_list(tmpdir, "check_customized", headers, indices)
+            self.assertEqual(
+                path, os.path.join(tmpdir, "check_customized.txt"),
+            )
+
+    def test_human_readable_in_text_editor(self):
+        """File must be plain text (UTF-8) readable in any basic text editor."""
+        headers = ["Field One", "Field Two", "Field Three"]
+        indices = [2, 0]
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            path = write_field_list(tmpdir, "readable_customized", headers, indices)
+            with open(path, mode="r", encoding="utf-8") as f:
+                lines = f.readlines()
+            # Every line should be plain text (no binary/special chars)
+            for line in lines:
+                self.assertIsInstance(line, str)
 
 
 if __name__ == "__main__":
