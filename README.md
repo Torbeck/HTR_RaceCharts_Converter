@@ -275,7 +275,7 @@ Customized output settings are stored in `config.ini` under `[output]`:
 | `visible_fields` | `all` | Which fields are included |
 | `custom_order` | `default` | Column order |
 
-- Custom values for both keys are comma-separated **1-based field numbers**, for example: `1,2,3,10`.
+- Custom values for both keys are comma-separated field numbers using 1-based indexing, for example: `1,2,3,10`.
 - High-level algorithm:
   1. Build the order from `custom_order` (or canonical default order when `default`).
   2. Build the visible set from `visible_fields` (or all fields when `all`).
