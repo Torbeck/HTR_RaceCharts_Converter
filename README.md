@@ -205,7 +205,7 @@ The indicator in the Options area shows current status:
 - **Output: Default**
 - **Output: Customized**
 
-### 7) Screenshots (placeholders)
+### 7) Screenshots
 
 ![Main Window](assets/screenshots/main-window.png)
 ![Field Visibility Dialog](assets/screenshots/field-visibility.png)
