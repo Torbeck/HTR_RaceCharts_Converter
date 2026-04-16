@@ -2,7 +2,7 @@
 
 <img src="assets/icons/master/htr_racecharts_converter_1024.png" width="128" alt="HTR Race Charts Converter">
 
-Version: 2.0.0
+Version is shown in **Help → About** and sourced from `src/version.py` (`__version__`).
 
 **Development Team**
 - **Lead Programmer:** Ken Torbeck ([ktorbeck@gmail.com](mailto:ktorbeck@gmail.com))
@@ -56,7 +56,7 @@ It is built for **handicappers, researchers, and data analysts** who work with H
 project_root/
 │
 ├── assets/
-│   └── icons/
+│   ├── icons/
 │       ├── apps/                ← application icons (32–512 px, for taskbar and About dialog)
 │       │   ├── htr_racecharts_converter_32.png
 │       │   ├── htr_racecharts_converter_64.png
@@ -75,6 +75,7 @@ project_root/
 │           ├── schema_editor_1024.png
 │           ├── schema_editor_2048.png
 │           └── schema_editor_4096.png
+│   └── screenshots/             ← README screenshot placeholders (add images here)
 │
 ├── src/
 │   ├── main.py              ← entry point; launches the GUI
@@ -153,57 +154,104 @@ project_root/
 
 ---
 
-## Using the Program
+## GUI Guide
 
-### Step 1 — Launch
+### 1) Launch the app
 
-Run `python src/main.py`. The HTR Chart Processor window will appear.
+Run:
 
-### Step 2 — Add Input Files
+```bash
+python src/main.py
+```
 
-You have three ways to add HTR files:
+The **HTR Chart Processor** window opens.
 
-- **Add Files…** — Click this button to open a file picker. Select one or more `.TXT` files.
-- **Add Folder…** — Click this button to select a folder. All `.TXT` files inside it will be added automatically.
-- **Drag and Drop** — Drag files or folders directly onto the application window (requires tkinterdnd2).
+### 2) Add input files
 
-Added files appear in the file list. Use **Remove Selected** or **Clear All** to manage the list.
+You can load HTR `.TXT` files using:
 
-### Step 3 — Choose Output Options
+- **Add Files...** (pick one or more files)
+- **Add Folder...** (loads all `.TXT` files in that folder)
+- **Drag and drop** files/folders into the app window (if `tkinterdnd2` is installed)
 
-- **Merge all files into one output** — Check this box to combine all loaded files into a single merged output. Leave it unchecked to produce separate output files for each input file. This checkbox is only enabled when two or more files are loaded.
-- **Output Directory** — Click **Browse…** to choose where the output files will be saved. The program remembers your last selection. If no directory has been chosen yet, it is automatically set to the folder of the first input file you add.
+Use **Remove Selected** or **Clear All** to manage the file list.
 
-### Step 4 — Process
+### 3) Choose output directory
 
-Click **Start Processing**. Processing runs in the background so the window stays responsive. Progress messages and any errors appear in the Log panel at the bottom of the window.
+- Click **Browse...** in **Output Directory**.
+- The app remembers your last used output folder in `config.ini` (`[paths] last_output`).
+- If no output directory is set yet, the app auto-fills it to the folder of the first input file you add.
 
-When processing completes, you will find your output files (`.csv` and `.xlsx`) in the chosen output directory.
+### 4) Merge behavior
+
+- **Merge all files into one output** is only enabled when 2+ files are loaded.
+- With merge on, all loaded files are combined into one output.
+- With merge off, each input file is exported separately.
+
+### 5) Start Processing + Log panel
+
+- Click **Start Processing** to run conversion.
+- Processing runs in a background thread so the GUI stays responsive.
+- Progress and errors are written to the **Log** panel.
+
+### 6) Menus and output customization controls
+
+- **Tools → Rebuild config.ini**: reset configuration to defaults (preserves last output path).
+- **Output → Field Visibility...**: choose which fields appear in customized output.
+- **Output → Field Ordering...**: reorder fields for customized output.
+- **Reset to Default** button (Options area): reset output customization to default behavior.
+
+The indicator in the Options area shows current status:
+- **Output: Default**
+- **Output: Customized**
+
+### 7) Screenshots (placeholders)
+
+Add screenshots at these paths:
+
+- `assets/screenshots/main-window.png` — main HTR Chart Processor window (file list, options, output directory, log panel)
+- `assets/screenshots/field-visibility.png` — **Field Visibility** dialog with field checkbox list
+- `assets/screenshots/field-ordering.png` — **Field Ordering** dialog showing reorder controls
+
+Suggested README embeds:
+
+```markdown
+![Main Window](assets/screenshots/main-window.png)
+![Field Visibility Dialog](assets/screenshots/field-visibility.png)
+![Field Ordering Dialog](assets/screenshots/field-ordering.png)
+```
 
 ### About
 
-Go to **Help → About** to view the version number, development team credits, license information, and a link to the project repository.
+Go to **Help → About** to view version, credits, license, and repository link.
 
 ---
 
 ## Configuration (config.ini)
 
-The `config.ini` file controls Excel formatting for each of the three workbook sheets. It is located in the project root folder.
+Most users should use the GUI for day-to-day settings:
 
-> **Note:** `config.ini` is not included in the repository (it is listed in `.gitignore`). A template file named `config.example.ini` is provided in the project root. To customize settings, copy or rename `config.example.ini` to `config.ini`. If `config.ini` does not exist when the program starts, it will be created automatically with default values.
+- **Output directory** (Browse button)
+- **Field Visibility** dialog
+- **Field Ordering** dialog
+- **Reset to Default** for output customization
 
-### Sections
+Use direct `config.ini` editing mainly for advanced/manual settings (especially Excel formatting options not exposed in the GUI).
 
-The file contains one section for each Excel sheet, plus a paths section:
+> **Important:** `config.ini` is not included in the repository (`.gitignore`). Copy `config.example.ini` to `config.ini` before manual editing. If `config.ini` does not exist at startup, the app can create one with defaults.
 
-| Section | Controls formatting for |
-|---|---|
-| `[race_data]` | Sheet 1 — Processed Race Data |
-| `[points_call]` | Sheet 2 — Points of Call by Distance |
-| `[fractional_times]` | Sheet 3 — Fractional Times by Distance |
-| `[paths]` | Remembered output directory (managed automatically) |
+### GUI-driven vs manual-only settings
 
-### Settings (per sheet section)
+| Section / Key | Preferred method | Notes |
+|---|---|---|
+| `[paths] last_output` | GUI | Set by **Output Directory → Browse...** and saved after successful processing. |
+| `[output] visible_fields` | GUI | Managed by **Output → Field Visibility...** |
+| `[output] custom_order` | GUI | Managed by **Output → Field Ordering...** |
+| `[race_data]`, `[points_call]`, `[fractional_times]` formatting keys | Manual `config.ini` edit | Not exposed in GUI. Keep these as advanced settings. |
+
+### Manual-only Excel formatting settings (not in GUI)
+
+These remain manual `config.ini` options:
 
 | Key | Values | Description |
 |---|---|---|
@@ -212,11 +260,44 @@ The file contains one section for each Excel sheet, plus a paths section:
 | `auto_size_columns` | `yes` / `no` | Whether column widths are automatically adjusted to fit content. |
 | `freeze_header` | `yes` / `no` | Whether the header row stays visible when scrolling down. |
 
-### Settings (paths section)
+### Paths section
 
 | Key | Values | Description |
 |---|---|---|
 | `last_output` | `Default` or a folder path | The output directory used for the next export. When set to `Default`, output files are saved to the same folder as the input file. After you choose a different output directory, this value is automatically updated to that path. |
+
+### Customized Output (Field Visibility & Field Ordering)
+
+Customized output settings are stored in `config.ini` under `[output]`:
+
+| Key | Default | Meaning |
+|---|---|---|
+| `visible_fields` | `all` | Which fields are included |
+| `custom_order` | `default` | Column order |
+
+- Custom values for both keys are comma-separated field numbers using 1-based indexing, for example: `1,2,3,10`.
+- Field numbers map to the canonical schema order in `scheme/fields.json` (also shown in the Field Visibility/Field Ordering dialogs).
+- High-level algorithm:
+  1. Build the order from `custom_order` (or canonical default order when `default`).
+  2. Build the visible set from `visible_fields` (or all fields when `all`).
+  3. Final output fields = ordered list intersected with visible set.
+
+#### Output files when customized
+
+- Base output name gets a `_customized` suffix.
+  - Example: `SA0322F_customized.xlsx`, `SA0322F_customized.csv`
+- A companion text file is generated:
+  - `*_customized.txt`
+  - Lists each chosen field with:
+    - output position
+    - field name
+    - original field number
+
+#### Scope: Excel vs CSV
+
+- Customized visibility/order is applied to **Excel output**.
+- **CSV output remains the full canonical 244-column layout**, even when customization is enabled.
+- When customization is enabled, CSV filename still uses the `_customized` suffix so all outputs from the same run share a consistent base name.
 
 ### Default Configuration
 
@@ -241,6 +322,10 @@ freeze_header = yes
 
 [paths]
 last_output = Default
+
+[output]
+visible_fields = all
+custom_order = default
 ```
 
 ### Invalid Style Names
@@ -252,7 +337,7 @@ If you enter a table style name that Excel does not recognize, the program will:
 
 ### Rebuilding the Config
 
-If `config.ini` becomes corrupted or you want to start fresh, go to **Tools → Rebuild config.ini** in the menu bar. This resets all formatting settings to their defaults while preserving your last output directory.
+If `config.ini` becomes corrupted or you want to start fresh, go to **Tools → Rebuild config.ini** in the menu bar. This resets Excel formatting and output customization settings to defaults while preserving your last output directory.
 
 ---
 
@@ -269,7 +354,11 @@ The program accepts `.TXT` files exported from HTR's Race Chart data product.
 
 ## Output Files
 
-For each input file (or merged group), the program produces two output files:
+For each input file (or merged group), the program produces:
+
+- A CSV file (`.csv`)
+- An Excel workbook (`.xlsx`)
+- If output customization is active, a companion field list text file (`*_customized.txt`)
 
 ### CSV File (`.csv`)
 
