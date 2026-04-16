@@ -198,6 +198,34 @@ def is_customized(field_indices: Optional[List[int]]) -> bool:
     return field_indices is not None
 
 
+def output_is_customized(config_path: str) -> bool:
+    """Return ``True`` when config.ini has non-default output settings.
+
+    Reads the ``[output]`` section and checks whether either
+    ``visible_fields`` or ``custom_order`` differ from their defaults.
+
+    Args:
+        config_path: Absolute path to config.ini.
+    """
+    visible, order = read_output_settings(config_path)
+    return (visible.lower() != DEFAULT_VISIBLE_FIELDS.lower()
+            or order.lower() != DEFAULT_CUSTOM_ORDER.lower())
+
+
+def reset_output_settings(config_path: str) -> None:
+    """Reset ``[output]`` settings to their defaults.
+
+    Sets ``visible_fields`` to ``"all"`` and ``custom_order`` to
+    ``"default"`` in config.ini, preserving all other sections.
+
+    Args:
+        config_path: Absolute path to config.ini.
+    """
+    write_output_settings(
+        config_path, DEFAULT_VISIBLE_FIELDS, DEFAULT_CUSTOM_ORDER,
+    )
+
+
 def write_field_list(
     output_dir: str,
     output_name: str,

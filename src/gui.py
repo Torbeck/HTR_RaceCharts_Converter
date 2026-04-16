@@ -19,7 +19,9 @@ from src.processor import process_files
 from src.utils.file_utils import collect_txt_files, validate_file_extension
 from src.utils.ini_utils import read_last_output, rebuild_config
 from src.output_settings import (
+    output_is_customized,
     read_output_settings,
+    reset_output_settings,
     write_output_settings,
 )
 from src.version import __version__
@@ -76,6 +78,8 @@ class HTRApp:
         last_output = read_last_output(config_path)
         if last_output and os.path.isdir(last_output):
             self._output_var.set(last_output)
+
+        self._update_output_indicator()
 
     def run(self) -> None:
         """Start the tkinter main loop."""
@@ -154,6 +158,20 @@ class HTRApp:
         )
         self._merge_check.pack(side=tk.LEFT)
         self._merge_check.state(["disabled"])
+
+        # ── Output Customization Indicator ────────────────────────────
+        self._reset_output_btn = ttk.Button(
+            options_frame,
+            text="Reset to Default",
+            command=self._on_reset_output,
+        )
+        self._reset_output_btn.pack(side=tk.RIGHT, padx=(5, 0))
+
+        self._output_indicator_var = tk.StringVar(value="")
+        self._output_indicator_label = ttk.Label(
+            options_frame, textvariable=self._output_indicator_var,
+        )
+        self._output_indicator_label.pack(side=tk.RIGHT)
 
         # ── Output Directory Section ──────────────────────────────────
         output_frame = ttk.LabelFrame(
@@ -238,6 +256,7 @@ class HTRApp:
         try:
             rebuild_config(self._config_path)
             self._log("config.ini rebuilt with default settings.")
+            self._update_output_indicator()
         except Exception as e:
             self._log(f"ERROR rebuilding config.ini: {e}")
 
@@ -254,6 +273,7 @@ class HTRApp:
         _FieldVisibilityDialog(
             self._root, fields_schema, self._config_path, visible_raw,
             log_callback=self._log,
+            on_save_callback=self._update_output_indicator,
         )
 
     def _on_field_ordering(self) -> None:
@@ -269,7 +289,26 @@ class HTRApp:
         _FieldOrderingDialog(
             self._root, fields_schema, self._config_path, order_raw,
             log_callback=self._log,
+            on_save_callback=self._update_output_indicator,
         )
+
+    def _update_output_indicator(self) -> None:
+        """Refresh the output-customization indicator and reset button."""
+        customized = output_is_customized(self._config_path)
+        if customized:
+            self._output_indicator_var.set("Output: Customized")
+            self._output_indicator_label.configure(foreground="blue")
+            self._reset_output_btn.configure(state=tk.NORMAL)
+        else:
+            self._output_indicator_var.set("Output: Default")
+            self._output_indicator_label.configure(foreground="")
+            self._reset_output_btn.configure(state=tk.DISABLED)
+
+    def _on_reset_output(self) -> None:
+        """Reset output settings to defaults and update the indicator."""
+        reset_output_settings(self._config_path)
+        self._update_output_indicator()
+        self._log("Output settings reset to defaults.")
 
     def _on_about(self) -> None:
         """Show the About dialog."""
@@ -609,10 +648,12 @@ class _FieldVisibilityDialog:
         config_path: str,
         visible_fields_raw: str,
         log_callback: Optional[Callable] = None,
+        on_save_callback: Optional[Callable] = None,
     ) -> None:
         self._config_path = config_path
         self._fields_schema = fields_schema
         self._log_callback = log_callback
+        self._on_save_callback = on_save_callback
 
         self._win = tk.Toplevel(parent)
         self._win.title("Field Visibility")
@@ -722,6 +763,8 @@ class _FieldVisibilityDialog:
                     f"Field visibility: {len(selected)} of "
                     f"{len(self._fields_schema)} fields selected."
                 )
+        if self._on_save_callback:
+            self._on_save_callback()
         self._win.destroy()
 
 
@@ -742,10 +785,12 @@ class _FieldOrderingDialog:
         config_path: str,
         custom_order_raw: str,
         log_callback: Optional[Callable] = None,
+        on_save_callback: Optional[Callable] = None,
     ) -> None:
         self._config_path = config_path
         self._fields_schema = fields_schema
         self._log_callback = log_callback
+        self._on_save_callback = on_save_callback
 
         self._win = tk.Toplevel(parent)
         self._win.title("Field Ordering")
@@ -870,4 +915,6 @@ class _FieldOrderingDialog:
                 self._log_callback("Field ordering: using default order.")
             else:
                 self._log_callback("Field ordering: custom order saved.")
+        if self._on_save_callback:
+            self._on_save_callback()
         self._win.destroy()
