@@ -205,9 +205,14 @@ The indicator in the Options area shows current status:
 
 ### 7) Screenshots
 
-![Main Window](assets/screenshots/main-window.png)
-![Field Visibility Dialog](assets/screenshots/field-visibility.png)
-![Field Ordering Dialog](assets/screenshots/field-ordering.png)
+**Figure 1. Main Window**
+![Main Window](assets/screenshots/main-window.png "Main Window")
+
+**Figure 2. Field Visibility Dialog**
+![Field Visibility Dialog](assets/screenshots/field-visibility.png "Field Visibility Dialog")
+
+**Figure 3. Field Ordering Dialog**
+![Field Ordering Dialog](assets/screenshots/field-ordering.png "Field Ordering Dialog")
 
 
 ### About
