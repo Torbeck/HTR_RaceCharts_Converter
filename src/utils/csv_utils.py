@@ -85,19 +85,20 @@ def write_csv(
         output_path: Path to write the CSV file.
 
     Raises:
-        ValueError: If any row does not have 244 fields.
+        ValueError: If any row length does not match the header count.
         PermissionError: If the file is locked by another application.
     """
     from src.utils.file_utils import check_file_writable
 
     check_file_writable(output_path)
+    expected = len(headers)
     with open(output_path, mode="w", encoding="utf-8", newline="") as f:
         writer = csv.writer(f)
         writer.writerow(headers)
         for i, row in enumerate(rows, start=1):
-            if len(row) != EXPECTED_FIELD_COUNT:
+            if len(row) != expected:
                 raise ValueError(
                     f"Row {i} has {len(row)} fields during CSV export, "
-                    f"expected {EXPECTED_FIELD_COUNT}."
+                    f"expected {expected}."
                 )
             writer.writerow(row)
