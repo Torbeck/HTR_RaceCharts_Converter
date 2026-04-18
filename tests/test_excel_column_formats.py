@@ -508,6 +508,88 @@ class TestCustomizedOutputColumnFormats(unittest.TestCase):
         )
         self.assertEqual(result, datetime.datetime(2024, 4, 5))
 
+    def test_coerce_uses_actual_excel_formats_currency(self):
+        """_coerce_cell_value must handle the actual EXCEL_FORMATS Currency format."""
+        currency_fmt = EXCEL_FORMATS["Currency"]
+        result = _coerce_cell_value("125000.00", currency_fmt)
+        self.assertIsInstance(
+            result, float,
+            f"Currency coercion must work with actual EXCEL_FORMATS['Currency'] "
+            f"format {currency_fmt!r}",
+        )
+        self.assertAlmostEqual(result, 125000.0)
+
+    def test_coerce_uses_actual_excel_formats_currency_with_symbols(self):
+        """Currency coercion must strip '$' and ',' using actual EXCEL_FORMATS."""
+        currency_fmt = EXCEL_FORMATS["Currency"]
+        result = _coerce_cell_value("$1,234.56", currency_fmt)
+        self.assertIsInstance(result, float)
+        self.assertAlmostEqual(result, 1234.56)
+
+    def test_coerce_uses_actual_excel_formats_integer(self):
+        """_coerce_cell_value must handle the actual EXCEL_FORMATS Integer format."""
+        int_fmt = EXCEL_FORMATS["Integer"]
+        result = _coerce_cell_value("42", int_fmt)
+        self.assertIsInstance(
+            result, int,
+            f"Integer coercion must work with actual EXCEL_FORMATS['Integer'] "
+            f"format {int_fmt!r}",
+        )
+        self.assertEqual(result, 42)
+
+    def test_coerce_uses_actual_excel_formats_decimal(self):
+        """_coerce_cell_value must handle the actual EXCEL_FORMATS Decimal format."""
+        dec_fmt = EXCEL_FORMATS["Decimal"]
+        result = _coerce_cell_value("3.14", dec_fmt)
+        self.assertIsInstance(
+            result, float,
+            f"Decimal coercion must work with actual EXCEL_FORMATS['Decimal'] "
+            f"format {dec_fmt!r}",
+        )
+        self.assertAlmostEqual(result, 3.14)
+
+    def test_coerce_uses_actual_excel_formats_text(self):
+        """_coerce_cell_value must handle the actual EXCEL_FORMATS Text format."""
+        text_fmt = EXCEL_FORMATS["Text"]
+        result = _coerce_cell_value("hello", text_fmt)
+        self.assertIsInstance(
+            result, str,
+            f"Text coercion must work with actual EXCEL_FORMATS['Text'] "
+            f"format {text_fmt!r}",
+        )
+        self.assertEqual(result, "hello")
+
+    def test_customized_output_currency_value_and_format(self):
+        """Currency column must be numeric with correct format in customized output."""
+        from src.output_settings import apply_field_filter
+
+        headers = ["Track", "Race Date", "Purse", "Race Number"]
+        rows = [["CD", "04/05/2024", "125000.00", "3"]]
+        col_fmts = ["@", "m/d/yyyy", "$#,##0.00", "0"]
+        # Select Purse and Race Date (indices 2, 1)
+        indices = [2, 1]
+        fh, fr, ff = apply_field_filter(headers, rows, col_fmts, indices)
+
+        build_workbook(
+            processed_headers=fh,
+            processed_rows=fr,
+            points_of_call_headers=["dist"],
+            points_of_call_rows=[["550"]],
+            fractional_times_headers=["dist"],
+            fractional_times_rows=[["550"]],
+            output_path=self._output_path,
+            column_formats=ff,
+        )
+        wb = openpyxl.load_workbook(self._output_path)
+        ws = wb.active
+        # Purse column should have currency format and numeric value
+        self.assertEqual(ws.cell(row=2, column=1).number_format, "$#,##0.00")
+        self.assertIsInstance(ws.cell(row=2, column=1).value, (int, float))
+        self.assertAlmostEqual(ws.cell(row=2, column=1).value, 125000.0)
+        # Race Date column should have date format and datetime value
+        self.assertEqual(ws.cell(row=2, column=2).number_format, "m/d/yyyy")
+        self.assertIsInstance(ws.cell(row=2, column=2).value, datetime.datetime)
+
 
 class TestExcelFormatsSourcedFromSchemaLoader(unittest.TestCase):
     """Verify EXCEL_FORMATS and VALID_TYPES come from src.schema_loader."""
