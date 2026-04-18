@@ -147,6 +147,91 @@ project_root/
    ```powershell
    python src/main.py
    ```
+
+### macOS
+
+> **Support note:** macOS is not a primary supported platform for this project. These steps are provided as best-effort guidance.
+
+1. Install Python 3.10+ from [python.org](https://www.python.org/downloads/macos/).  
+   Using the python.org installer is recommended on macOS to avoid common Tkinter issues.
+
+2. Open **Terminal** in the project folder, then create and activate a virtual environment:
+
+   ```bash
+   python3 -m venv .venv
+   source .venv/bin/activate
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   python -m pip install -r requirements.txt
+   ```
+
+   If `tkinterdnd2` fails to install, you can install only `openpyxl` and continue without drag-and-drop:
+
+   ```bash
+   python -m pip install openpyxl
+   ```
+
+   The app still works using **Add Files...** and **Add Folder...**.
+
+4. Run the app:
+
+   ```bash
+   python src/main.py
+   ```
+
+### Linux
+
+> **Support note:** Linux is not a primary supported platform for this project. These steps are provided as best-effort guidance.
+
+1. Install Python 3.10+ and create a virtual environment:
+
+   ```bash
+   python3 --version
+   python3 -m venv .venv
+   source .venv/bin/activate
+   ```
+
+2. Install the system Tkinter package for your distro (required for GUI):
+
+   - Debian/Ubuntu:
+     ```bash
+     sudo apt-get update
+     sudo apt-get install python3-tk
+     ```
+   - Fedora:
+     ```bash
+     sudo dnf install python3-tkinter
+     ```
+   - Arch:
+     ```bash
+     sudo pacman -S tk
+     ```
+
+3. Install dependencies:
+
+   ```bash
+   python -m pip install -r requirements-linux.txt
+   ```
+
+4. (Optional) Enable drag-and-drop support:
+
+   ```bash
+   python -m pip install tkinterdnd2
+   ```
+
+5. Run the app:
+
+   ```bash
+   python src/main.py
+   ```
+
+#### Linux GUI requirements
+- This is a Tkinter desktop app and needs a graphical session (`$DISPLAY` set).
+- Headless servers, WSL without an X server, or SSH sessions without X forwarding cannot launch the GUI.
+
 ---
 
 ## GUI Guide
