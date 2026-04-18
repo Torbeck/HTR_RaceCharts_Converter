@@ -145,12 +145,12 @@ def _coerce_cell_value(value: str, fmt: Optional[str]) -> Any:
     Args:
         value: Raw string value from CSV parsing.
         fmt: Excel format string (e.g. ``"0"``, ``"$#,##0.00"``,
-             ``"mm/dd/yyyy"``, ``"@"``), or ``None`` for General format.
+             ``"m/d/yyyy"``, ``"@"``), or ``None`` for General format.
 
     Returns:
         - ``int`` for Integer format (``"0"``)
         - ``float`` for Decimal (``"0.00"``) or Currency (``"$#,##0.00"``)
-        - ``datetime.datetime`` for Date format (``"mm/dd/yyyy"``)
+        - ``datetime.datetime`` for Date format (``"m/d/yyyy"``)
         - Original ``str`` for Text (``"@"``) or unknown/None formats,
           and as a fallback when conversion fails.
     """
@@ -172,7 +172,7 @@ def _coerce_cell_value(value: str, fmt: Optional[str]) -> Any:
         except (ValueError, TypeError):
             return value
 
-    if fmt == "mm/dd/yyyy":
+    if fmt in ("m/d/yyyy", "mm/dd/yyyy"):
         try:
             return datetime.datetime.strptime(value, "%m/%d/%Y")
         except (ValueError, TypeError):

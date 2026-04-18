@@ -147,11 +147,11 @@ class TestApplyColumnFormats(unittest.TestCase):
     def test_none_format_skipped(self):
         """None entries must leave cells at their default format."""
         ws = self._make_ws(["A", "B"], [["1", "2"]])
-        _apply_column_formats(ws, [None, "mm/dd/yyyy"], row_count=2)
+        _apply_column_formats(ws, [None, "m/d/yyyy"], row_count=2)
         # Column 1: None → untouched (openpyxl default is "General")
-        self.assertNotEqual(ws.cell(row=2, column=1).number_format, "mm/dd/yyyy")
+        self.assertNotEqual(ws.cell(row=2, column=1).number_format, "m/d/yyyy")
         # Column 2: Date format applied
-        self.assertEqual(ws.cell(row=2, column=2).number_format, "mm/dd/yyyy")
+        self.assertEqual(ws.cell(row=2, column=2).number_format, "m/d/yyyy")
 
     def test_empty_column_formats_list(self):
         """Empty column_formats list should apply nothing without error."""
@@ -206,7 +206,7 @@ class TestCellValueCoercion(unittest.TestCase):
         self.assertIsInstance(result, float)
 
     def test_date_format_converts_to_datetime(self):
-        result = _coerce_cell_value("04/05/2024", "mm/dd/yyyy")
+        result = _coerce_cell_value("04/05/2024", "m/d/yyyy")
         self.assertEqual(result, datetime.datetime(2024, 4, 5))
         self.assertIsInstance(result, datetime.datetime)
 
@@ -222,7 +222,7 @@ class TestCellValueCoercion(unittest.TestCase):
 
     def test_blank_always_returned_unchanged_for_all_formats(self):
         """Blank strings must remain blank for every format to preserve empty cells."""
-        for fmt in ["0", "0.00", "$#,##0.00", "mm/dd/yyyy", "@", None]:
+        for fmt in ["0", "0.00", "$#,##0.00", "m/d/yyyy", "@", None]:
             with self.subTest(fmt=fmt):
                 result = _coerce_cell_value("", fmt)
                 self.assertEqual(result, "")
@@ -238,7 +238,7 @@ class TestCellValueCoercion(unittest.TestCase):
         self.assertIsInstance(result, str)
 
     def test_invalid_date_falls_back_to_string(self):
-        result = _coerce_cell_value("not_a_date", "mm/dd/yyyy")
+        result = _coerce_cell_value("not_a_date", "m/d/yyyy")
         self.assertEqual(result, "not_a_date")
         self.assertIsInstance(result, str)
 
@@ -277,11 +277,11 @@ class TestBuildWorkbookColumnFormats(unittest.TestCase):
         headers = ["Track", "Date", "Race Number"]
         rows = [["CD", "04/05/2024", "3"]]
         # Text, Date, Integer
-        col_fmts = ["@", "mm/dd/yyyy", "0"]
+        col_fmts = ["@", "m/d/yyyy", "0"]
         wb = self._build(headers, rows, col_fmts)
         ws = wb.active  # Sheet 1
         self.assertEqual(ws.cell(row=2, column=1).number_format, "@")
-        self.assertEqual(ws.cell(row=2, column=2).number_format, "mm/dd/yyyy")
+        self.assertEqual(ws.cell(row=2, column=2).number_format, "m/d/yyyy")
         self.assertEqual(ws.cell(row=2, column=3).number_format, "0")
 
     def test_no_column_formats_no_error(self):
@@ -371,7 +371,7 @@ class TestBuildWorkbookColumnFormats(unittest.TestCase):
         """Date column must store a datetime value, not a string."""
         headers = ["Race Date"]
         rows = [["04/05/2024"]]
-        col_fmts = ["mm/dd/yyyy"]
+        col_fmts = ["m/d/yyyy"]
         wb = self._build(headers, rows, col_fmts)
         ws = wb.active
         cell_value = ws.cell(row=2, column=1).value
@@ -423,6 +423,90 @@ class TestBuildWorkbookColumnFormats(unittest.TestCase):
         wb = self._build(headers, rows, col_fmts)
         ws = wb.active
         self.assertEqual(ws.cell(row=2, column=1).number_format, "$#,##0.00")
+
+
+class TestCustomizedOutputColumnFormats(unittest.TestCase):
+    """Verify column formats are enforced in customized (filtered) output."""
+
+    def setUp(self):
+        self._tmpdir = tempfile.mkdtemp()
+        self._output_path = os.path.join(self._tmpdir, "test_customized.xlsx")
+
+    def tearDown(self):
+        shutil.rmtree(self._tmpdir, ignore_errors=True)
+
+    def test_filtered_formats_applied_to_customized_output(self):
+        """Column formats must be correctly applied after field filtering."""
+        from src.output_settings import apply_field_filter
+
+        headers = ["Track", "Race Date", "Race Number", "Purse"]
+        rows = [["CD", "04/05/2024", "3", "125000.00"]]
+        col_fmts = ["@", "m/d/yyyy", "0", "$#,##0.00"]
+        # Simulate customized output: select Race Date, Purse (indices 1, 3)
+        indices = [1, 3]
+        fh, fr, ff = apply_field_filter(headers, rows, col_fmts, indices)
+
+        build_workbook(
+            processed_headers=fh,
+            processed_rows=fr,
+            points_of_call_headers=["dist"],
+            points_of_call_rows=[["550"]],
+            fractional_times_headers=["dist"],
+            fractional_times_rows=[["550"]],
+            output_path=self._output_path,
+            column_formats=ff,
+        )
+        wb = openpyxl.load_workbook(self._output_path)
+        ws = wb.active
+        # Race Date column should have date format and datetime value
+        self.assertEqual(ws.cell(row=2, column=1).number_format, "m/d/yyyy")
+        self.assertIsInstance(ws.cell(row=2, column=1).value, datetime.datetime)
+        # Purse column should have currency format and numeric value
+        self.assertEqual(ws.cell(row=2, column=2).number_format, "$#,##0.00")
+        self.assertIsInstance(ws.cell(row=2, column=2).value, (int, float))
+
+    def test_reordered_formats_applied_to_customized_output(self):
+        """Column formats must follow field reordering in customized output."""
+        from src.output_settings import apply_field_filter
+
+        headers = ["Track", "Race Date", "Race Number"]
+        rows = [["CD", "04/05/2024", "7"]]
+        col_fmts = ["@", "m/d/yyyy", "0"]
+        # Reorder: Race Number, Track (indices 2, 0)
+        indices = [2, 0]
+        fh, fr, ff = apply_field_filter(headers, rows, col_fmts, indices)
+
+        build_workbook(
+            processed_headers=fh,
+            processed_rows=fr,
+            points_of_call_headers=["dist"],
+            points_of_call_rows=[["550"]],
+            fractional_times_headers=["dist"],
+            fractional_times_rows=[["550"]],
+            output_path=self._output_path,
+            column_formats=ff,
+        )
+        wb = openpyxl.load_workbook(self._output_path)
+        ws = wb.active
+        # Column 1 should be Race Number with Integer format
+        self.assertEqual(ws.cell(row=2, column=1).number_format, "0")
+        self.assertIsInstance(ws.cell(row=2, column=1).value, int)
+        self.assertEqual(ws.cell(row=2, column=1).value, 7)
+        # Column 2 should be Track with Text format
+        self.assertEqual(ws.cell(row=2, column=2).number_format, "@")
+        self.assertIsInstance(ws.cell(row=2, column=2).value, str)
+        self.assertEqual(ws.cell(row=2, column=2).value, "CD")
+
+    def test_coerce_uses_actual_excel_formats_date(self):
+        """_coerce_cell_value must handle the actual EXCEL_FORMATS Date format."""
+        date_fmt = EXCEL_FORMATS["Date"]
+        result = _coerce_cell_value("04/05/2024", date_fmt)
+        self.assertIsInstance(
+            result, datetime.datetime,
+            f"Date coercion must work with actual EXCEL_FORMATS['Date'] "
+            f"format {date_fmt!r}",
+        )
+        self.assertEqual(result, datetime.datetime(2024, 4, 5))
 
 
 class TestExcelFormatsSourcedFromSchemaLoader(unittest.TestCase):
