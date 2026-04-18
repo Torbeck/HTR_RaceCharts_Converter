@@ -192,7 +192,7 @@ project_root/
    python src/main.py
    ```
 
-Linux GUI note:
+#### Linux GUI requirements
 - This is a Tkinter desktop app and needs a graphical session (`$DISPLAY` set).
 - Headless servers, WSL without an X server, or SSH sessions without X forwarding cannot launch the GUI.
 
