@@ -223,7 +223,7 @@ def _translate_and_export(
         column_formats: Optional list of Excel number-format strings for
             each column in sheet 1, derived from fields.json field types.
         field_indices: Optional list of 0-based column indices that
-            defines the visible fields and their order for Excel export.
+            defines the visible fields and their order for export.
             ``None`` means use all fields in canonical order.
     """
     # Deep copy rows so translations don't mutate the originals
@@ -238,12 +238,9 @@ def _translate_and_export(
     if customized:
         output_name = f"{output_name}_customized"
 
-    # Export CSV (always uses the full canonical 244-column layout)
-    csv_path = os.path.join(output_dir, f"{output_name}.csv")
-    progress(f"Exporting CSV: {csv_path}")
-    export_csv(translated_rows, headers, csv_path)
-
-    # Apply field visibility / ordering for Excel export
+    # Apply field visibility / ordering for customized exports
+    csv_headers = headers
+    csv_rows = translated_rows
     excel_headers = headers
     excel_rows = translated_rows
     excel_formats = column_formats
@@ -252,12 +249,19 @@ def _translate_and_export(
         excel_headers, excel_rows, excel_formats = apply_field_filter(
             headers, translated_rows, column_formats, field_indices,
         )
+        csv_headers = excel_headers
+        csv_rows = excel_rows
 
         # Generate companion field list file
         txt_path = write_field_list(
             output_dir, output_name, headers, field_indices,
         )
         progress(f"Field list written: {txt_path}")
+
+    # Export CSV
+    csv_path = os.path.join(output_dir, f"{output_name}.csv")
+    progress(f"Exporting CSV: {csv_path}")
+    export_csv(csv_rows, csv_headers, csv_path)
 
     # Export Excel
     xlsx_path = os.path.join(output_dir, f"{output_name}.xlsx")

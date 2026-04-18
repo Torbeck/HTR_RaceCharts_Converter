@@ -20,8 +20,8 @@ def export_csv(
     """Export processed rows to a CSV file with headers.
 
     Args:
-        rows: Translated data rows (244 fields each).
-        headers: Column headers (244 items).
+        rows: Translated data rows.
+        headers: Column headers.
         output_path: Path to write the output CSV.
     """
     write_csv(rows, headers, output_path)

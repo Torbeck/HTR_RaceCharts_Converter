@@ -2,11 +2,11 @@
 
 Reads and writes the ``[output]`` section in config.ini:
 
-- ``visible_fields``: Controls which fields appear in the Excel export.
+- ``visible_fields``: Controls which fields appear in the output.
   - Default: ``"all"`` (include every field from fields.json).
   - Custom: comma-separated list of 1-based field numbers, e.g. ``"1,2,3,5"``
 
-- ``custom_order``: Controls the column order in the Excel export.
+- ``custom_order``: Controls the column order in the output.
   - Default: ``"default"`` (use the order from fields.json).
   - Custom: comma-separated list of 1-based field numbers, e.g. ``"3,1,2,5"``
 
