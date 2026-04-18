@@ -1,0 +1,16 @@
+Customized Output Fields
+========================
+
+1. Date (Field #2)
+2. Track (Field #1)
+3. Race Number (Field #3)
+4. Distance (Field #5)
+5. Surface (Field #7)
+6. Race Name (Field #12)
+7. Weather (Field #23)
+8. #1 Wager Type (Field #131)
+9. #1 Wager Unit (Field #132)
+10. #1 Number Right (Field #133)
+11. #1 Wager Payout (Field #134)
+12. #1 Winning Pgm Numbers (Field #135)
+13. #1 Total Pool (Field #136)
