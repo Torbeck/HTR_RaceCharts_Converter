@@ -148,6 +148,40 @@ project_root/
    python src/main.py
    ```
 
+### macOS
+
+> **Support note:** macOS is not a primary supported platform for this project. These steps are provided as best-effort guidance.
+
+1. Install Python 3.10+ from [python.org](https://www.python.org/downloads/macos/).  
+   Using the python.org installer is recommended on macOS to avoid common Tkinter issues.
+
+2. Open **Terminal** in the project folder, then create and activate a virtual environment:
+
+   ```bash
+   python3 -m venv .venv
+   source .venv/bin/activate
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   python -m pip install -r requirements.txt
+   ```
+
+   If `tkinterdnd2` fails to install, you can install only `openpyxl` and continue without drag-and-drop:
+
+   ```bash
+   python -m pip install openpyxl
+   ```
+
+   The app still works using **Add Files...** and **Add Folder...**.
+
+4. Run the app:
+
+   ```bash
+   python src/main.py
+   ```
+
 ### Linux
 
 1. Install Python 3.10+ and create a virtual environment:
