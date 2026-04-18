@@ -117,38 +117,84 @@ project_root/
 |---|---|
 | **Python** | 3.10 or higher |
 | **openpyxl** | Excel workbook generation |
-| **tkinterdnd2** | Drag-and-drop support (optional — the program works without it) |
-| **tkinter** | Included with standard Python installations |
+| **tkinter** | Required for the GUI. Included with many Python installs, but may require a separate OS package on Linux. |
+| **tkinterdnd2** | Optional drag-and-drop support. If not installed, the app still works using **Add Files...** and **Add Folder...**. |
 
 ---
 
 ## Installation
 
-1. **Install Python** (3.10+) from [python.org](https://www.python.org/downloads/) if not already installed. Make sure to check **"Add Python to PATH"** during setup.
+### Windows
 
-2. **Install required libraries** by opening a terminal in the project folder and running:
+1. Install Python 3.10+ from [python.org](https://www.python.org/downloads/windows/).  
+   During setup, enable **"Add Python to PATH"** and keep **tkinter** support enabled.
 
-   ```
-   pip install -r requirements.txt
-   ```
+2. Open **Command Prompt** or **PowerShell** in the project folder, then create and activate a virtual environment:
 
-   Or install packages individually:
-
-   ```
-   pip install openpyxl
+   ```powershell
+   py -3 -m venv .venv
+   .venv\Scripts\activate
    ```
 
-3. **Install drag-and-drop support** (optional but recommended):
+3. Install dependencies:
 
-   ```
-   pip install tkinterdnd2
+   ```powershell
+   python -m pip install -r requirements.txt
    ```
 
-4. **Run the program:**
+4. Run the app:
 
-   ```
+   ```powershell
    python src/main.py
    ```
+
+### Linux
+
+1. Install Python 3.10+ and create a virtual environment:
+
+   ```bash
+   python3 --version
+   python3 -m venv .venv
+   source .venv/bin/activate
+   ```
+
+2. Install the system Tkinter package for your distro (required for GUI):
+
+   - Debian/Ubuntu:
+     ```bash
+     sudo apt-get update
+     sudo apt-get install python3-tk
+     ```
+   - Fedora:
+     ```bash
+     sudo dnf install python3-tkinter
+     ```
+   - Arch:
+     ```bash
+     sudo pacman -S tk
+     ```
+
+3. Install dependencies:
+
+   ```bash
+   python -m pip install -r requirements-linux.txt
+   ```
+
+4. (Optional) Enable drag-and-drop support:
+
+   ```bash
+   python -m pip install tkinterdnd2
+   ```
+
+5. Run the app:
+
+   ```bash
+   python src/main.py
+   ```
+
+Linux GUI note:
+- This is a Tkinter desktop app and needs a graphical session (`$DISPLAY` set).
+- Headless servers, WSL without an X server, or SSH sessions without X forwarding cannot launch the GUI.
 
 ---
 
@@ -407,6 +453,16 @@ Requires `tkinter` (included with standard Python installations) and the `scheme
 ---
 
 ## Troubleshooting
+
+### Linux-specific setup issues
+
+| Problem | Solution |
+|---|---|
+| **ModuleNotFoundError: No module named '_tkinter'** | Install your distro Tkinter package (`python3-tk` on Debian/Ubuntu, `python3-tkinter` on Fedora, `tk` on Arch), then recreate/activate your venv and reinstall requirements. |
+| **TclError: no display name and no $DISPLAY environment variable** | Run from a desktop GUI session, or configure X11/Wayland display access (for WSL/SSH, use an X server and X forwarding). This app cannot run in fully headless mode. |
+| **`pip install tkinterdnd2` fails** | `tkinterdnd2` is optional. Continue without it and use **Add Files...** / **Add Folder...** instead of drag-and-drop. |
+
+### General
 
 | Problem | Solution |
 |---|---|
