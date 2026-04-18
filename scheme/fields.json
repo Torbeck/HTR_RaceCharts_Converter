@@ -1050,7 +1050,7 @@
     {
         "field": 132,
         "name": "#1 Wager Unit",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "Unit Bet for specified Payout",
         "hasOptions": ""
@@ -1082,7 +1082,7 @@
     {
         "field": 136,
         "name": "#1 Total Pool",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "Total Pool for this Wager Type",
         "hasOptions": ""
@@ -1099,7 +1099,7 @@
     {
         "field": 138,
         "name": "#2 Wager Unit",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1131,7 +1131,7 @@
     {
         "field": 142,
         "name": "#2 Total Pool",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1148,7 +1148,7 @@
     {
         "field": 144,
         "name": "#3 Wager Unit",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1180,7 +1180,7 @@
     {
         "field": 148,
         "name": "#3 Total Pool",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1197,7 +1197,7 @@
     {
         "field": 150,
         "name": "#4 Wager Unit",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1229,7 +1229,7 @@
     {
         "field": 154,
         "name": "#4 Total Pool",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1246,7 +1246,7 @@
     {
         "field": 156,
         "name": "#5 Wager Unit",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1278,7 +1278,7 @@
     {
         "field": 160,
         "name": "#5 Total Pool",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1295,7 +1295,7 @@
     {
         "field": 162,
         "name": "#6 Wager Unit",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1327,7 +1327,7 @@
     {
         "field": 166,
         "name": "#6 Total Pool",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1344,7 +1344,7 @@
     {
         "field": 168,
         "name": "#7 Wager Unit",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1376,7 +1376,7 @@
     {
         "field": 172,
         "name": "#7 Total Pool",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1393,7 +1393,7 @@
     {
         "field": 174,
         "name": "#8 Wager Unit",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1425,7 +1425,7 @@
     {
         "field": 178,
         "name": "#8 Total Pool",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1442,7 +1442,7 @@
     {
         "field": 180,
         "name": "#9 Wager Unit",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1474,7 +1474,7 @@
     {
         "field": 184,
         "name": "#9 Total Pool",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1491,7 +1491,7 @@
     {
         "field": 186,
         "name": "#10 Wager Unit",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1523,7 +1523,7 @@
     {
         "field": 190,
         "name": "#10 Total Pool",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1540,7 +1540,7 @@
     {
         "field": 192,
         "name": "#11 Wager Unit",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1572,7 +1572,7 @@
     {
         "field": 196,
         "name": "#11 Total Pool",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1589,7 +1589,7 @@
     {
         "field": 198,
         "name": "#12 Wager Unit",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1621,7 +1621,7 @@
     {
         "field": 202,
         "name": "#12 Total Pool",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1638,7 +1638,7 @@
     {
         "field": 204,
         "name": "#13 Wager Unit",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1670,7 +1670,7 @@
     {
         "field": 208,
         "name": "#13 Total Pool",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1687,7 +1687,7 @@
     {
         "field": 210,
         "name": "#14 Wager Unit",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1719,7 +1719,7 @@
     {
         "field": 214,
         "name": "#14 Total Pool",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1736,7 +1736,7 @@
     {
         "field": 216,
         "name": "#15 Wager Unit",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1768,7 +1768,7 @@
     {
         "field": 220,
         "name": "#15 Total Pool",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1785,7 +1785,7 @@
     {
         "field": 222,
         "name": "#16 Wager Unit",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1817,7 +1817,7 @@
     {
         "field": 226,
         "name": "#16 Total Pool",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1834,7 +1834,7 @@
     {
         "field": 228,
         "name": "#17 Wager Unit",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1866,7 +1866,7 @@
     {
         "field": 232,
         "name": "#17 Total Pool",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1883,7 +1883,7 @@
     {
         "field": 234,
         "name": "#18 Wager Unit",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1915,7 +1915,7 @@
     {
         "field": 238,
         "name": "#18 Total Pool",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1932,7 +1932,7 @@
     {
         "field": 240,
         "name": "#19 Wager Unit",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
@@ -1964,7 +1964,7 @@
     {
         "field": 244,
         "name": "#19 Total Pool",
-        "type": "Decimal",
+        "type": "Currency",
         "maxLength": "",
         "comments": "",
         "hasOptions": ""
