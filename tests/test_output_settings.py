@@ -1,6 +1,7 @@
 """Tests for src.output_settings module."""
 
 import configparser
+import csv
 import os
 import tempfile
 import unittest
@@ -371,6 +372,68 @@ class TestWriteFieldList(unittest.TestCase):
             # Every line should be plain text (no binary/special chars)
             for line in lines:
                 self.assertIsInstance(line, str)
+
+
+class TestCustomizedCsvOutput(unittest.TestCase):
+    """Verify that write_csv supports customized (filtered) field sets."""
+
+    def test_csv_with_fewer_than_244_columns(self):
+        """write_csv should accept rows matching header count, not just 244."""
+        from src.utils.csv_utils import write_csv
+
+        headers = ["Date", "Track", "Race Number"]
+        rows = [["2022-03-22", "OP", "1"], ["2022-03-22", "OP", "2"]]
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            path = os.path.join(tmpdir, "test_customized.csv")
+            write_csv(rows, headers, path)
+
+            with open(path, encoding="utf-8") as f:
+                reader = csv.reader(f)
+                result = list(reader)
+
+            self.assertEqual(result[0], headers)
+            self.assertEqual(result[1], ["2022-03-22", "OP", "1"])
+            self.assertEqual(result[2], ["2022-03-22", "OP", "2"])
+
+    def test_csv_row_length_mismatch_raises(self):
+        """write_csv should raise ValueError when row length != header count."""
+        from src.utils.csv_utils import write_csv
+
+        headers = ["A", "B"]
+        rows = [["a1", "b1", "c1"]]  # 3 fields but only 2 headers
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            path = os.path.join(tmpdir, "bad.csv")
+            with self.assertRaises(ValueError) as ctx:
+                write_csv(rows, headers, path)
+            self.assertIn("3 fields", str(ctx.exception))
+            self.assertIn("expected 2", str(ctx.exception))
+
+    def test_filtered_csv_matches_filtered_headers_and_rows(self):
+        """Applying field filter and writing CSV should produce correct output."""
+        from src.utils.csv_utils import write_csv
+
+        headers = ["A", "B", "C", "D", "E"]
+        rows = [
+            ["a1", "b1", "c1", "d1", "e1"],
+            ["a2", "b2", "c2", "d2", "e2"],
+        ]
+        indices = [2, 0, 4]  # C, A, E
+
+        fh, fr, _ = apply_field_filter(headers, rows, None, indices)
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            path = os.path.join(tmpdir, "filtered.csv")
+            write_csv(fr, fh, path)
+
+            with open(path, encoding="utf-8") as f:
+                reader = csv.reader(f)
+                result = list(reader)
+
+            self.assertEqual(result[0], ["C", "A", "E"])
+            self.assertEqual(result[1], ["c1", "a1", "e1"])
+            self.assertEqual(result[2], ["c2", "a2", "e2"])
 
 
 if __name__ == "__main__":

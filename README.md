@@ -369,11 +369,9 @@ Customized output settings are stored in `config.ini` under `[output]`:
     - field name
     - original field number
 
-#### Scope: Excel vs CSV
+#### Scope
 
-- Customized visibility/order is applied to **Excel output**.
-- **CSV output remains the full canonical 244-column layout**, even when customization is enabled.
-- When customization is enabled, CSV filename still uses the `_customized` suffix so all outputs from the same run share a consistent base name.
+- Customized visibility/order is applied to **all output formats**: Excel (`.xlsx`), CSV (`.csv`), and the companion field list (`.txt`).
 
 ### Default Configuration
 
