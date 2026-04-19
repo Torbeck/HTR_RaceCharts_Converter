@@ -161,6 +161,51 @@ If `.venv` does not exist yet, `run.bat` will tell you to run `setup.bat` first.
 
 ---
 
+## Optional Windows EXE Build (PyInstaller)
+
+This project now includes optional PyInstaller packaging for Windows 10/11.
+The normal script-based workflow (`setup.bat` + `run.bat`) is still the recommended developer workflow.
+
+### Build locally
+
+From the project root:
+
+```bat
+build_exe.bat
+```
+
+Or run PyInstaller directly:
+
+```bat
+pyinstaller --clean --noconfirm HTR_RaceCharts_Converter.spec
+```
+
+### Build output location
+
+PyInstaller creates an onedir build at:
+
+```text
+dist\HTR_RaceCharts_Converter\HTR_RaceCharts_Converter.exe
+```
+
+### First-run/runtime notes
+
+- The bundled EXE includes required runtime assets and scheme files from `assets/` and `scheme/`.
+- `config.example.ini` is bundled for reference.
+- `config.ini` is created automatically (if missing) next to the EXE on first launch.
+- Output files are written using the same behavior as the script-based app (defaulting to the input file folder unless a different output folder is selected).
+
+### Optional CI artifact build
+
+A GitHub Actions workflow is included at `.github/workflows/build-windows-exe.yml`.
+
+- Trigger manually with **Run workflow** (`workflow_dispatch`), or
+- Trigger automatically on tag push matching `v*`.
+
+The workflow builds on a Windows runner and uploads the packaged EXE folder as an artifact.
+
+---
+
 ## GUI Guide
 
 ### 1) Launch the app
