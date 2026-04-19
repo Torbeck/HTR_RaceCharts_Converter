@@ -18,14 +18,28 @@ from os import chdir
 from pathlib import Path
 
 
+def _resolve_bundle_root() -> Path:
+    """Return the base directory that contains bundled runtime resources."""
+    if getattr(sys, "frozen", False):
+        meipass = getattr(sys, "_MEIPASS", None)
+        if meipass:
+            return Path(meipass).resolve()
+    return Path(__file__).resolve().parent.parent
+
+
 def resolve_runtime_paths() -> tuple[Path, Path, Path]:
     """Resolve absolute runtime paths.
 
     Returns:
         Tuple of ``(project_root, scheme_dir, config_path)``.
     """
-    project_root = Path(__file__).resolve().parent.parent
-    scheme_dir = project_root / "scheme"
+    bundle_root = _resolve_bundle_root()
+    if getattr(sys, "frozen", False):
+        project_root = Path(sys.executable).resolve().parent
+    else:
+        project_root = bundle_root
+
+    scheme_dir = bundle_root / "scheme"
     config_path = project_root / "config.ini"
     return project_root, scheme_dir, config_path
 
