@@ -12,11 +12,16 @@ import os
 import threading
 import tkinter as tk
 import webbrowser
+from pathlib import Path
 from tkinter import filedialog, messagebox, ttk
 from typing import Callable, List, Optional
 
 from src.processor import process_files
-from src.utils.file_utils import collect_txt_files, validate_file_extension
+from src.utils.file_utils import (
+    collect_txt_files,
+    resolve_existing_directory,
+    validate_file_extension,
+)
 from src.utils.ini_utils import read_last_output, rebuild_config
 from src.output_settings import (
     output_is_customized,
@@ -26,9 +31,8 @@ from src.output_settings import (
 )
 from src.version import __version__
 
-_ICON_DIR = os.path.join(
-    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-    "assets", "icons", "apps",
+_ICON_DIR = (
+    Path(__file__).resolve().parent.parent / "assets" / "icons" / "apps"
 )
 
 
@@ -76,8 +80,11 @@ class HTRApp:
         # will be auto-filled to the input file's directory when the
         # user adds files (see _add_files).
         last_output = read_last_output(config_path)
-        if last_output and os.path.isdir(last_output):
-            self._output_var.set(last_output)
+        if last_output:
+            try:
+                self._output_var.set(resolve_existing_directory(last_output))
+            except (FileNotFoundError, ValueError):
+                pass
 
         self._update_output_indicator()
 
@@ -232,12 +239,10 @@ class HTRApp:
         sizes = [512, 256, 128, 64, 32]
         icons: List[tk.PhotoImage] = []
         for size in sizes:
-            path = os.path.join(
-                _ICON_DIR, f"htr_racecharts_converter_{size}.png"
-            )
-            if os.path.isfile(path):
+            path = _ICON_DIR / f"htr_racecharts_converter_{size}.png"
+            if path.is_file():
                 try:
-                    icons.append(tk.PhotoImage(file=path))
+                    icons.append(tk.PhotoImage(file=str(path)))
                 except Exception:
                     pass
         if icons:
@@ -321,10 +326,10 @@ class HTRApp:
         frame = ttk.Frame(about_win, padding=20)
         frame.pack(fill=tk.BOTH, expand=True)
 
-        logo_path = os.path.join(_ICON_DIR, "htr_racecharts_converter_128.png")
-        if os.path.isfile(logo_path):
+        logo_path = _ICON_DIR / "htr_racecharts_converter_128.png"
+        if logo_path.is_file():
             try:
-                logo_img = tk.PhotoImage(file=logo_path)
+                logo_img = tk.PhotoImage(file=str(logo_path))
                 logo_label = ttk.Label(frame, image=logo_img)
                 logo_label.image = logo_img  # Prevent garbage collection
                 logo_label.pack(pady=(0, 5))
@@ -423,7 +428,13 @@ class HTRApp:
         """Open a directory dialog to select the output location."""
         folder = filedialog.askdirectory(title="Select Output Directory")
         if folder:
-            self._output_var.set(folder)
+            try:
+                self._output_var.set(resolve_existing_directory(folder))
+            except (FileNotFoundError, ValueError):
+                messagebox.showerror(
+                    "Invalid Directory",
+                    f"Output directory does not exist or is not accessible:\n{folder}",
+                )
 
     def _on_drop(self, event: tk.Event) -> None:
         """Handle drag-and-drop of files or folders.
@@ -453,19 +464,22 @@ class HTRApp:
             messagebox.showwarning("No Files", "Please add HTR files to process.")
             return
 
-        output_dir = self._output_var.get()
-        if not output_dir:
+        output_raw = self._output_var.get()
+        if not output_raw:
             messagebox.showwarning(
                 "No Output Directory", "Please select an output directory."
             )
             return
-
-        if not os.path.isdir(output_dir):
+        try:
+            output_dir = resolve_existing_directory(output_raw)
+        except (FileNotFoundError, ValueError):
             messagebox.showerror(
                 "Invalid Directory",
-                f"Output directory does not exist: {output_dir}",
+                f"Output directory does not exist or is not accessible:\n{output_raw}",
             )
             return
+
+        self._output_var.set(output_dir)
 
         # Validate file types before processing
         for fp in self._file_paths:

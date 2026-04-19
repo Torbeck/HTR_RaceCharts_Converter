@@ -20,12 +20,14 @@ Usage:
 import json
 import os
 import sys
+from pathlib import Path
 from typing import Any, Dict, List, Optional, Set
 
 # ── Ensure project root is on sys.path so ``src.*`` imports work ─────
-_PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-if _PROJECT_ROOT not in sys.path:
-    sys.path.insert(0, _PROJECT_ROOT)
+_PROJECT_ROOT = Path(__file__).resolve().parent.parent
+_PROJECT_ROOT_STR = str(_PROJECT_ROOT)
+if _PROJECT_ROOT_STR not in sys.path:
+    sys.path.insert(0, _PROJECT_ROOT_STR)
 
 from src.schema_loader import (
     EXCEL_FORMATS,
@@ -159,14 +161,14 @@ class SchemaEditorApp:
     def _set_app_icon(self) -> None:
         """Load and set the schema editor window icon from assets/icons/apps."""
         tk = self._tk
-        icon_dir = os.path.join(_PROJECT_ROOT, "assets", "icons", "apps")
+        icon_dir = _PROJECT_ROOT / "assets" / "icons" / "apps"
         sizes = [512, 256, 128, 64, 32]
         icons = []
         for size in sizes:
-            path = os.path.join(icon_dir, f"schema_editor_{size}.png")
-            if os.path.isfile(path):
+            path = icon_dir / f"schema_editor_{size}.png"
+            if path.is_file():
                 try:
-                    icons.append(tk.PhotoImage(file=path))
+                    icons.append(tk.PhotoImage(file=str(path)))
                 except Exception:
                     pass
         if icons:
@@ -533,15 +535,15 @@ class SchemaEditorApp:
 
 def main() -> None:
     """Resolve the scheme directory and launch the editor."""
-    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    scheme_dir = os.path.join(project_root, "scheme")
-    if not os.path.isdir(scheme_dir):
+    project_root = Path(__file__).resolve().parent.parent
+    scheme_dir = project_root / "scheme"
+    if not scheme_dir.is_dir():
         print(
             f"FATAL: Scheme directory not found: {scheme_dir}",
             file=sys.stderr,
         )
         sys.exit(1)
-    app = SchemaEditorApp(scheme_dir=scheme_dir)
+    app = SchemaEditorApp(scheme_dir=str(scheme_dir))
     app.run()
 
 

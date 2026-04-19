@@ -13,33 +13,48 @@ Launches the GUI. The scheme directory and config.ini path are resolved
 relative to this file's parent directory (project root).
 """
 
-import os
 import sys
+from os import chdir
+from pathlib import Path
+
+
+def resolve_runtime_paths() -> tuple[Path, Path, Path]:
+    """Resolve absolute runtime paths.
+
+    Returns:
+        Tuple of ``(project_root, scheme_dir, config_path)``.
+    """
+    project_root = Path(__file__).resolve().parent.parent
+    scheme_dir = project_root / "scheme"
+    config_path = project_root / "config.ini"
+    return project_root, scheme_dir, config_path
 
 
 def main() -> None:
     """Resolve the scheme directory and config path, then launch the GUI."""
-    # Project root is one level above src/
-    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    scheme_dir = os.path.join(project_root, "scheme")
-    config_path = os.path.join(project_root, "config.ini")
+    project_root, scheme_dir, config_path = resolve_runtime_paths()
 
-    if not os.path.isdir(scheme_dir):
+    if not scheme_dir.is_dir():
         print(f"FATAL: Scheme directory not found: {scheme_dir}", file=sys.stderr)
         sys.exit(1)
 
+    # Ensure deterministic runtime paths when launched from run.bat or IDEs.
+    # This keeps any incidental relative-path behavior rooted at project root.
+    chdir(str(project_root))
+
     # Add project root to sys.path so imports resolve correctly
-    if project_root not in sys.path:
-        sys.path.insert(0, project_root)
+    project_root_str = str(project_root)
+    if project_root_str not in sys.path:
+        sys.path.insert(0, project_root_str)
 
     # Create config.ini with defaults if it does not exist yet.
-    if not os.path.isfile(config_path):
+    if not config_path.is_file():
         from src.utils.ini_utils import rebuild_config
-        rebuild_config(config_path)
+        rebuild_config(str(config_path))
 
     from src.gui import HTRApp
 
-    app = HTRApp(scheme_dir=scheme_dir, config_path=config_path)
+    app = HTRApp(scheme_dir=str(scheme_dir), config_path=str(config_path))
     app.run()
 
 
