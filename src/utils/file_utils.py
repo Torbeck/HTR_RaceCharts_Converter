@@ -122,6 +122,8 @@ def resolve_existing_directory(path_value: str) -> str:
     """
     if not path_value:
         raise ValueError("Directory path cannot be empty.")
+    # strict=False keeps normalization robust across environments even when
+    # symlink components cannot be fully resolved; existence is validated below.
     resolved = Path(path_value).expanduser().resolve(strict=False)
     if not resolved.is_dir():
         raise FileNotFoundError(f"Directory not found: {resolved}")

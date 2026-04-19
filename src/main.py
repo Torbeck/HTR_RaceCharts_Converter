@@ -14,11 +14,16 @@ relative to this file's parent directory (project root).
 """
 
 import sys
+from os import chdir
 from pathlib import Path
 
 
 def resolve_runtime_paths() -> tuple[Path, Path, Path]:
-    """Resolve project-root, scheme-dir, and config.ini absolute paths."""
+    """Resolve absolute runtime paths.
+
+    Returns:
+        Tuple of ``(project_root, scheme_dir, config_path)``.
+    """
     project_root = Path(__file__).resolve().parent.parent
     scheme_dir = project_root / "scheme"
     config_path = project_root / "config.ini"
@@ -35,7 +40,6 @@ def main() -> None:
 
     # Ensure deterministic runtime paths when launched from run.bat or IDEs.
     # This keeps any incidental relative-path behavior rooted at project root.
-    from os import chdir
     chdir(str(project_root))
 
     # Add project root to sys.path so imports resolve correctly

@@ -18,7 +18,7 @@
 
 - **Supported/Tested:** **Windows 10/11 only**.
 - **Why:** HTR is Windows-only, so this project is now focused on Windows-only support.
-- **Linux/macOS:** Not supported.
+- **Linux/macOS:** Not supported (HTR is Windows-only).
 
 **Windows convenience scripts:**
 - `setup.bat` for one-step environment setup
@@ -417,7 +417,7 @@ Requires `tkinter` (included with standard Python installations) and the `scheme
 
 ### Linux/macOS status
 
-Linux and macOS are **not supported** for this project.
+Linux and macOS are **not supported** for this project because HTR is Windows-only.
 
 ### General
 
