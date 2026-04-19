@@ -31,6 +31,23 @@ jobs:
           pip install -r requirements.txt
           pip install pyinstaller
 
+      - name: Set app version from Git tag
+        shell: pwsh
+        run: |
+          $ref = "${{ github.ref_name }}"   # v2.0.2 or main
+          if ($ref -match '^v(\d+\.\d+\.\d+)$') {
+            $ver = $Matches[1]
+          } else {
+            $ver = "0.0.0-dev"
+          }
+
+          "# Single-source version for the HTR Race Charts Converter." | Out-File -Encoding utf8 src/version.py
+          "" | Out-File -Encoding utf8 -Append src/version.py
+          "__version__ = `"$ver`"" | Out-File -Encoding utf8 -Append src/version.py
+
+          Write-Host "Set src/version.py to version $ver"
+          Get-Content src/version.py
+
       - name: Build EXE with PyInstaller
         run: pyinstaller --clean --noconfirm HTR_RaceCharts_Converter.onefile.spec
 
