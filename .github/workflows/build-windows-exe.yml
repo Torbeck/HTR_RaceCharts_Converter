@@ -32,11 +32,11 @@ jobs:
           pip install pyinstaller
 
       - name: Build EXE with PyInstaller
-        run: pyinstaller --clean --noconfirm HTR_RaceCharts_Converter.spec
+        run: pyinstaller --clean --noconfirm HTR_RaceCharts_Converter.onefile.spec
 
       - name: Upload EXE artifact
         uses: actions/upload-artifact@v4
         with:
-          name: HTR_RaceCharts_Converter-windows-exe
-          path: dist/HTR_RaceCharts_Converter
+          name: HTR_RaceCharts_Converter-${{ github.ref_name }}-windows-exe
+          path: dist/HTR_RaceCharts_Converter.exe
           if-no-files-found: error
