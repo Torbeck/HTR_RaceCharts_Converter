@@ -7,6 +7,12 @@ __pycache__/
 # sample_data/
 config.ini
 
+# PyInstaller
+*.spec
+!HTR_RaceCharts_Converter.spec
+!HTR_RaceCharts_Converter.onefile.spec
+
+
 # C extensions
 *.so
 
