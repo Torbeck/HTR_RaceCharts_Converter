@@ -14,7 +14,7 @@
 
 ---
 
-## Platform Support (Option A)
+## Platform Support
 
 - **Supported/Tested:** **Windows 10/11 only**.
 - **Why:** HTR is Windows-only, so this project is now focused on Windows-only support.
@@ -24,8 +24,6 @@
 - `setup.bat` for one-step environment setup
 - `run.bat` for one-step app launch
 - Optional prebuilt Windows `.exe` distribution
-
-_Repository metadata note: add the `windows` GitHub topic in repo settings._
 
 ---
 
