@@ -14,6 +14,21 @@
 
 ---
 
+## Platform Support (Option A)
+
+- **Supported/Tested:** **Windows 10/11 only**.
+- **Why:** HTR is Windows-only, so this project is now focused on Windows-only support.
+- **Linux/macOS:** Not supported or tested. The code may run in some environments, but Linux/macOS are considered unsupported.
+
+**Coming soon (Windows):**
+- `setup.bat` for one-step environment setup
+- `run.bat` for one-step app launch
+- Optional prebuilt Windows `.exe` distribution
+
+_Repository metadata note: add the `windows` GitHub topic in repo settings._
+
+---
+
 ## Overview
 
 HTR Race Charts Converter is a desktop application that transforms raw horse racing data files exported from **HTR (Handicapping Technology & Research)** into clean, formatted Excel workbooks and CSV files.
@@ -117,7 +132,7 @@ project_root/
 |---|---|
 | **Python** | 3.10 or higher |
 | **openpyxl** | Excel workbook generation |
-| **tkinter** | Required for the GUI. Included with many Python installs, but may require a separate OS package on Linux. |
+| **tkinter** | Required for the GUI (keep Tk support enabled during Windows Python installation). |
 | **tkinterdnd2** | Optional drag-and-drop support. If not installed, the app still works using **Add Files...** and **Add Folder...**. |
 
 ---
@@ -147,6 +162,8 @@ project_root/
    ```powershell
    python src/main.py
    ```
+
+> **Coming soon:** streamlined Windows launch scripts (`setup.bat`, `run.bat`) and an optional Windows `.exe`.
 
 ---
 
@@ -404,13 +421,9 @@ Requires `tkinter` (included with standard Python installations) and the `scheme
 
 ## Troubleshooting
 
-### Linux-specific setup issues
+### Linux/macOS status
 
-| Problem | Solution |
-|---|---|
-| **ModuleNotFoundError: No module named '_tkinter'** | Install your distro Tkinter package (`python3-tk` on Debian/Ubuntu, `python3-tkinter` on Fedora, `tk` on Arch), then recreate/activate your venv and reinstall requirements. |
-| **TclError: no display name and no $DISPLAY environment variable** | Run from a desktop GUI session, or configure X11/Wayland display access (for WSL/SSH, use an X server and X forwarding). This app cannot run in fully headless mode. |
-| **`pip install tkinterdnd2` fails** | `tkinterdnd2` is optional. Continue without it and use **Add Files...** / **Add Folder...** instead of drag-and-drop. |
+Linux and macOS are **not supported or tested** for this project. The application may run in some non-Windows environments, but those platforms are outside supported scope.
 
 ### General
 
