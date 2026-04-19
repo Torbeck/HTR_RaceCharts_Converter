@@ -21,5 +21,5 @@ exit /b 0
 
 :error
 echo.
-echo Application exited with an error.
+echo Application exited with an error. See details above.
 exit /b 1
