@@ -380,6 +380,12 @@ class HTRApp:
             "<Button-1>", lambda e: webbrowser.open_new_tab(github_url)
         )
 
+        ttk.Label(
+            frame,
+            text="🦋 Dedicated to my Little Butterflies 🦋\nSonya & Clara\nSonya Desandro (1984-2023)",
+            justify=tk.CENTER
+        ).pack(pady=(10, 0))
+
         ttk.Button(about_win, text="OK", command=about_win.destroy).pack(
             pady=(0, 10)
         )
