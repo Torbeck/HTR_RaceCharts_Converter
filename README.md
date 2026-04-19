@@ -20,10 +20,10 @@
 - **Why:** HTR is Windows-only, so this project is now focused on Windows-only support.
 - **Linux/macOS:** Not supported or tested. The code may run in some environments, but Linux/macOS are considered unsupported.
 
-**Coming soon (Windows):**
+**Windows convenience scripts:**
 - `setup.bat` for one-step environment setup
 - `run.bat` for one-step app launch
-- Optional prebuilt Windows `.exe` distribution
+- Optional prebuilt Windows `.exe` distribution (coming later)
 
 ---
 
@@ -118,6 +118,8 @@ project_root/
 ├── tests/                   ← unit tests (Python unittest)
 │
 ├── config.example.ini       ← template for config.ini
+├── setup.bat                ← Windows setup script (create venv + install dependencies)
+├── run.bat                  ← Windows launch script
 ├── requirements.txt
 └── FeatureRequirements.txt
 ```
@@ -135,33 +137,26 @@ project_root/
 
 ---
 
-## Installation
+## Windows Quickstart
 
 ### Windows
 
 1. Install Python 3.10+ from [python.org](https://www.python.org/downloads/windows/).  
    During setup, enable **"Add Python to PATH"** and keep **tkinter** support enabled.
 
-2. Open **Command Prompt** or **PowerShell** in the project folder, then create and activate a virtual environment:
+2. Open **Command Prompt** in the project folder and run:
 
-   ```powershell
-   py -3 -m venv .venv
-   .venv\Scripts\activate
+   ```bat
+   setup.bat
    ```
 
-3. Install dependencies:
+3. Launch the app:
 
-   ```powershell
-   python -m pip install -r requirements.txt
+   ```bat
+   run.bat
    ```
 
-4. Run the app:
-
-   ```powershell
-   python src/main.py
-   ```
-
-> **Coming soon:** streamlined Windows launch scripts (`setup.bat`, `run.bat`) and an optional Windows `.exe`.
+If `.venv` does not exist yet, `run.bat` will tell you to run `setup.bat` first.
 
 ---
 
@@ -169,10 +164,10 @@ project_root/
 
 ### 1) Launch the app
 
-Run:
+Run from the project root:
 
-```bash
-python src/main.py
+```bat
+run.bat
 ```
 
 The **HTR Chart Processor** window opens.
