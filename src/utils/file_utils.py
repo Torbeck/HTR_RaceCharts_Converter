@@ -1,6 +1,7 @@
 """File I/O utilities for HTR chart processing."""
 
 import os
+from pathlib import Path
 from typing import List
 
 
@@ -104,3 +105,24 @@ def collect_txt_files(paths: List[str]) -> List[str]:
         else:
             raise FileNotFoundError(f"Path not found: {p}")
     return result
+
+
+def resolve_existing_directory(path_value: str) -> str:
+    """Resolve a directory path and return normalized absolute path.
+
+    Args:
+        path_value: User-provided directory path.
+
+    Returns:
+        Resolved absolute directory path.
+
+    Raises:
+        ValueError: If path_value is empty.
+        FileNotFoundError: If the resolved path is not an existing directory.
+    """
+    if not path_value:
+        raise ValueError("Directory path cannot be empty.")
+    resolved = Path(path_value).expanduser().resolve(strict=False)
+    if not resolved.is_dir():
+        raise FileNotFoundError(f"Directory not found: {resolved}")
+    return str(resolved)

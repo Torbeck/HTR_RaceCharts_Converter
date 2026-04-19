@@ -18,7 +18,7 @@
 
 - **Supported/Tested:** **Windows 10/11 only**.
 - **Why:** HTR is Windows-only, so this project is now focused on Windows-only support.
-- **Linux/macOS:** Not supported or tested. The code may run in some environments, but Linux/macOS are considered unsupported.
+- **Linux/macOS:** Not supported.
 
 **Windows convenience scripts:**
 - `setup.bat` for one-step environment setup
@@ -157,6 +157,7 @@ project_root/
    ```
 
 If `.venv` does not exist yet, `run.bat` will tell you to run `setup.bat` first.
+`run.bat` resolves paths relative to its own location, so it works reliably when launched from Explorer or any working directory.
 
 ---
 
@@ -416,7 +417,7 @@ Requires `tkinter` (included with standard Python installations) and the `scheme
 
 ### Linux/macOS status
 
-Linux and macOS are **not supported or tested** for this project. The application may run in some non-Windows environments, but those platforms are outside supported scope.
+Linux and macOS are **not supported** for this project.
 
 ### General
 
